@@ -28,3 +28,20 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
+
+Manifest requirements:
+- Include INTERNET permissions within the manifest tags
+- Include Google Play Services within the application tags
+
+```
+<manifest>
+  ...
+  <application ...>
+    <meta-data android:name="com.google.android.gms.version"
+           android:value="@integer/google_play_services_version" />
+  </application>
+  ...
+  <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+  ...
+</manifest>
+```
