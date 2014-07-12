@@ -9,7 +9,7 @@ Eclipse integration instructions:
 4. Copy the `tenjin.jar` file to the `libs` folder
 5. Right click on `tenjin.jar` and then select Build Path > Add to Build Path - this should create a folder called `Referenced Libraries` in your project
 7. Install Google's "Android Support Repository", "Android Support Library", "Google Play Services" and "Google Repository" SDKs from the SDK Manager (http://developer.android.com/google/play-services/setup.html)
-8. Get your `API_KEY` from a cfarm@tenjin.io
+8. Get your `API_KEY` from https://tenjin.io/dashboard/organizations
 9. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
 10. In the `onCreate` method add the following line of code: `TenjinSDK.getInstance(this, "[API_KEY]").connect();`
 
