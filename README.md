@@ -4,7 +4,7 @@ Tenjin Android SDK
 Eclipse integration instructions:
 ---------------------------------
 
-1. Download and unzip the .zip file from https://github.com/Ordinance/tenjin-android-sdk/archive/master.zip
+1. Download and unzip the latest Android SDK from releases (https://github.com/Ordinance/tenjin-android-sdk/releases)
 3. Create a folder called `libs` in your project's root folder
 4. Copy the `tenjin.jar` file to the `libs` folder
 5. Right click on `tenjin.jar` and then select Build Path > Add to Build Path - this should create a folder called `Referenced Libraries` in your project
@@ -24,14 +24,11 @@ public class TenjinDemo extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tenjin_demo);
-        //variable for Tenjin API_KEY and initialize the TenjinSDK
+        
+        //Integrate TenjinSDK connect call
         String apiKey = <API_KEY>;
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
-
-        //custom events with and without values - examples for "swipe_right" and "revenue"
-        instance.eventWithName("swipe_right");
-        instance.eventWithNameAndValue("revenue", "0.99");
 
     }
 ```
@@ -51,4 +48,17 @@ Manifest requirements:
   <uses-permission android:name="android.permission.INTERNET"></uses-permission>
   ...
 </manifest>
+```
+
+Tenjin custom event integration instructions:
+-----
+There are two methods that you can use to pass custom events: `eventWithName(String name)` and `eventWithNameAndValue(String name, String value)`.
+
+You can use these to pass Tenjin custom interactions with your app to tie this to user level cost from each acquisition source that you use through Tenjin's platform. Here are some examples of usage:
+
+```
+String apiKey = <API_KEY>;
+TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+instance.eventWithName("swipe_right");
+instance.eventWithNameAndValue("revenue", "0.99");
 ```
