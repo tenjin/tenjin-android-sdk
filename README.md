@@ -24,7 +24,14 @@ public class TenjinDemo extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tenjin_demo);
-        TenjinSDK.getInstance(this, "X6SJQRU3UE3PXWJDEQB2S17GE7YZ3S80").connect();
+        //variable for Tenjin API_KEY and initialize the TenjinSDK
+        String apiKey = <API_KEY>;
+        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        instance.connect();
+
+        //custom events with and without values - examples for "swipe_right" and "revenue"
+        instance.eventWithName("swipe_right");
+        instance.eventWithNameAndValue("revenue", "0.99");
 
     }
 ```
