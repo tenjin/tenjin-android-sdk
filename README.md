@@ -60,5 +60,7 @@ You can use these to pass Tenjin custom interactions with your app to tie this t
 String apiKey = <API_KEY>;
 TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 instance.eventWithName("swipe_right");
-instance.eventWithNameAndValue("revenue", "0.99");
+
+//the value for a revenue event needs to be in cents
+instance.eventWithNameAndValue("revenue", "99");
 ```
