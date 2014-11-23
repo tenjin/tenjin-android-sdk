@@ -19,7 +19,7 @@ Manifest requirements:
 </manifest>
 ```
 
-Eclipse integration instructions:
+Setup and integration instructions (Eclipse):
 ---------------------------------
 
 1. Download and unzip the latest Android SDK from releases (https://github.com/Ordinance/tenjin-android-sdk/releases)
@@ -29,9 +29,9 @@ Eclipse integration instructions:
 7. Install Google's "Android Support Repository", "Android Support Library", "Google Play Services" and "Google Repository" SDKs from the SDK Manager (http://developer.android.com/google/play-services/setup.html)
 8. Get your `API_KEY` from https://tenjin.io/dashboard/organizations
 9. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
-10. In the `onResume` method in each of your Activities add the following line of code: `TenjinSDK.getInstance(this, "[API_KEY]").connect();`
+10. For each `onResume` method of every `Activity` add the following line of code: `TenjinSDK.getInstance(this, "[API_KEY]").connect();`
 
-Here's an example of what the first/main activity should look like.
+Or similarly here's an example of what the `Activity` integrations should look like:
 
 ```
 import com.tenjin.android.TenjinSDK;
@@ -59,21 +59,21 @@ public class TenjinDemo extends ActionBarActivity {
 
 Tenjin purchase event instructions:
 -----
-To understand user revenue and purchase behavior, developers can send purchase events to Tenjin through Tenjin's API. To send purchase events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` according to the following method signature:
+To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
 
 `public void transaction(String productId, String currencyCode, int quantity, double unitPrice)`.
 
 Here's an example of how this can be implemented at the time of purchase:
 ```
-//The developer's method for completing a transaction that happened in app
+//The developer's own method for completing a transaction that happened in app
 public void completeTransaction(String productId, String currencyCode, int quantity, double unitPrice){
-  
+  ...
   //Call the Tenjin SDK with the context and the API_KEY
   TenjinSDK.getInstance(this, API_KEY).transaction(productId, currencyCode, quantity, unitPrice);
+  ...
 }
 ```
 Tenjin will record and track the revenue based on the currency code, quantity, and the unit price sent.
-
 
 
 Tenjin custom event integration instructions:
