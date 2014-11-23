@@ -19,7 +19,7 @@ Manifest requirements:
 </manifest>
 ```
 
-Setup and integration instructions (Eclipse):
+Setup and initialization instructions (Eclipse):
 ---------------------------------
 
 1. Download and unzip the latest Android SDK from releases (https://github.com/Ordinance/tenjin-android-sdk/releases)
