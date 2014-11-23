@@ -3,7 +3,7 @@ Tenjin Android SDK
 Manifest requirements:
 ----
 
-- Include INTERNET permissions within the manifest tags
+- Include `INTERNET` permissions within the manifest tags
 - Include Google Play Services within the application tags
 
 ```
