@@ -1,4 +1,4 @@
-Tenjin Android SDK
+Tenjin Android SDK (v1.0.2)
 ==================
 Manifest requirements:
 ----
