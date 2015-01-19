@@ -5,6 +5,7 @@ Manifest requirements:
 
 - Include `INTERNET` permissions within the manifest tags
 - Include Google Play Services within the application tags
+- Include Tenjin's INSTALL_REFERRER receiver
 
 ```
 <manifest>
@@ -12,6 +13,13 @@ Manifest requirements:
   <application ...>
     <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" />
+    ...
+    <receiver android:name="com.tenjin.android.InstallReferrerReceiver" android:exported="true">
+      <intent-filter>
+        <action android:name="com.android.vending.INSTALL_REFERRER"/>
+      </intent-filter>
+    </receiver>
+    ...
   </application>
   ...
   <uses-permission android:name="android.permission.INTERNET"></uses-permission>
