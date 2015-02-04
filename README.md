@@ -108,5 +108,5 @@ To test the Android `INSTALL_REFERRER` is working:
 2. Open up your `./adb shell` - if `adb` is not in your home directory locate it in yoru Android SDK folder
 3. Run your app
 4. Filter for the `REF` tag in your IDE
-5. Run `am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"
+5. Run `am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"`
 6. You should see the output in your IDE console
