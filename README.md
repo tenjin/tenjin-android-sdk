@@ -14,7 +14,7 @@ Manifest requirements:
     <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" />
     ...
-    <receiver android:name="com.tenjin.android.InstallReferrerReceiver" android:exported="true">
+    <receiver android:name="com.tenjin.android.TenjinReferrerReceiver" android:exported="true">
       <intent-filter>
         <action android:name="com.android.vending.INSTALL_REFERRER"/>
       </intent-filter>
@@ -100,3 +100,13 @@ instance.eventWithName("swipe_right");
 //Integrate a custom event with a distinct name and value - ie. awarding user with 100 virtual coins
 instance.eventWithNameAndValue("awarded_virtual_coins", "100");
 ```
+
+Testing the Android Referrer:
+----
+To test the Android `INSTALL_REFERRER` is working:
+1. Do the above initialization instrutions
+2. Open up your `./adb shell` - if `adb` is not in your home directory locate it in yoru Android SDK folder
+3. Run your app
+4. Filter for the `REF` tag in your IDE
+5. Run `am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"
+6. You should see the output in your IDE console
