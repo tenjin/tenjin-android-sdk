@@ -1,4 +1,4 @@
-Tenjin Android SDK (v1.0.2)
+Tenjin Android SDK (v1.1.0)
 ==================
 Manifest requirements:
 ----
@@ -104,8 +104,9 @@ instance.eventWithNameAndValue("awarded_virtual_coins", "100");
 Testing the Android Referrer:
 ----
 To test the Android `INSTALL_REFERRER` is working:
+
 1. Do the above initialization instrutions
-2. Open up your `./adb shell` - if `adb` is not in your home directory locate it in yoru Android SDK folder
+2. Open up your `./adb shell`. If `adb` is not in your home directory locate it in your Android SDK folder
 3. Run your app
 4. Filter for the `REF` tag in your IDE
 5. Run `am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"`
