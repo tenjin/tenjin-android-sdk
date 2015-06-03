@@ -30,16 +30,21 @@ Manifest requirements:
 Setup and initialization instructions (Eclipse):
 ---------------------------------
 
-1. Download and unzip the latest Android SDK from releases (https://github.com/Ordinance/tenjin-android-sdk/releases)
-3. Create a folder called `libs` in your project's root folder (if there isn't one already)
-4. Copy the `tenjin.jar` file to the `libs` folder
-5. Right click on `tenjin.jar` and then select Build Path > Add to Build Path - this should create a folder called `Referenced Libraries` in your project
-7. Install Google's "Android Support Repository", "Android Support Library", "Google Play Services" and "Google Repository" SDKs from the SDK Manager (http://developer.android.com/google/play-services/setup.html)
-8. Get your `API_KEY` from https://tenjin.io/dashboard/organizations
-9. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
-10. For each `onResume` method of every `Activity` add the following line of code: `TenjinSDK.getInstance(this, "[API_KEY]").connect();`
+#####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
+#####2. Create a folder `libs` in your project's root folder.
+#####3. Copy the `tenjin.jar` file to the `libs` folder.
+#####4. Right click on `tenjin.jar` and then select `Build Path` -> `Add to Build Path` 
+- This should create a folder called `Referenced Libraries` in your project
 
-Or similarly here's an example of what the `Activity` integrations should look like:
+#####5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
+#####6. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
+#####7. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
+#####8. For each `onResume` method of every `Activity` add the following line of code: 
+```java 
+TenjinSDK.getInstance(this, "[API_KEY]").connect();
+```
+
+Or similarly here's an example of what the `Activity` integration(s) should look like:
 
 ```java
 import com.tenjin.android.TenjinSDK;
@@ -63,7 +68,6 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
-
 
 Tenjin purchase event instructions:
 -----
