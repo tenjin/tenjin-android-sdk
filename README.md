@@ -7,7 +7,7 @@ Manifest requirements:
 - Include Google Play Services within the application tags
 - Include Tenjin's INSTALL_REFERRER receiver
 
-```
+```xml
 <manifest>
   ...
   <application ...>
@@ -41,7 +41,7 @@ Setup and initialization instructions (Eclipse):
 
 Or similarly here's an example of what the `Activity` integrations should look like:
 
-```
+```java
 import com.tenjin.android.TenjinSDK;
 
 public class TenjinDemo extends ActionBarActivity {
@@ -72,7 +72,7 @@ To understand user revenue and purchase behavior, developers can send `transacti
 `public void transaction(String productId, String currencyCode, int quantity, double unitPrice)`.
 
 Here's an example of how this can be implemented at the time of purchase:
-```
+```java
 //The developer's own method for completing a transaction that happened in app
 public void completeTransaction(String productId, String currencyCode, int quantity, double unitPrice){
   ...
@@ -90,7 +90,7 @@ There are two methods that you can use to pass custom events: `eventWithName(Str
 
 You can use these to pass Tenjin custom interactions with your app to tie this to user level cost from each acquisition source that you use through Tenjin's platform. Here are some examples of usage:
 
-```
+```java
 String apiKey = <API_KEY>;
 TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
@@ -109,5 +109,8 @@ To test the Android `INSTALL_REFERRER` is working:
 2. Open up your `./adb shell`. If `adb` is not in your home directory locate it in your Android SDK folder
 3. Run your app
 4. Filter for the `REF` tag in your IDE
-5. Run `am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"`
-6. You should see the output in your IDE console
+5. Run and Test:
+```sh
+am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"
+```
+After testing this you should see the output in your IDE console.
