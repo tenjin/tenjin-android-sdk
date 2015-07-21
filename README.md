@@ -117,4 +117,6 @@ To test the Android `INSTALL_REFERRER` is working:
 ```sh
 am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"
 ```
-After testing this you should see the output in your IDE console.
+After testing this you should see the output of the values passed to your `referrer` in your IDE console. In the case above you would see:
+
+`ai=test&gclid=click_test`
