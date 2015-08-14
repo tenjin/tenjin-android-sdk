@@ -90,9 +90,9 @@ Tenjin will record and track the revenue based on the currency code, quantity, a
 
 Tenjin custom event integration instructions:
 -----
-There are two methods that you can use to pass custom events: `eventWithName(String name)` and `eventWithNameAndValue(String name, String value)`.
+You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 
-You can use these to pass Tenjin custom interactions with your app to tie this to user level cost from each acquisition source that you use through Tenjin's platform. Here are some examples of usage:
+The custom interactions with your app can be tied to level cost from each acquisition source that you use through Tenjin's service. Here is an example of usage:
 
 ```java
 String apiKey = <API_KEY>;
@@ -101,8 +101,6 @@ TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 //Integrate a custom event with a distinct name - ie. swiping right on the screen
 instance.eventWithName("swipe_right");
 
-//Integrate a custom event with a distinct name and value - ie. awarding user with 100 virtual coins
-instance.eventWithNameAndValue("awarded_virtual_coins", "100");
 ```
 
 Testing the Android Referrer:
