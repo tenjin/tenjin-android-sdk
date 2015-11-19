@@ -85,6 +85,14 @@ public void completeTransaction(String productId, String currencyCode, int quant
   ...
 }
 ```
+
+- `productId` -> Name or ID of the product that you're selling 
+- `currencyCode` -> Currency code of the price
+- `quantity` -> Number of transactions that you are doing on this event
+- `unitPrice` -> Unit price of a single transaction
+
+Tenjin will calculate the Total Revenue from a transaction based on `quantity`*`unitPrice`
+
 Tenjin will record and track the revenue based on the currency code, quantity, and the unit price sent.
 
 
