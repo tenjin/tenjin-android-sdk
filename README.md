@@ -1,4 +1,4 @@
-Tenjin Android SDK (v1.1.1)
+Tenjin Android SDK (v1.2.0)
 ==================
 Manifest requirements:
 ----
@@ -110,6 +110,24 @@ TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 instance.eventWithName("swipe_right");
 
 ```
+
+Passing custom events with integer values:
+----
+You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)`.
+
+Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful. 
+
+```java
+String apiKey = <API_KEY>;
+TenjinSDK.instance = TenjinSDK.getInstance(this, apiKey);
+
+//Integrate a custom event with a distinct name and value - ie. paying 100 virtual coins for an item
+instance.eventWithNameAndValue("item", "100");
+```
+
+Using the example above, the Tenjin dashboard will sum and average the values for all events with the name `item`.
+
+Keep in mind that this event will not work if the value passed not an integer. 
 
 Testing the Android Referrer:
 ----
