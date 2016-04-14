@@ -73,7 +73,7 @@ Tenjin purchase event instructions:
 -----
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
-1. Validate receipts
+####1. Validate receipts
 Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (Apps -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs". 
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
@@ -108,7 +108,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
+####2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
 To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
 
 `public void transaction(String productId, String currencyCode, int quantity, double unitPrice)`.
