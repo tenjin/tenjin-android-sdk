@@ -1,4 +1,4 @@
-Tenjin Android SDK (v1.2.0)
+Tenjin Android SDK (v1.3.0)
 ==================
 Manifest requirements:
 ----
@@ -71,7 +71,45 @@ public class TenjinDemo extends ActionBarActivity {
 
 Tenjin purchase event instructions:
 -----
-To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
+To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
+
+1. Validate receipts
+Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (Apps -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs". 
+
+![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
+
+After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
+
+`public void transaction(String productId, String currencyCode, int quantity, double unitPrice, String purchaseData, String dataSignature)`
+
+Here's an example of this can be implemented at the time of purchase (ex. code taken from here http://developer.android.com/google/play/billing/billing_integrate.html#Purchase):
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+   if (requestCode == 1001) {
+      int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
+      String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
+      String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
+
+      if (resultCode == RESULT_OK) {
+         try {
+            JSONObject jo = new JSONObject(purchaseData);
+            String sku = jo.getString("productId");
+
+            //here you will need to assign the currencyCode, quantity, and the price
+            TenjinSDK.getInstance(this, API_KEY).transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
+          }
+          catch (JSONException e) {
+             alert("Failed to parse purchase data.");
+             e.printStackTrace();
+          }
+      }
+   }
+}
+```
+
+2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
+To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
 
 `public void transaction(String productId, String currencyCode, int quantity, double unitPrice)`.
 
