@@ -1,4 +1,4 @@
-Tenjin Android SDK (v1.3.0)
+Tenjin Android SDK (v1.4.0) - Google Play and Amazon Store support
 ==================
 Manifest requirements:
 ----
@@ -33,14 +33,14 @@ Setup and initialization instructions (Eclipse):
 #####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
 #####2. Create a folder `libs` in your project's root folder.
 #####3. Copy the `tenjin.jar` file to the `libs` folder.
-#####4. Right click on `tenjin.jar` and then select `Build Path` -> `Add to Build Path` 
+#####4. Right click on `tenjin.jar` and then select `Build Path` -> `Add to Build Path`
 - This should create a folder called `Referenced Libraries` in your project
 
 #####5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
 #####6. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
 #####7. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
-#####8. For each `onResume` method of every `Activity` add the following line of code: 
-```java 
+#####8. For each `onResume` method of every `Activity` add the following line of code:
+```java
 TenjinSDK.getInstance(this, "[API_KEY]").connect();
 ```
 
@@ -57,7 +57,7 @@ public class TenjinDemo extends ActionBarActivity {
     public void onResume() {
         //standard code
         super.onResume()
-        
+
         //Integrate TenjinSDK connect call
         String apiKey = <API_KEY>; //You can potentially set this as a global variable too
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
@@ -74,7 +74,7 @@ Tenjin purchase event instructions:
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
 ####1. Validate receipts
-Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (Apps -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs". 
+Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (Apps -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs".
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
 
@@ -124,7 +124,7 @@ public void completeTransaction(String productId, String currencyCode, int quant
 }
 ```
 
-- `productId` -> Name or ID of the product that you're selling 
+- `productId` -> Name or ID of the product that you're selling
 - `currencyCode` -> Currency code of the price
 - `quantity` -> Number of transactions that you are doing on this event
 - `unitPrice` -> Unit price of a single transaction
@@ -153,7 +153,7 @@ Passing custom events with integer values:
 ----
 You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)`.
 
-Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful. 
+Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful.
 
 ```java
 String apiKey = <API_KEY>;
@@ -165,7 +165,7 @@ instance.eventWithNameAndValue("item", "100");
 
 Using the example above, the Tenjin dashboard will sum and average the values for all events with the name `item`.
 
-Keep in mind that this event will not work if the value passed not an integer. 
+Keep in mind that this event will not work if the value passed not an integer.
 
 Testing the Android Referrer:
 ----
