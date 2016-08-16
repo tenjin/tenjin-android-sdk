@@ -1,4 +1,4 @@
-Tenjin Android SDK (v1.4.0) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.4.1) - Google Play and Amazon Store support
 ==================
 Manifest requirements:
 ----
