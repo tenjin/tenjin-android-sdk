@@ -29,7 +29,7 @@ Manifest requirements:
 </manifest>
 ```
 
-Setup and initialization instructions (Eclipse):
+Setup and Initialization (Eclipse):
 ---------------------------------
 
 #####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
@@ -153,6 +153,8 @@ instance.eventWithName("swipe_right");
 
 Passing custom events with integer values:
 ----
+NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** event (above).
+
 You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
 
 Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful.
