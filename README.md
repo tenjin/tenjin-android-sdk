@@ -153,7 +153,7 @@ instance.eventWithName("swipe_right");
 
 Passing custom events with integer values:
 ----
-NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** event (above).
+NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** event (above). The initialization event must come before any custom events are sent. 
 
 You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
 
