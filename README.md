@@ -1,6 +1,6 @@
 For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
 
-Tenjin Android SDK (v1.4.1) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.5.0) - Google Play and Amazon Store support
 ==================
 Manifest requirements:
 ----
@@ -25,6 +25,7 @@ Manifest requirements:
   </application>
   ...
   <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
   ...
 </manifest>
 ```
@@ -41,7 +42,7 @@ Setup and Initialization (Eclipse):
 #####5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
 #####6. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
 #####7. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
-#####8. For each `onResume` method of every `Activity` add the following line of code:
+#####8a. For each `onResume` method of every `Activity` add the following line of code:
 ```java
 TenjinSDK.getInstance(this, "[API_KEY]").connect();
 ```
@@ -64,6 +65,44 @@ public class TenjinDemo extends ActionBarActivity {
         String apiKey = <API_KEY>; //You can potentially set this as a global variable too
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
+
+        //Your other code...
+        ...
+
+    }
+```
+#####8b. Alternate initialization with Facebook (DO NOT USE 8a and 8b. You need to use only one.)
+```java
+import com.facebook.applinks.AppLinkData;
+
+import com.tenjin.android.TenjinSDK;
+
+public class TenjinDemo extends ActionBarActivity {
+
+    //...other callbacks are here
+
+    @Override
+    public void onResume() {
+        //standard code
+        super.onResume()
+
+        //Integrate TenjinSDK connect call
+        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
+        final TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+
+        AppLinkData.fetchDeferredAppLinkData(this,
+                new AppLinkData.CompletionHandler() {
+                    @Override
+                    public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+                        if (appLinkData != null) {
+                            String appLinkUri = appLinkData.getTargetUri().toString();
+                            instance.connect(appLinkUri);
+                        } else {
+                            instance.connect();
+                        }
+                    }
+                }
+        );
 
         //Your other code...
         ...
