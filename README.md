@@ -55,7 +55,7 @@ dependencies {
 
 #####5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
 
-Initialization:
+Code Integration:
 ---------------------------------
 #####1. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
 #####2. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
