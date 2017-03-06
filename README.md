@@ -30,9 +30,23 @@ Manifest requirements:
 </manifest>
 ```
 
-Setup and Initialization (Eclipse):
+SDK Integration:
 ---------------------------------
 
+### Android Studio Integration
+#####1. Add the tenjin.jar into your Android Studio project by selecting New > Module.
+#####2. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
+![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
+#####3. Select the tenjin.jar file click on Finish.
+#####4. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.
+
+```java
+dependencies {
+  compile 'com.google.android.gms:play-services:10.0.1'
+}
+```
+
+### Eclipse Integration
 #####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
 #####2. Create a folder `libs` in your project's root folder.
 #####3. Copy the `tenjin.jar` file to the `libs` folder.
@@ -40,9 +54,12 @@ Setup and Initialization (Eclipse):
 - This should create a folder called `Referenced Libraries` in your project
 
 #####5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
-#####6. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
-#####7. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
-#####8a. For each `onResume` method of every `Activity` add the following line of code:
+
+Initialization:
+---------------------------------
+#####1. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
+#####2. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
+#####3a. For each `onResume` method of every `Activity` add the following line of code:
 ```java
 TenjinSDK.getInstance(this, "[API_KEY]").connect();
 ```
@@ -71,7 +88,7 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
-#####8b. Alternate initialization with Facebook (DO NOT USE 8a and 8b. You need to use only one.)
+#####3b. Alternate initialization with Facebook (DO NOT USE 3a and 3b. You need to use only one.)
 ```java
 import com.facebook.applinks.AppLinkData;
 
