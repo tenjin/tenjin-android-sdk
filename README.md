@@ -34,11 +34,12 @@ SDK Integration:
 ---------------------------------
 
 ### Android Studio Integration
-#####1. Add the tenjin.jar into your Android Studio project by selecting New > Module.
-#####2. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
+#####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
+#####2. Add the tenjin.jar into your Android Studio project by selecting New > Module.
+#####3. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
-#####3. Select the tenjin.jar file click on Finish.
-#####4. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.
+#####4. Select the tenjin.jar file click on Finish.
+#####5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.
 
 ```java
 dependencies {
