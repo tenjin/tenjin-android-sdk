@@ -228,6 +228,84 @@ Using the example above, the Tenjin dashboard will sum and average the values fo
 
 Keep in mind that this event will not work if the value passed not an integer.
 
+
+Tenjin deferred deeplink integration instructions:
+-------
+Tenjin supports the ability to direct users to a specific part of your app after a new attributed install via Tenjin's campaign tracking URLs. You can utilize the `getDeeplink` method and callback to access the deferred deeplink through the data object. To test you can follow the instructions found <a href="http://help.tenjin.io/t/how-do-i-use-and-test-deferred-deeplinks-with-my-campaigns/547">here</a>.
+
+```java
+import com.tenjin.android.TenjinSDK;
+
+public class TenjinDemo extends ActionBarActivity {
+
+    //...other callbacks are here
+
+    @Override
+    public void onResume() {
+        //standard code
+        super.onResume()
+
+        //Integrate TenjinSDK connect call
+        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
+        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        instance.connect();
+
+        instance.getDeeplink(new Callback() {
+            @Override
+            public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
+                if (isFirstSession) {
+                }
+
+                if (data.containsKey(TenjinSDK.DEEPLINK_URL)) {
+                  // handle deeplink
+                }
+            }
+        });
+
+        //Your other code...
+        ...
+
+    }
+```
+
+You can also use the v1.7.1+ SDK for handling post-install logic by checking the `isFirstSession` param. For example, if you have a paid app, you can register your paid app install in the following way:
+
+```java
+import com.tenjin.android.TenjinSDK;
+
+public class TenjinDemo extends ActionBarActivity {
+
+    //...other callbacks are here
+
+    @Override
+    public void onResume() {
+        //standard code
+        super.onResume()
+
+        //Integrate TenjinSDK connect call
+        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
+        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        instance.connect();
+
+        instance.getDeeplink(new Callback() {
+            @Override
+            public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
+                if (isFirstSession) {
+                  // send paid app price and revenue to Tenjin
+                }
+
+                if (data.containsKey(TenjinSDK.DEEPLINK_URL)) {
+
+                }
+            }
+        });
+
+        //Your other code...
+        ...
+
+    }
+```
+
 Testing the Android Referrer:
 ----
 To test the Android `INSTALL_REFERRER` is working:
