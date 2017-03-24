@@ -1,6 +1,6 @@
 For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
 
-Tenjin Android SDK (v1.7.1) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.7.1`) - Google Play and Amazon Store support
 ==================
 Manifest requirements:
 ----
@@ -253,11 +253,12 @@ public class TenjinDemo extends ActionBarActivity {
         instance.getDeeplink(new Callback() {
             @Override
             public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
-                if (isFirstSession) {
-                }
-
-                if (data.containsKey(TenjinSDK.DEEPLINK_URL)) {
-                  // handle deeplink
+                if (clickedTenjinLink) {
+                    if (isFirstSession) {
+                        if (data.containsKey(TenjinSDK.DEEPLINK_URL)) {
+                           // use the deferred_deeplink_url to direct the user to a specific part of your app
+                        }
+                    }
                 }
             }
         });
@@ -292,10 +293,6 @@ public class TenjinDemo extends ActionBarActivity {
             public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
                 if (isFirstSession) {
                   // send paid app price and revenue to Tenjin
-                }
-
-                if (data.containsKey(TenjinSDK.DEEPLINK_URL)) {
-
                 }
             }
         });
