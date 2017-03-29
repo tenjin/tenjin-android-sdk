@@ -1,6 +1,6 @@
 For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
 
-Tenjin Android SDK (v1.7.1`) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.7.1) - Google Play and Amazon Store support
 ==================
 Manifest requirements:
 ----
@@ -34,12 +34,12 @@ SDK Integration:
 ---------------------------------
 
 ### Android Studio Integration
-#####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
-#####2. Add the tenjin.jar into your Android Studio project by selecting New > Module.
-#####3. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
+1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
+2. Add the tenjin.jar into your Android Studio project by selecting New > Module.
+3. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
-#####4. Select the tenjin.jar file click on Finish.
-#####5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.
+4. Select the tenjin.jar file click on Finish.
+5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.
 
 ```java
 dependencies {
@@ -48,19 +48,18 @@ dependencies {
 ```
 
 ### Eclipse Integration
-#####1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
-#####2. Create a folder `libs` in your project's root folder.
-#####3. Copy the `tenjin.jar` file to the `libs` folder.
-#####4. Right click on `tenjin.jar` and then select `Build Path` -> `Add to Build Path`
+1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
+2. Create a folder `libs` in your project's root folder.
+3. Copy the `tenjin.jar` file to the `libs` folder.
+4. Right click on `tenjin.jar` and then select `Build Path` -> `Add to Build Path`
 - This should create a folder called `Referenced Libraries` in your project
-
-#####5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
+5. Install Google's `Android Support Repository`, `Android Support Library`, `Google Play Services` and `Google Repository` SDKs from the SDK Manager. Google outlines how to best <a href="http://developer.android.com/google/play-services/setup.html">configure this</a> if you haven't already.
 
 Code Integration:
 ---------------------------------
-#####1. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
-#####2. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
-#####3a. For each `onResume` method of every `Activity` add the following line of code:
+1. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
+2. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
+3a. For each `onResume` method of every `Activity` add the following line of code:
 ```java
 TenjinSDK.getInstance(this, "[API_KEY]").connect();
 ```
@@ -89,7 +88,7 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
-#####3b. Alternate initialization with Facebook (DO NOT USE 3a and 3b. You need to use only one.)
+3b. Alternate initialization with Facebook (DO NOT USE 3a and 3b. You need to use only one.)
 ```java
 import com.facebook.applinks.AppLinkData;
 
@@ -132,7 +131,7 @@ Tenjin purchase event instructions:
 -----
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
-####1. Validate receipts
+1. Validate receipts
 Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (Apps -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs".
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
@@ -167,7 +166,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-####2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
+2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
 To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
 
 `public void transaction(String productId, String currencyCode, int quantity, double unitPrice)`.
