@@ -1,6 +1,6 @@
 For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
 
-Tenjin Android SDK (v1.7.4) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.7.5) - Google Play and Amazon Store support
 ==================
 Manifest requirements:
 ----
