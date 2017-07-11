@@ -1,3 +1,5 @@
+Please see our [Release Notes](https://github.com/Ordinance/tenjin-android-sdk/wiki) to see detailed version history.
+
 For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
 
 Tenjin Android SDK (v1.7.6) - Google Play and Amazon Store support
