@@ -90,10 +90,9 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
-3b. Alternate initialization with Facebook (DO NOT USE 3a and 3b. You need to use only one.)
-```java
-import com.facebook.applinks.AppLinkData;
+3b. Alternate initialization to handle deferred deep links from other services (DO NOT USE 3a and 3b. You need to use only one.). If you use other services to produce deferred deep links, you can pass tenjin those deep links to handle the attribution logic with your tenjin enabled deep links.
 
+```java
 import com.tenjin.android.TenjinSDK;
 
 public class TenjinDemo extends ActionBarActivity {
@@ -108,20 +107,16 @@ public class TenjinDemo extends ActionBarActivity {
         //Integrate TenjinSDK connect call
         String apiKey = <API_KEY>; //You can potentially set this as a global variable too
         final TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
-
-        AppLinkData.fetchDeferredAppLinkData(this,
-                new AppLinkData.CompletionHandler() {
-                    @Override
-                    public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
-                        if (appLinkData != null) {
-                            String appLinkUri = appLinkData.getTargetUri().toString();
-                            instance.connect(appLinkUri);
-                        } else {
-                            instance.connect();
-                        }
-                    }
-                }
-        );
+        
+        //get your deferred deep link from the third party service
+        String yourDDL = "your_deep_link";
+        
+        //pass your deferred deep link to tenjin on the connect call if it exists for complete deferred deep link attribution logic
+        if (yourDDL != null) {
+            instance.connect(yourDDL);
+        } else {
+            instance.connect();
+        }
 
         //Your other code...
         ...
