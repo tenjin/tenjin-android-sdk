@@ -109,7 +109,7 @@ public class TenjinDemo extends ActionBarActivity {
         final TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         
         //get your deferred deep link from the third party service
-        String yourDDL = "your_deep_link"
+        String yourDDL = "your_deep_link";
         
         //pass your deferred deep link to tenjin on the connect call if it exists for complete deferred deep link attribution logic
         if (yourDDL != null) {
