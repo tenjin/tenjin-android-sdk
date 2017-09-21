@@ -46,7 +46,12 @@ dependencies {
   compile 'com.google.android.gms:play-services:10.0.1'
 }
 ```
-
+6. In your app  module's build.gradle file, make sure to add this into the dependencies block:
+```java
+dependencies {
+  compile project(":tenjin")
+}
+```
 ### Eclipse Integration
 1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
 2. Create a folder `libs` in your project's root folder.
