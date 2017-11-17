@@ -142,13 +142,14 @@ Tenjin purchase event instructions:
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
 1. Validate receipts
-Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (Apps -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs".
+Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (<a href="https://www.tenjin.io/dashboard/apps">Apps</a> -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs".
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
 
 After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
-
-`public void transaction(String productId, String currencyCode, int quantity, double unitPrice, String purchaseData, String dataSignature)`
+```java
+public void transaction(String productId, String currencyCode, int quantity, double unitPrice, String purchaseData, String dataSignature)
+```
 
 Here's an example of this can be implemented at the time of purchase (ex. code taken from here http://developer.android.com/google/play/billing/billing_integrate.html#Purchase):
 ```java
@@ -175,6 +176,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
    }
 }
 ```
+Once code implemented, send a test transaction to our backend to verify purchase events are coming in.  Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>.  Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test transaction from your app.  You should see a live event come in showing the verified purchase event:
+![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
+
 
 2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
 To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
