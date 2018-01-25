@@ -3,7 +3,7 @@ Please see our <a href="https://github.com/Ordinance/tenjin-android-sdk/wiki">Re
 
 For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
 
-Tenjin Android SDK (v1.8.2) (132KB) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.8.3) (132KB) - Google Play and Amazon Store support
 ==================
 **Note: We recommend using the latest version of <a href="https://developer.android.com/studio/index.html">Android Studio</a> when integrating our SDK.**
 
@@ -49,6 +49,7 @@ SDK Integration:
 ```java
 dependencies {
   compile 'com.google.android.gms:play-services:10.0.1'
+  compile 'com.android.installreferrer:installreferrer:1.0'
 }
 ```
 6. In your app  module's build.gradle file, make sure to add this into the dependencies block:
