@@ -44,7 +44,7 @@ SDK Integration:
 3. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
 4. Select the tenjin.jar file click on Finish.
-5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.
+5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.  Starting with Tenjin Android SDK v1.8.3, you will need to add <a href="https://developer.android.com/google/play/installreferrer/library.html">Google's Install Referrer Library</a>. 
 
 ```java
 dependencies {
