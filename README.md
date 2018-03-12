@@ -1,7 +1,7 @@
 
-Please see our <a href="https://github.com/Ordinance/tenjin-android-sdk/wiki">Release Notes</a> to see detailed version history.
+Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/wiki">Release Notes</a> to see detailed version history.
 
-For Unity-specific instructions, please visit https://github.com/Ordinance/tenjin-unity-sdk.
+For Unity-specific instructions, please visit https://github.com/tenjin/tenjin-unity-sdk.
 
 Tenjin Android SDK (v1.8.3) (132KB) - Google Play and Amazon Store support
 ==================
@@ -39,7 +39,7 @@ SDK Integration:
 ---------------------------------
 
 ### Android Studio Integration
-1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
+1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases">here.</a>
 2. Add the tenjin.jar into your Android Studio project by selecting New > Module.
 3. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
@@ -59,7 +59,7 @@ dependencies {
 }
 ```
 ### Eclipse Integration
-1. Download the latest Android SDK from <a href="https://github.com/Ordinance/tenjin-android-sdk/releases">here.</a>
+1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases">here.</a>
 2. Create a folder `libs` in your project's root folder.
 3. Copy the `tenjin.jar` file to the `libs` folder.
 4. Right click on `tenjin.jar` and then select `Build Path` -> `Add to Build Path`
