@@ -43,7 +43,8 @@ SDK Integration:
 2. Add the tenjin.jar into your Android Studio project by selecting New > Module.
 3. In the New Module dialog, select the Import .JAR or .AAR Package option and click on Next.
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
-4. Select the tenjin.jar file click on Finish.
+4. Select the `tenjin.jar` or `tenjin.aar`
+ file click on Finish.
 5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.  Starting with Tenjin Android SDK v1.8.3, you will need to add <a href="https://developer.android.com/google/play/installreferrer/library.html">Google's Install Referrer Library</a>. 
 
 ```java
@@ -73,17 +74,17 @@ Code Integration:
 
 3a. For each `onResume` method of every `Activity` add the following line of code:
 ```java
-TenjinSDK.getInstance(this, "[API_KEY]").connect();
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+instance.connect();
 ```
 
 Or similarly here's an example of what the `Activity` integration(s) should look like:
 
 ```java
 import com.tenjin.android.TenjinSDK;
+import com.tenjin.android.Callback;
 
 public class TenjinDemo extends ActionBarActivity {
-
-    //...other callbacks are here
 
     @Override
     public void onResume() {
@@ -91,16 +92,18 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
+        String apiKey = "<API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
         //Your other code...
-        ...
+        //...
 
     }
+}
 ```
-3b. Alternate initialization with Facebook (DO NOT USE 3a and 3b. You need to use only one.)
+3b. Alternate initialization to handle deep links from other services. (DO NOT USE 3a and 3b. You need to use only one.)
+If you use other services to produce deferred deep links, you can pass Tenjin those deep links to handle the attribution logic with your Tenjin enabled deep links.
 ```java
 import com.facebook.applinks.AppLinkData;
 
@@ -108,7 +111,38 @@ import com.tenjin.android.TenjinSDK;
 
 public class TenjinDemo extends ActionBarActivity {
 
-    //...other callbacks are here
+    @Override
+    public void onResume() {
+        //standard code
+        super.onResume()
+
+        //Integrate TenjinSDK connect call
+        String apiKey = "<API_KEY>";
+        final TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+
+        String appLinkUri = "your_deeplink";
+        if (appLinkUri){
+          instance.connect(appLinkUri);
+        } else {
+          instance.connect();
+        }
+
+        //Your other code...
+        //...
+
+    }
+}
+```
+
+Tenjin GDPR:
+-------
+As part of GDPR compliance, with Tenjin's SDK you can opt-in, opt-out devices/users, or select which specific device-related params to opt-in or opt-out.  `OptOut()` will not send any API requests to Tenjin and we will not process any events.
+
+To opt-in/opt-out:
+```java
+import com.tenjin.android.TenjinSDK;
+
+public class TenjinDemo extends ActionBarActivity {
 
     @Override
     public void onResume() {
@@ -116,28 +150,84 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
-        final TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        String apiKey = "<API_KEY>";
+        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
-        AppLinkData.fetchDeferredAppLinkData(this,
-                new AppLinkData.CompletionHandler() {
-                    @Override
-                    public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
-                        if (appLinkData != null) {
-                            String appLinkUri = appLinkData.getTargetUri().toString();
-                            instance.connect(appLinkUri);
-                        } else {
-                            instance.connect();
-                        }
-                    }
-                }
-        );
+        boolean userOptIn = checkOptInValue();
+
+        if (userOptIn) {
+            instance.optIn();
+        }
+        else {
+            instance.optOut();
+        }
+
+        instance.connect();
 
         //Your other code...
-        ...
+        //...
 
     }
+
+    protected boolean checkOptInValue(){
+        // check opt-in value
+        // return true; // if user opted-in
+        return false;
+    }
+}
 ```
+
+To opt-in/opt-out specific device-related parameters, you can use the `OptInParams()` or `OptOutParams()`.  `OptInParams()` will only send device-related parameters that are specified.  `OptOutParams()` will send all device-related parameters except ones that are specified.  Please note that we require at least `ip_address`, `advertising_id`, `developer_device_id`, `limit_ad_tracking`, `referrer` (Android), and `iad` (iOS) to properly track devices in Tenjin's system.
+
+If you want to only get specific device-related parameters, use `OptInParams()`. In example below, we will only these device-related parameters: `ip_address`, `advertising_id`, `developer_device_id`, `limit_ad_tracking`, `referrer`, and `iad`:
+
+```java
+String apiKey = "<API_KEY>";
+TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+
+String[] optInParams = {"ip_address", "advertising_id", "developer_device_id", "limit_ad_tracking", "referrer", "iad"};
+instance.optInParams(optInParams);
+
+instance.connect();
+```
+
+If you want to send ALL parameters except specfic device-related parameters, use `OptOutParams()`.  In example below, we will send ALL device-related parameters except:
+
+
+```java
+String apiKey = "<API_KEY>";
+TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+
+String[] optOutParams = {"locale", "timezone", "build_id"};
+instance.optOutParams(optOutParams);
+
+instance.connect();
+```
+
+#### Device-Related Parameters
+
+| Param  | Description | Reference |
+| ------------- | ------------- | ------------- |
+| advertising_id  | Device Advertising ID | [Android](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)) |
+| limit_ad_tracking  | limit ad tracking enabled | [Android](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()) |
+| platform | platform| Android |
+| referrer | Google Play Install Referrer | [Android](https://developer.android.com/google/play/installreferrer/index.html) |
+| os_version | Operating system version | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT) |
+| device | device name | [Android](https://developer.android.com/reference/android/os/Build.html#DEVICE) |
+| device_manufacturer | device manufactuer | [Android](https://developer.android.com/reference/android/os/Build.html#MANUFACTURER) |
+| device_model | device model | [Android](https://developer.android.com/reference/android/os/Build.html#MODEL) |
+| device_brand | device brand | [Android](https://developer.android.com/reference/android/os/Build.html#BRAND) |
+| device_product | device product | [Android](https://developer.android.com/reference/android/os/Build.html#PRODUCT) |
+| carrier | phone carrier | [Android](https://developer.android.com/reference/android/telephony/TelephonyManager.html#getSimOperatorName()) |
+| connection_type | cellular or wifi | [Android](https://developer.android.com/reference/android/net/ConnectivityManager.html#getActiveNetworkInfo()) |
+| screen_width | device screen width | [Android](https://developer.android.com/reference/android/util/DisplayMetrics.html#widthPixels) |
+| screen_height | device screen height | [Android](https://developer.android.com/reference/android/util/DisplayMetrics.html#heightPixels) |
+| os_version_release | operating system version  | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#RELEASE) |
+| build_id | build ID | [Android](https://developer.android.com/reference/android/os/Build.html) |
+| locale | device locale | [Android](https://developer.android.com/reference/java/util/Locale.html#getDefault()) |
+| country | locale country |[Android](https://developer.android.com/reference/java/util/Locale.html#getDefault()) |
+| timezone | timezone | [Android](https://developer.android.com/reference/java/util/TimeZone.html) |
+
 
 Tenjin purchase event instructions:
 -----
@@ -168,7 +258,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             String sku = jo.getString("productId");
 
             //here you will need to assign the currencyCode, quantity, and the price
-            TenjinSDK.getInstance(this, API_KEY).transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
+            TenjinSDK.getInstance(this, "<API_KEY>").transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
           }
           catch (JSONException e) {
              alert("Failed to parse purchase data.");
@@ -193,7 +283,7 @@ Here's an example of how this can be implemented at the time of purchase:
 public void completeTransaction(String productId, String currencyCode, int quantity, double unitPrice){
   ...
   //Call the Tenjin SDK with the context and the API_KEY
-  TenjinSDK.getInstance(this, API_KEY).transaction(productId, currencyCode, quantity, unitPrice);
+  TenjinSDK.getInstance(this, "<API_KEY>").transaction(productId, currencyCode, quantity, unitPrice);
   ...
 }
 ```
@@ -204,9 +294,7 @@ public void completeTransaction(String productId, String currencyCode, int quant
 - `unitPrice` -> Unit price of a single transaction
 
 Tenjin will calculate the Total Revenue from a transaction based on `quantity`*`unitPrice`
-
 Tenjin will record and track the revenue based on the currency code, quantity, and the unit price sent.
-
 
 Tenjin custom event integration instructions:
 -----
@@ -225,7 +313,7 @@ instance.eventWithName("swipe_right");
 
 Passing custom events with integer values:
 ----
-NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** event (above). The initialization event must come before any custom events are sent. 
+NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** `connect()` event (above). The initialization event must come before any custom events are sent. 
 
 You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
 
@@ -250,6 +338,7 @@ Tenjin supports the ability to direct users to a specific part of your app after
 
 ```java
 import com.tenjin.android.TenjinSDK;
+import com.tenjin.android.Callback;
 
 public class TenjinDemo extends ActionBarActivity {
 
@@ -261,7 +350,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
+        String apiKey = "<API_KEY>"; //You can potentially set this as a global variable too
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
@@ -299,7 +388,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = <API_KEY>; //You can potentially set this as a global variable too
+        String apiKey = "<API_KEY>"; //You can potentially set this as a global variable too
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
