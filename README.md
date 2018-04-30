@@ -208,6 +208,7 @@ instance.connect();
 
 | Param  | Description | Reference |
 | ------------- | ------------- | ------------- |
+| ip_address  | IP Address | |
 | advertising_id  | Device Advertising ID | [Android](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)) |
 | limit_ad_tracking  | limit ad tracking enabled | [Android](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()) |
 | platform | platform| Android |
