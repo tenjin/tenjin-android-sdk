@@ -134,6 +134,9 @@ public class TenjinDemo extends ActionBarActivity {
 }
 ```
 
+You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>.  Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app.  You should see a live event come in:
+![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
+
 Tenjin and GDPR:
 -------
 As part of GDPR compliance, with Tenjin's SDK you can opt-in, opt-out devices/users, or select which specific device-related params to opt-in or opt-out.  `OptOut()` will not send any API requests to Tenjin and we will not process any events.
@@ -235,7 +238,7 @@ Tenjin purchase event instructions:
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
 1. Validate receipts
-Tenjin can validate `transaction` receipts for you. Visit your app on the dashboard (<a href="https://www.tenjin.io/dashboard/apps">Apps</a> -> Your Android App -> Edit) and enter your Public Key that can be found in your Google Play dashboard under "Services & APIs".
+Tenjin can validate `transaction` receipts for you. **Important:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs. 
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
 
@@ -269,9 +272,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
    }
 }
 ```
-Once code implemented, send a test transaction to our backend to verify purchase events are coming in.  Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>.  Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test transaction from your app.  You should see a live event come in showing the verified purchase event:
+You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>.  You should see a live event come in:
 ![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
-
 
 2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
 To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
