@@ -118,7 +118,7 @@ public class TenjinDemo extends ActionBarActivity {
 
         //Integrate TenjinSDK connect call
         String apiKey = "<API_KEY>";
-        final TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
         String appLinkUri = "your_deeplink";
         if (appLinkUri){
@@ -238,7 +238,9 @@ Tenjin purchase event instructions:
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
 1. Validate receipts
-Tenjin can validate `transaction` receipts for you. **Important:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs. 
+Tenjin can validate `transaction` receipts for you. 
+
+**IMPORTANT:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs. 
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
 
@@ -261,8 +263,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             JSONObject jo = new JSONObject(purchaseData);
             String sku = jo.getString("productId");
 
-            //here you will need to assign the currencyCode, quantity, and the price
-            TenjinSDK.getInstance(this, "<API_KEY>").transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
+            //Below, you will need to assign the currencyCode, quantity, and the price
+            String apiKey = "<API_KEY>";
+            TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);]
+            instance.transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
           }
           catch (JSONException e) {
              alert("Failed to parse purchase data.");
@@ -353,7 +357,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>"; //You can potentially set this as a global variable too
+        String apiKey = "<API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
@@ -391,7 +395,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>"; //You can potentially set this as a global variable too
+        String apiKey = "<API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
