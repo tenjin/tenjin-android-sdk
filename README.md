@@ -49,7 +49,7 @@ SDK Integration:
 
 ```java
 dependencies {
-  compile 'com.google.android.gms:play-services:10.0.1'
+  compile 'com.google.android.gms:play-services-base:15.0.1'
   compile 'com.android.installreferrer:installreferrer:1.0'
 }
 ```
