@@ -430,7 +430,7 @@ After testing this you should see the output of the values passed to your `refer
 
 `ai=test&gclid=click_test`
 
-Proguard Settings:
+ProGuard Settings:
 ----
 ```java
 -keep class com.tenjin.** { *; }
