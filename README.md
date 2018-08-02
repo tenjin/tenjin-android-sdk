@@ -3,7 +3,7 @@ Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/wiki">Relea
 
 For Unity-specific instructions, please visit https://github.com/tenjin/tenjin-unity-sdk.
 
-Tenjin Android SDK (v1.8.5) (132KB) - Google Play and Amazon Store support
+Tenjin Android SDK (v1.8.6) (132KB) - Google Play and Amazon Store support
 ==================
 **Note: We recommend using the latest version of <a href="https://developer.android.com/studio/index.html">Android Studio</a> when integrating our SDK.**
 
