@@ -442,3 +442,14 @@ ProGuard Settings:
 }
 -keepattributes *Annotation*
 ```
+
+App Subversion parameter for A/B Testing
+-------
+
+If you are running A/B tests and want to report the differences, we can append a numeric value to your app version using the `appendAppSubversion` method.  For example, if your app version `1.0.1`, and set `appendAppSubversion(8888)`, it will report as `1.0.1.8888`.
+
+```
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+instance.appendAppSubversion(8888);
+instance.connect();
+```
