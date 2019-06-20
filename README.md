@@ -69,12 +69,12 @@ dependencies {
 
 Code Integration:
 ---------------------------------
-1. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
+1. Get your `TENJIN_API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
 2. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
 
 3a. For each `onResume` method of every `Activity` add the following line of code:
 ```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<TENJIN_API_KEY>");
 instance.connect();
 ```
 
@@ -92,7 +92,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
+        String apiKey = "<TENJIN_API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
@@ -117,7 +117,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
+        String apiKey = "<TENJIN_API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
         String appLinkUri = "your_deeplink";
@@ -153,7 +153,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
+        String apiKey = "<TENJIN_API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
         boolean userOptIn = checkOptInValue();
@@ -185,7 +185,7 @@ To opt-in/opt-out specific device-related parameters, you can use the `OptInPara
 If you want to only get specific device-related parameters, use `OptInParams()`. In example below, we will only these device-related parameters: `ip_address`, `advertising_id`, `developer_device_id`, `limit_ad_tracking`, `referrer`, and `iad`:
 
 ```java
-String apiKey = "<API_KEY>";
+String apiKey = "<TENJIN_API_KEY>";
 TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
 String[] optInParams = {"ip_address", "advertising_id", "developer_device_id", "limit_ad_tracking", "referrer", "iad"};
@@ -198,7 +198,7 @@ If you want to send ALL parameters except specfic device-related parameters, use
 
 
 ```java
-String apiKey = "<API_KEY>";
+String apiKey = "<TENJIN_API_KEY>";
 TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
 String[] optOutParams = {"locale", "timezone", "build_id"};
@@ -264,7 +264,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             String sku = jo.getString("productId");
 
             //Below, you will need to assign the currencyCode, quantity, and the price
-            String apiKey = "<API_KEY>";
+            String apiKey = "<TENJIN_API_KEY>";
             TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);]
             instance.transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
           }
@@ -289,8 +289,8 @@ Here's an example of how this can be implemented at the time of purchase:
 //The developer's own method for completing a transaction that happened in app
 public void completeTransaction(String productId, String currencyCode, int quantity, double unitPrice){
   ...
-  //Call the Tenjin SDK with the context and the API_KEY
-  TenjinSDK.getInstance(this, "<API_KEY>").transaction(productId, currencyCode, quantity, unitPrice);
+  //Call the Tenjin SDK with the context and the TENJIN_API_KEY
+  TenjinSDK.getInstance(this, "<TENJIN_API_KEY>").transaction(productId, currencyCode, quantity, unitPrice);
   ...
 }
 ```
@@ -310,7 +310,7 @@ You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 The custom interactions with your app can be tied to level cost from each acquisition source that you use through Tenjin's service. Here is an example of usage:
 
 ```java
-String apiKey = <API_KEY>;
+String apiKey = <TENJIN_API_KEY>;
 TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 
 //Integrate a custom event with a distinct name - ie. swiping right on the screen
@@ -327,7 +327,7 @@ You can use the Tenjin SDK to pass a custom event with an integer value: `eventW
 Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful.
 
 ```java
-String apiKey = <API_KEY>;
+String apiKey = <TENJIN_API_KEY>;
 TenjinSDK.instance = TenjinSDK.getInstance(this, apiKey);
 
 //Integrate a custom event with a distinct name and value - ie. paying 100 virtual coins for an item
@@ -357,7 +357,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
+        String apiKey = "<TENJIN_API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
@@ -395,7 +395,7 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
+        String apiKey = "<TENJIN_API_KEY>";
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
@@ -451,7 +451,43 @@ If you are running A/B tests and want to report the differences, we can append a
 This data will appear within DataVault where you will be able to run reports using the app subversion values. 
 
 ```
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<TENJIN_API_KEY>");
 instance.appendAppSubversion(8888);
 instance.connect();
 ```
+Tenjin + MoPub Impression Level Ad Revenue Integration
+-------
+
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from MoPub, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+
+> *NOTE* Please ensure you have the latest MoPub Android SDK installed (> 5.7.0) and Impression Level Ad Revenue is enabled for your MoPub Account
+
+```
+public class DemoActivity extends Activity implements BannerAdListener, ImpressionListener {
+
+	private TenjinSDK tenjinInstance;
+
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // MoPub Banner
+        moPubBanner = (MoPubView) findViewById(R.id.banner_ad_view);
+        moPubBanner.setAdUnitId("<MoPub Ad unit ID>");
+        moPubBanner.setBannerAdListener(this);
+        ImpressionsEmitter.addListener(this);
+    }
+
+    @Override
+    public void onImpression(@NonNull String s, @Nullable ImpressionData impressionData) {
+        JSONObject jsonImpressionData = impressionData.getJsonRepresentation();
+        tenjinInstance.eventAdRevenueMoPub(jsonImpressionData);
+    }
+ }
+}
+
+```
+
