@@ -72,7 +72,7 @@ Code Integration:
 1. Get your `API_KEY` from your <a href="https://tenjin.io/dashboard/organizations">Tenjin Organization tab.</a>
 2. In your main Activity include the Tenjin SDK with `import com.tenjin.android.TenjinSDK;`
 
-3a. For each `onResume` method of every `Activity` add the following line of code:
+3a. In the `onResume` method of your main `Activity` class add the following line of code:
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 instance.connect();
