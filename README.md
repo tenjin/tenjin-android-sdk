@@ -49,7 +49,7 @@ SDK Integration:
 
 ```java
 dependencies {
-  compile 'com.google.android.gms:play-services-analytics:16.0.6'
+  compile 'com.google.android.gms:play-services-analytics:17.0.0'
   compile 'com.android.installreferrer:installreferrer:1.0'
 }
 ```
