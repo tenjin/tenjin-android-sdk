@@ -12,22 +12,9 @@ Manifest requirements:
 
 - Include `INTERNET` permissions within the manifest tags
 - Include Google Play Services within the application tags
-- Include Tenjin's INSTALL_REFERRER receiver
 
 ```xml
 <manifest>
-  ...
-  <application ...>
-    <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
-    ...
-    <receiver android:name="com.tenjin.android.TenjinReferrerReceiver" android:exported="true">
-      <intent-filter>
-        <action android:name="com.android.vending.INSTALL_REFERRER"/>
-      </intent-filter>
-    </receiver>
-    ...
-  </application>
   ...
   <uses-permission android:name="android.permission.INTERNET"></uses-permission>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
@@ -45,7 +32,7 @@ SDK Integration:
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
 4. Select the `tenjin.jar` or `tenjin.aar`
  file click on Finish.
-5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.  Starting with Tenjin Android SDK v1.8.3, you will need to add <a href="https://developer.android.com/google/play/installreferrer/library.html">Google's Install Referrer Library</a>. 
+5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.  Starting with Tenjin Android SDK v1.8.3, you will need to add <a href="https://developer.android.com/google/play/installreferrer/library.html">Google's Install Referrer Library</a>.   
 
 ```java
 dependencies {
@@ -413,22 +400,6 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
-
-Testing the Android Referrer:
-----
-To test the Android `INSTALL_REFERRER` is working:
-
-1. Do the above initialization instrutions
-2. Open up your `./adb shell`. If `adb` is not in your home directory locate it in your Android SDK folder
-3. Run your app
-4. Filter for the `REF` tag in your IDE
-5. Run and Test:
-```sh
-am broadcast -a com.android.vending.INSTALL_REFERRER -n <com.your.apppackage>/com.tenjin.android.TenjinReferrerReceiver --es "referrer" "ai=test&gclid=click_test"
-```
-After testing this you should see the output of the values passed to your `referrer` in your IDE console. In the case above you would see:
-
-`ai=test&gclid=click_test`
 
 ProGuard Settings:
 ----
