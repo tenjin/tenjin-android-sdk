@@ -236,32 +236,18 @@ After entering your Public Key into the Tenjin dashboard for your app, you can u
 public void transaction(String productId, String currencyCode, int quantity, double unitPrice, String purchaseData, String dataSignature)
 ```
 
-Here's an example of this can be implemented at the time of purchase (ex. code taken from here http://developer.android.com/google/play/billing/billing_integrate.html#Purchase):
+Example:
 ```java
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-   if (requestCode == 1001) {
-      int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-      String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-      String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
 
-      if (resultCode == RESULT_OK) {
-         try {
-            JSONObject jo = new JSONObject(purchaseData);
-            String sku = jo.getString("productId");
+public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCode) {
+        String sku = purchase.getSku();
+        String purchaseData = purchase.getOriginalJson();
+        String dataSignature = purchase.getSignature();
 
-            //Below, you will need to assign the currencyCode, quantity, and the price
-            String apiKey = "<API_KEY>";
-            TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);]
-            instance.transaction(sku, "USD", 1, 3.99, purchaseData, dataSignature)
-          }
-          catch (JSONException e) {
-             alert("Failed to parse purchase data.");
-             e.printStackTrace();
-          }
-      }
-   }
+        TenjinSDK instance = getTenjinInstance();
+        instance.transaction(sku, currencyCode, 1, price, purchaseData, dataSignature);
 }
+
 ```
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>.  You should see a live event come in:
 ![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
