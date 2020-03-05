@@ -8,6 +8,5 @@
 
 **Steps:**
 
-- [ ] Applied with Terraform/Atlantis
 - [ ] Merged by Assignee
 - [ ] Branch removed
