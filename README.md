@@ -37,7 +37,7 @@ SDK Integration:
 ```java
 dependencies {
   implementation 'com.google.android.gms:play-services-analytics:17.0.0'
-  implementation 'com.android.installreferrer:installreferrer:1.1'
+  implementation 'com.android.installreferrer:installreferrer:1.1.2'
 }
 ```
 6. In your app  module's build.gradle file, make sure to add this into the dependencies block:
