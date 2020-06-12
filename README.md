@@ -484,7 +484,7 @@ public class DemoActivity extends Activity implements BannerAdListener, Impressi
     @Override
     public void onImpression(@NonNull String s, @Nullable ImpressionData impressionData) {
         JSONObject jsonImpressionData = impressionData.getJsonRepresentation();
-        tenjinInstance.eventAdRevenueMoPub(jsonImpressionData);
+        tenjinInstance.eventAdImpressionMoPub(jsonImpressionData);
     }
  }
 }
