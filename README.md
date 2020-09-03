@@ -357,7 +357,7 @@ public class TenjinDemo extends ActionBarActivity {
     }
 ```
 
-Below are the parameters, if available, that returned in the deferred deeplink callback:
+Below are the parameters, if available, that are returned in the deferred deeplink callback:
 
 | Parameter             | Description                                                      |
 |-----------------------|------------------------------------------------------------------|
