@@ -256,30 +256,6 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>.  You should see a live event come in:
 ![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
 
-2. Pass the transaction manually (usually this is necessary if purchases are not handled by Google Play)
-To send `transaction` events, you must provide the `productId`, `currencyCode`, `quantity`, and `unitPrice` of the user's transaction following method signature below:
-
-`public void transaction(String productId, String currencyCode, int quantity, double unitPrice)`.
-
-Here's an example of how this can be implemented at the time of purchase:
-```java
-//The developer's own method for completing a transaction that happened in app
-public void completeTransaction(String productId, String currencyCode, int quantity, double unitPrice){
-  ...
-  //Call the Tenjin SDK with the context and the API_KEY
-  TenjinSDK.getInstance(this, "<API_KEY>").transaction(productId, currencyCode, quantity, unitPrice);
-  ...
-}
-```
-
-- `productId` -> Name or ID of the product that you're selling
-- `currencyCode` -> Currency code of the price
-- `quantity` -> Number of transactions that you are doing on this event
-- `unitPrice` -> Unit price of a single transaction
-
-Tenjin will calculate the Total Revenue from a transaction based on `quantity`*`unitPrice`
-Tenjin will record and track the revenue based on the currency code, quantity, and the unit price sent.
-
 Tenjin custom event integration instructions:
 -----
 You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
