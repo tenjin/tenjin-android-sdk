@@ -1,4 +1,4 @@
-Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/wiki">Release Notes</a> to see detailed version history.
+Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/RELEASE_NOTES.md">Release Notes</a> to see detailed version history.
 
 For Unity-specific instructions, please visit https://github.com/tenjin/tenjin-unity-sdk.
 
