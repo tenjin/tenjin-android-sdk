@@ -1,33 +1,6 @@
-v1.12.2
+v1.9.3
 ----
-- Remove tools:replace
-
-v1.12.1
-----
-- Clean up AndroidManifest.xml to allow tools:replace
-
-v1.12.0
-----
-- Redesign parameter collection
-- Heavy refactoring of TenjinSDK class / file.
-- Reduce time to first request
-- Async startup operations running from HandlerThread instance, instead of AsyncEvent
-
-v1.11.0
-----
-- Prepend wrapper version to sent sdk_version on outgoing requests
-
-v1.10.2
-----
-CI Unification
-
-v1.10.1
-----
-MoPub Impression Level Ad Revenue
-
-v1.9.4
-----
-CI integration
+- Fix bug where not correctly closing BufferedReader
 
 v1.8.3
 ----
