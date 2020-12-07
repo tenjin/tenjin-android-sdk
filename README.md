@@ -4,7 +4,7 @@ For Unity-specific instructions, please visit https://github.com/tenjin/tenjin-u
 
 For any issues or support, please contact: support@tenjin.com
 
-Tenjin Android SDK (v1.9.3) (132KB) - Google Play and Amazon Store support
+Tenjin Android SDK - Google Play and Amazon Store support
 =========
 
 The native Android SDK for Tenjin. Integrate this into your Android app or game to get access to the functionality offered at https://www.tenjin.com/.
