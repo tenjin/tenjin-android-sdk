@@ -36,7 +36,7 @@ SDK Integration:
 ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
 4. Select the `tenjin.jar` or `tenjin.aar`
  file click on Finish.
-5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.  Starting with Tenjin Android SDK v1.8.3, you will need to add <a href="https://developer.android.com/google/play/installreferrer/library.html">Google's Install Referrer Library</a>.   
+5. If you haven’t already installed the <a href="https://developers.google.com/android/guides/setup">Google Play Services</a>, add it to our build.gradle file.  Starting with Tenjin Android SDK v1.8.3, you will need to add <a href="https://developer.android.com/google/play/installreferrer/library.html">Google's Install Referrer Library</a>.
 
 ```java
 dependencies {
@@ -229,9 +229,9 @@ Tenjin purchase event instructions:
 To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
 
 1. Validate receipts
-Tenjin can validate `transaction` receipts for you. 
+Tenjin can validate `transaction` receipts for you.
 
-**IMPORTANT:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs. 
+**IMPORTANT:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs.
 
 ![Dashboard](https://s3.amazonaws.com/tenjin-instructions/android_pk.png "dashboard")
 
@@ -258,6 +258,11 @@ You can verify if the IAP validation is working through our <a href="https://www
 
 Tenjin custom event integration instructions:
 -----
+
+NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** `connect()` event (above). The initialization event must come before any custom events are sent.
+
+**IMPORTANT: Limit custom event names to less than 80 characters. Do not exceed 500 unique custom event names.**
+
 You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 
 The custom interactions with your app can be tied to level cost from each acquisition source that you use through Tenjin's service. Here is an example of usage:
@@ -272,10 +277,8 @@ instance.eventWithName("swipe_right");
 ```
 
 Passing custom events with integer values:
-----
-NOTE: **DO NOT SEND CUSTOM EVENTS BEFORE THE INITIALIZATION** `connect()` event (above). The initialization event must come before any custom events are sent. 
 
-You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
+To pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
 
 Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful.
 
@@ -289,8 +292,7 @@ instance.eventWithNameAndValue("item", "100");
 
 Using the example above, the Tenjin dashboard will sum and average the values for all events with the name `item`.
 
-Keep in mind that this event will not work if the value passed not an integer.
-
+Keep in mind that this event will not work if the value passed is not an integer.
 
 Tenjin deferred deeplink integration instructions:
 -------
@@ -399,7 +401,7 @@ App Subversion parameter for A/B Testing (requires DataVault)
 
 If you are running A/B tests and want to report the differences, we can append a numeric value to your app version using the `appendAppSubversion` method.  For example, if your app version `1.0.1`, and set `appendAppSubversion: @8888`, it will report as `1.0.1.8888`.
 
-This data will appear within DataVault where you will be able to run reports using the app subversion values. 
+This data will appear within DataVault where you will be able to run reports using the app subversion values.
 
 ```
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
