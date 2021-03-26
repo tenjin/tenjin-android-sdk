@@ -226,7 +226,7 @@ instance.connect();
 
 Tenjin purchase event instructions:
 -----
-To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. There are two ways to send `transaction` events to Tenjin.
+To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin.
 
 1. Validate receipts
 Tenjin can validate `transaction` receipts for you.
@@ -382,6 +382,9 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
+
+## Server-to-server integration
+Tenjin offers server-to-server integration. If you want to access to the documentation, please send email to support@tenjin.com.
 
 ProGuard Settings:
 ----
