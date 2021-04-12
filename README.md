@@ -13,6 +13,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
    * [SDK Integration](#sdk-integration)
      * [Google Play Services](#google-play-services)
      * [OAID](#oaid)
+       * [MSA OAID](#msa-oaid)
        * [Huawei OAID](#huawei-oaid)
        * [Huawei Install Referrer](#huawei-install-referrer)
        * [Huawei App Store](#huawei-app-store)
@@ -70,10 +71,20 @@ dependencies {
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
 ```
-
 ## <a id="oaid"></a>OAID
+If you are marketing your app with Ad Networks that require OAID, implement the following libraries:
 
-If you are marketing your app with Ad Networks that require OAID, add the <a href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="_new">Huawei OAID libary</a> to your project:
+### <a id="msa-oaid"></a>MSA OAID (In China)
+
+
+For integration with the <href="http://www.msa-alliance.cn/" target="_new">MSA libary</a>, <a href="">download</a> add the following to your project:
+```
+implementation files('libs/oaid_sdk_1.0.23.aar')
+
+```
+### <a id="huawei-oaid"></a>Huawei OAID (Outside China)
+
+For integration with the <href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="_new">Huawei OAID libary</a>, add the following to your project:
 
 In your `build.gradle` file, add the Maven address for the Huawei SDKs:
 
@@ -89,7 +100,6 @@ allprojects {
 
 ```
 
-### <a id="huawei-oaid"></a>Huawei OAID
 ```java
 dependencies {
 
