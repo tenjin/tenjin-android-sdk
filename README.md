@@ -207,7 +207,7 @@ Current `AppStoreType` options:
 
 - `googleplay`
 - `amazon`
-- `huawei`
+- `other`
 
 ## <a id="gdpr"></a> GDPR
 
