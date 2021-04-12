@@ -2,32 +2,33 @@
 
 The native Android SDK for Tenjin. To learn more about Tenjin and our product offering, please visit https://www.tenjin.com.
 
-* Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/RELEASE_NOTES.md" target="_new">Release Notes</a> to see detailed version history of changes.
-* We recommend using the latest version of <a href="https://developer.android.com/studio/index.html" target="_new">Android Studio</a>.
-* For Unity integration, please visit https://github.com/tenjin/tenjin-unity-sdk.
-* For any issues or support, please contact: support@tenjin.com
+- Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/RELEASE_NOTES.md" target="_new">Release Notes</a> to see detailed version history of changes.
+- We recommend using the latest version of <a href="https://developer.android.com/studio/index.html" target="_new">Android Studio</a>.
+- For Unity integration, please visit https://github.com/tenjin/tenjin-unity-sdk.
+- For any issues or support, please contact: support@tenjin.com
 
 # Table of contents
 
-   * [Permissions](#permissions)
-   * [SDK Integration](#sdk-integration)
-     * [Google Play Services](#google-play-services)
-     * [OAID](#oaid)
-       * [MSA OAID](#msa-oaid)
-       * [Huawei OAID](#huawei-oaid)
-       * [Huawei Install Referrer](#huawei-install-referrer)
-       * [Huawei App Store](#huawei-app-store)
-     * [Proguard](#proguard)
-   * [Integration](#integration)
-     * [App Initilization](#initialization)
-     * [App Store](#app-store)
-     * [GDPR](#gdpr)
-     * [Purchase Events](#purchase-events)
-     * [Custom Events](#custom-events)
-     * [Deferred Deeplink](#deferred-deeplink)
-     * [App Subversion](#subversion)
+- [Permissions](#permissions)
+- [SDK Integration](#sdk-integration)
+  - [Google Play Services](#google-play-services)
+  - [OAID](#oaid)
+    - [MSA OAID](#msa-oaid)
+    - [Huawei OAID](#huawei-oaid)
+    - [Huawei Install Referrer](#huawei-install-referrer)
+    - [Setting for other Android App Store](#other-app-store)
+  - [Proguard](#proguard)
+- [Integration](#integration)
 
-   * [Testing](#testing)
+  - [App Initilization](#initialization)
+  - [App Store](#app-store)
+  - [GDPR](#gdpr)
+  - [Purchase Events](#purchase-events)
+  - [Custom Events](#custom-events)
+  - [Deferred Deeplink](#deferred-deeplink)
+  - [App Subversion](#subversion)
+
+- [Testing](#testing)
 
 # <a id="permissions"></a> Permissions
 
@@ -37,6 +38,7 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
+
 If you are using an Ad Network that targets the `IMEI`, you will need to add the following permissions enabled:
 
 ```xml
@@ -50,11 +52,12 @@ If you are using an Ad Network that targets the `IMEI`, you will need to add the
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
 2. Add the Tenjin SDK into your Android Studio project by selecting: `New > Module`.
 3. In the New Module dialog, select the `Import .JAR.AAR Package` option and click on Next.
-<br /><br />
-![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
-<br /><br />
+   <br /><br />
+   ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_studio_import.png "studio")
+   <br /><br />
 4. Select the `tenjin.jar` or `tenjin.aar` file and click on Finish.
-5. In your app  module's build.gradle file, make sure to add this into the dependencies block:
+5. In your app module's build.gradle file, make sure to add this into the dependencies block:
+
 ```java
 dependencies {
   compile project(":tenjin")
@@ -71,20 +74,37 @@ dependencies {
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
 ```
-## <a id="oaid"></a>OAID
-If you are marketing your app with Ad Networks that require OAID, implement the following libraries:
+
+## <a id="oaid"></a>OAID and other Android App Stores
+
+Tenjin supports promoting on other Android App Stores using the Android OAID. We have the following options for integrating OAID libraries.
 
 ### <a id="msa-oaid"></a>MSA OAID (In China)
 
+For integration with the <a href="http://www.msa-alliance.cn/col.jsp?id=120" target="_new">MSA libary</a>, download the follwing <a href="msa-oaid/oaid_sdk_1.0.25.aar">oaid_sdk_1.0.25.aar</a> and <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a>.
 
-For integration with the <href="http://www.msa-alliance.cn/" target="_new">MSA libary</a>, <a href="">download</a> add the following to your project:
+Add the following to your project gradle file:
+
 ```
 implementation files('libs/oaid_sdk_1.0.23.aar')
 
 ```
+
+Be sure to copy the <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a> file to the `assets/supplierconfig.json` folder of your project.
+
+#### <a id="other-app-store"></a>Android Other App Store
+
+In order to properly track installs from Third Party App Stores that use OAID/IMEI for tracking, it is required to properly set the App Store source.
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+
+instance.setAppStore(TenjinSDK.AppStoreType.other);
+```
+
 ### <a id="huawei-oaid"></a>Huawei OAID (Outside China)
 
-For integration with the <href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="_new">Huawei OAID libary</a>, add the following to your project:
+For integration with the <href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="\_new">Huawei OAID libary</a>, add the following to your project:
 
 In your `build.gradle` file, add the Maven address for the Huawei SDKs:
 
@@ -102,10 +122,18 @@ allprojects {
 
 ```java
 dependencies {
-
     implementation 'com.huawei.hms:ads-identifier:{version}'
-
 }
+```
+
+#### <a id="other-app-store"></a>Android Other App Store
+
+In order to properly track installs from Third Party App Stores that use OAID/IMEI for tracking, it is required to properly set the App Store source.
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+
+instance.setAppStore(TenjinSDK.AppStoreType.other);
 ```
 
 ### <a id="huawei-install-referrer"></a>Huawei Install Referrer
@@ -114,30 +142,15 @@ If you are marketing your app with <a href="https://appgallery.huawei.com/" targ
 
 ```java
 dependencies {
-    
+
     implementation 'com.huawei.hms:ads-identifier:{version}'
     implementation 'com.huawei.hms:ads-installreferrer:{version}'
 
 }
 ```
-### <a id="huawei-app-store"></a>Huawei App Store
-In order to properly track installs from Huawei App Store, it is required to properly set the App Store source.  Below are the two options to set the App Store value:
-
-1. `AndroidManifest.xml`
-```xml
-<meta-data
-    android:name="TENJIN_APP_STORE"
-    android:value="huawei" />
-```
-
-2. `setAppStore()`
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
-
-instance.setAppStore(TenjinSDK.AppStoreType.huawei);
-```
 
 ## <a id="proguard"></a>Proguard Settings
+
 ```java
 -keep class com.tenjin.** { *; }
 -keep public class com.google.android.gms.ads.identifier.** { *; }
@@ -155,6 +168,7 @@ If you are using Huawei libraries, you can to use these setttings:
 -keep class com.huawei.hms.ads.** { *; }
 -keep interface com.huawei.hms.ads.** { *; }
 ```
+
 # <a id="integration"></a> Integration
 
 ## <a id="initialization"></a> App Initialization
@@ -162,6 +176,7 @@ If you are using Huawei libraries, you can to use these setttings:
 1. Get your `<API_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onResume` method of your main `Activity` class add the following line of code:
+
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 
@@ -169,9 +184,11 @@ instance.connect();
 ```
 
 ## <a id="app-store"></a> App Store
+
 By default, <a href="https://play.google.com/" target="_new">Google Play</a> is the default App Store. If you are publishing in a different App Store, update to the appropriate `TenjinSDK.AppStoreType.*` value:
 
 1. `AndroidManifest.xml`:
+
 ```xml
 <meta-data
     android:name="TENJIN_APP_STORE"
@@ -179,12 +196,15 @@ By default, <a href="https://play.google.com/" target="_new">Google Play</a> is 
 ```
 
 2. `setAppStore()`:
+
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 
 instance.setAppStore(TenjinSDK.AppStoreType.{{APP_STORE_TYPE_VALUE}});
 ```
+
 Current `AppStoreType` options:
+
 - `googleplay`
 - `amazon`
 - `huawei`
@@ -194,6 +214,7 @@ Current `AppStoreType` options:
 As part of GDPR compliance, with Tenjin's SDK you can opt-in, opt-out devices/users, or select which specific device-related params to opt-in or opt-out. `optOut()` will not send any API requests to Tenjin and we will not process any events.
 
 To opt-in/opt-out:
+
 ```java
 import com.tenjin.android.TenjinSDK;
 
@@ -232,26 +253,28 @@ public class TenjinDemo extends ActionBarActivity {
 }
 ```
 
-To opt-in/opt-out specific device-related parameters, you can use `optInParams()` or `optOutParams()`.  
+To opt-in/opt-out specific device-related parameters, you can use `optInParams()` or `optOutParams()`.
 
-* `optInParams()` will only send device-related parameters that are specified. `optOutParams()` will send all device-related parameters except ones that are specified.  
+- `optInParams()` will only send device-related parameters that are specified. `optOutParams()` will send all device-related parameters except ones that are specified.
 
-* Please note that we require the following parameters to properly track devices in Tenjin's system: 
-    * `ip_address`
-    * `advertising_id`
-    * `limit_ad_tracking`
-    * `referrer`
+- Please note that we require the following parameters to properly track devices in Tenjin's system:
 
-* If you are targeting IMEI and/or OAID Ad Networks, these params are required:
-    * `imei`
-    * `oaid`
+  - `ip_address`
+  - `advertising_id`
+  - `limit_ad_tracking`
+  - `referrer`
 
-* If you plan on using Google AdWords, these params are required:
-    * `platform`
-    * `os_version`
-    * `locale`
-    * `device_model`
-    * `build_id`
+- If you are targeting IMEI and/or OAID Ad Networks, these params are required:
+
+  - `imei`
+  - `oaid`
+
+- If you plan on using Google AdWords, these params are required:
+  - `platform`
+  - `os_version`
+  - `locale`
+  - `device_model`
+  - `build_id`
 
 If you want to only get specific device-related parameters, use `optInParams()`. In example below, we will only these device-related parameters: `ip_address`, `advertising_id`, `limit_ad_tracking`, and `referrer`.
 
@@ -265,7 +288,7 @@ instance.optInParams(optInParams);
 instance.connect();
 ```
 
-If you want to send ALL parameters except specfic device-related parameters, use `optOutParams()`.  In example below, we will send ALL device-related parameters except:
+If you want to send ALL parameters except specfic device-related parameters, use `optOutParams()`. In example below, we will send ALL device-related parameters except:
 
 ```java
 String apiKey = "<API_KEY>";
@@ -279,33 +302,34 @@ instance.connect();
 
 ## Device-Related Parameters
 
-| Param  | Description | Reference |
-| ------------- | ------------- | ------------- |
-| ip_address  | IP Address | |
-| advertising_id  | Device Advertising ID | [Android](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)) |
-| limit_ad_tracking  | limit ad tracking enabled | [Android](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()) |
-| platform | Platform| Android |
-| referrer | Google Play Install Referrer | [Android](https://developer.android.com/google/play/installreferrer/index.html) |
-| os_version | operating system version | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT) |
-| device | device name | [Android](https://developer.android.com/reference/android/os/Build.html#DEVICE) |
-| device_manufacturer | device manufactuer | [Android](https://developer.android.com/reference/android/os/Build.html#MANUFACTURER) |
-| device_model | device model | [Android](https://developer.android.com/reference/android/os/Build.html#MODEL) |
-| device_brand | device brand | [Android](https://developer.android.com/reference/android/os/Build.html#BRAND) |
-| device_product | device product | [Android](https://developer.android.com/reference/android/os/Build.html#PRODUCT) |
-| carrier | phone carrier | [Android](https://developer.android.com/reference/android/telephony/TelephonyManager.html#getSimOperatorName()) |
-| connection_type | cellular or wifi | [Android](https://developer.android.com/reference/android/net/ConnectivityManager.html#getActiveNetworkInfo()) |
-| screen_width | device screen width | [Android](https://developer.android.com/reference/android/util/DisplayMetrics.html#widthPixels) |
-| screen_height | device screen height | [Android](https://developer.android.com/reference/android/util/DisplayMetrics.html#heightPixels) |
-| os_version_release | operating system version  | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#RELEASE) |
-| build_id | build ID | [Android](https://developer.android.com/reference/android/os/Build.html) |
-| locale | device locale | [Android](https://developer.android.com/reference/java/util/Locale.html#getDefault()) |
-| country | locale country |[Android](https://developer.android.com/reference/java/util/Locale.html#getDefault()) |
-| timezone | timezone | [Android](https://developer.android.com/reference/java/util/TimeZone.html) |
+| Param               | Description                  | Reference                                                                                                                                                                 |
+| ------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ip_address          | IP Address                   |                                                                                                                                                                           |
+| advertising_id      | Device Advertising ID        | [Android](<https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)>) |
+| limit_ad_tracking   | limit ad tracking enabled    | [Android](<https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()>)               |
+| platform            | Platform                     | Android                                                                                                                                                                   |
+| referrer            | Google Play Install Referrer | [Android](https://developer.android.com/google/play/installreferrer/index.html)                                                                                           |
+| os_version          | operating system version     | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT)                                                                                  |
+| device              | device name                  | [Android](https://developer.android.com/reference/android/os/Build.html#DEVICE)                                                                                           |
+| device_manufacturer | device manufactuer           | [Android](https://developer.android.com/reference/android/os/Build.html#MANUFACTURER)                                                                                     |
+| device_model        | device model                 | [Android](https://developer.android.com/reference/android/os/Build.html#MODEL)                                                                                            |
+| device_brand        | device brand                 | [Android](https://developer.android.com/reference/android/os/Build.html#BRAND)                                                                                            |
+| device_product      | device product               | [Android](https://developer.android.com/reference/android/os/Build.html#PRODUCT)                                                                                          |
+| carrier             | phone carrier                | [Android](<https://developer.android.com/reference/android/telephony/TelephonyManager.html#getSimOperatorName()>)                                                         |
+| connection_type     | cellular or wifi             | [Android](<https://developer.android.com/reference/android/net/ConnectivityManager.html#getActiveNetworkInfo()>)                                                          |
+| screen_width        | device screen width          | [Android](https://developer.android.com/reference/android/util/DisplayMetrics.html#widthPixels)                                                                           |
+| screen_height       | device screen height         | [Android](https://developer.android.com/reference/android/util/DisplayMetrics.html#heightPixels)                                                                          |
+| os_version_release  | operating system version     | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#RELEASE)                                                                                  |
+| build_id            | build ID                     | [Android](https://developer.android.com/reference/android/os/Build.html)                                                                                                  |
+| locale              | device locale                | [Android](<https://developer.android.com/reference/java/util/Locale.html#getDefault()>)                                                                                   |
+| country             | locale country               | [Android](<https://developer.android.com/reference/java/util/Locale.html#getDefault()>)                                                                                   |
+| timezone            | timezone                     | [Android](https://developer.android.com/reference/java/util/TimeZone.html)                                                                                                |
 
 <br/>
 
 ## <a id="purchase-events"></a>Purchase Events
-To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin.  Tenjin will validate `transaction` receipts for you. 
+
+To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. Tenjin will validate `transaction` receipts for you.
 
 **IMPORTANT:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs.
 
@@ -320,6 +344,7 @@ public void transaction(String productId, String currencyCode, int quantity, dou
 ```
 
 Example:
+
 ```java
 
 public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCode) {
@@ -332,7 +357,8 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 }
 
 ```
-You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>.  You should see a live event come in:
+
+You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
 <br/>
 ![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
@@ -340,7 +366,7 @@ You can verify if the IAP validation is working through our <a href="https://www
 
 ## <a id="custom-events"></a>Custom Events
 
-**NOTE:** The initialization event `connect()` must come before any custom events are sent. 
+**NOTE:** The initialization event `connect()` must come before any custom events are sent.
 
 You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 
@@ -354,6 +380,7 @@ TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
 instance.eventWithName("swipe_right");
 
 ```
+
 ## Custom Events with values:
 
 You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
@@ -416,7 +443,7 @@ public class TenjinDemo extends ActionBarActivity {
 Below are the parameters, if available, that are returned in the deferred deeplink callback:
 
 | Parameter             | Description                                                      |
-|-----------------------|------------------------------------------------------------------|
+| --------------------- | ---------------------------------------------------------------- |
 | advertising_id        | Advertising ID of the device                                     |
 | ad_network            | Ad network of the campaign                                       |
 | campaign_id           | Tenjin campaign ID                                               |
@@ -463,9 +490,9 @@ public class TenjinDemo extends ActionBarActivity {
 
 ## <a id="subversion"></a>App Subversion parameter for A/B Testing (requires DataVault)
 
-If you are running A/B tests and want to report the differences, we can append a numeric value to your app version using the `appendAppSubversion()` method.  For example, if your app version `1.0.1`, and set `appendAppSubversion(8888)`, it will report app version as `1.0.1.8888`.
+If you are running A/B tests and want to report the differences, we can append a numeric value to your app version using the `appendAppSubversion()` method. For example, if your app version `1.0.1`, and set `appendAppSubversion(8888)`, it will report app version as `1.0.1.8888`.
 
-This data will appear within DataVault where you will be able to run reports using the app subversion values. 
+This data will appear within DataVault where you will be able to run reports using the app subversion values.
 
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
@@ -475,11 +502,10 @@ instance.connect();
 
 # <a id="testing"></a>Testing
 
-You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>.  Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app.  You should see a live events come in:
+You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app. You should see a live events come in:
 
 <br />
 
 ![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
 
 <br /><br />
-
