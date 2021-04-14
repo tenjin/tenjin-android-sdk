@@ -316,6 +316,8 @@ public class TenjinDemo extends ActionBarActivity {
         TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
         instance.connect();
 
+        //Your other code...
+
         instance.getDeeplink(new Callback() {
             @Override
             public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
@@ -382,6 +384,73 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
+
+Calling `getDeeplink()` immediately after `connect()` call can sometimes
+result in incomplete information being returned, with empty `ad_network`
+parameter. If you call `getDeeplink()` close to `connect()`, we recommend
+using a retry strategy with exponential backoff, checking for the presence
+of `ad_network`.
+
+```java
+import com.tenjin.android.TenjinSDK;
+import com.tenjin.android.Callback;
+
+public class TenjinDemo extends ActionBarActivity {
+
+    //...other callbacks are here
+
+    @Override
+    public void onResume() {
+        //standard code
+        super.onResume()
+
+        //Integrate TenjinSDK connect call
+        String apiKey = "<API_KEY>";
+        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        instance.connect();
+
+        //Your other code...
+
+        getTenjinDeeplinkWithRetry(instance, 0);
+    }
+
+    private int MAX_RETRIES = 5;     // maximum of 5 retries
+    private int MIN_SLEEP_MS = 1000; // wait at least 1 second between each attempt
+    private int INTERVAL_MS = 10000; // multiple of 10 seconds between each attempt
+
+    private void getTenjinDeeplinkWithRetry(final TenjinSDK instance, final int attempts) {
+        instance.getDeeplink(new Callback() {
+            @Override
+            public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
+                if (data.containsKey("ad_network")) {
+                    /**
+                     * NOTE: data is ready to use here
+                     */
+                } else {
+                    if (attempts >= MAX_RETRIES) {
+                        /**
+                         * NOTE: add your error handling code here
+                         */
+                        return;
+                    }
+
+                    // exponential back-off
+                    double interval_ms = Math.pow(2, attempts) * INTERVAL_MS;
+                    try {
+                        Thread.sleep(MIN_SLEEP_MS + (long) interval_ms);
+                        getTenjinDeeplinkWithRetry(instance, attempts + 1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+```
+
+
+
+
 
 ## Server-to-server integration
 Tenjin offers server-to-server integration. If you want to access to the documentation, please send email to support@tenjin.com.
