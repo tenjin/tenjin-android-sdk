@@ -16,7 +16,6 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
     - [MSA OAID](#msa-oaid)
     - [Huawei OAID](#huawei-oaid)
     - [Huawei Install Referrer](#huawei-install-referrer)
-    - [Setting for other Android App Store](#other-app-store)
   - [Proguard](#proguard)
 - [Integration](#integration)
 
@@ -92,9 +91,7 @@ implementation files('libs/oaid_sdk_1.0.23.aar')
 
 Be sure to copy the <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a> file to the `assets/supplierconfig.json` folder of your project.
 
-#### <a id="other-app-store"></a>Android Other App Store
-
-In order to properly track installs from Third Party App Stores that use OAID/IMEI for tracking, it is required to properly set the App Store source.
+Set your App Store Type value to `other`:
 
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
@@ -104,7 +101,7 @@ instance.setAppStore(TenjinSDK.AppStoreType.other);
 
 ### <a id="huawei-oaid"></a>Huawei OAID (Outside China)
 
-For integration with the <href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="\_new">Huawei OAID libary</a>, add the following to your project:
+For integration with the <a href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="_new">Huawei OAID libary</a>, add the following to your project:
 
 In your `build.gradle` file, add the Maven address for the Huawei SDKs:
 
@@ -126,9 +123,7 @@ dependencies {
 }
 ```
 
-#### <a id="other-app-store"></a>Android Other App Store
-
-In order to properly track installs from Third Party App Stores that use OAID/IMEI for tracking, it is required to properly set the App Store source.
+Set your App Store Type value to `other`:
 
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
@@ -307,6 +302,8 @@ instance.connect();
 | ip_address          | IP Address                   |                                                                                                                                                                           |
 | advertising_id      | Device Advertising ID        | [Android](<https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)>) |
 | limit_ad_tracking   | limit ad tracking enabled    | [Android](<https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()>)               |
+| oaid                | Open Advertising ID          | [Android](http://www.msa-alliance.cn/col.jsp?id=120)                                                                                                                      |
+| imei                | Device IMEI                  | [Android](<https://developer.android.com/reference/android/telephony/TelephonyManager#getImei()>)                                                                         |
 | platform            | Platform                     | Android                                                                                                                                                                   |
 | referrer            | Google Play Install Referrer | [Android](https://developer.android.com/google/play/installreferrer/index.html)                                                                                           |
 | os_version          | operating system version     | [Android](https://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT)                                                                                  |
