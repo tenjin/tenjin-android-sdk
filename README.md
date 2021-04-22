@@ -65,7 +65,8 @@ dependencies {
 
 ## <a id="google-play-services"></a>Google Play Services and Install Referrer
 
-If you are doing distribution with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup" target="_new">Google Play Services</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+If you are distributing your app with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup" target="_new">Google Play Services</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+**If you are distributing your app outside of Google Play, don't implement Google Play Services, otherwise the attribution won't work properly.**
 
 ```java
 dependencies {
@@ -86,7 +87,6 @@ Add the following to your project gradle file:
 
 ```
 implementation files('libs/oaid_sdk_1.0.23.aar')
-
 ```
 
 Be sure to copy the <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a> file to the `assets/supplierconfig.json` folder of your project.
