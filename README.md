@@ -66,7 +66,6 @@ dependencies {
 ## <a id="google-play-services"></a>Google Play Services and Install Referrer
 
 If you are distributing your app with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup" target="_new">Google Play Services</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
-**If you are distributing your app outside of Google Play, don't implement Google Play Services, otherwise the attribution won't work properly.**
 
 ```java
 dependencies {
