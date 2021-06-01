@@ -8,7 +8,6 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
 - For any issues or support, please contact: support@tenjin.com
 
 # Table of contents
-
 - [Permissions](#permissions)
 - [SDK Integration](#sdk-integration)
   - [Google Play Services](#google-play-services)
@@ -18,7 +17,6 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
     - [Huawei Install Referrer](#huawei-install-referrer)
   - [Proguard](#proguard)
 - [Integration](#integration)
-
   - [App Initilization](#initialization)
   - [App Store](#app-store)
   - [GDPR](#gdpr)
@@ -26,7 +24,6 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Custom Events](#custom-events)
   - [Deferred Deeplink](#deferred-deeplink)
   - [App Subversion](#subversion)
-
 - [Testing](#testing)
 
 # <a id="permissions"></a> Permissions
@@ -330,7 +327,7 @@ To understand user revenue and purchase behavior, developers can send `transacti
 **IMPORTANT:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> > Your Android App > Edit. You can retreive your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> > Select your app > Development Tools > Services & APIs.
 
 <br/>
-![](https://s3.amazonaws.com/tenjin-instructions/android_pk.png)
+<img src="https://s3.amazonaws.com/tenjin-instructions/android_pk.png" />
 <br/><br/>
 
 After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
@@ -357,7 +354,7 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
 <br/>
-![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
+<img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png" />
 <br/><br/>
 
 ## <a id="custom-events"></a>Custom Events
