@@ -73,7 +73,7 @@ dependencies {
 
 ## <a id="oaid"></a>OAID and other Android App Stores
 
-Tenjin supports promoting on other Android App Stores using the Android OAID. We have the following options for integrating OAID libraries.
+Tenjin supports promoting on other Android App Stores using the Android OAID. We have the following options for integrating OAID libraries. **If you plan to develop app outside of Google Play, make sure to implement these OAID libraries.**
 
 ### <a id="msa-oaid"></a>MSA OAID (In China)
 
