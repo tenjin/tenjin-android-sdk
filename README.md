@@ -357,7 +357,7 @@ You can verify if the IAP validation is working through our <a href="https://www
 <img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png" />
 <br/>
 
-**Disclaimer:** If you implement purchase event on Tenjin at the first time, make sure to verify the data with other tools you’re using before you start scaling up you user acquisition campaigns using purchase data.
+**Disclaimer:** If you are implementing purchase events on Tenjin for the first time, make sure to verify the data with other tools you’re using before you start scaling up you user acquisition campaigns using purchase data.
 
 ## <a id="custom-events"></a>Custom Events
 
