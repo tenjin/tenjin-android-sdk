@@ -354,7 +354,7 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
 <br/>
-<img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png" />
+<img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png" />
 <br/>
 
 **Disclaimer:** If you are implementing purchase events on Tenjin for the first time, make sure to verify the data with other tools you’re using before you start scaling up you user acquisition campaigns using purchase data.
@@ -501,6 +501,6 @@ You can verify if the integration is working through our <a href="https://www.te
 
 <br />
 
-![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events.png)
+![](https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png)
 
 <br /><br />
