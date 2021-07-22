@@ -35,7 +35,8 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
 
-If you are using an Ad Network that targets the `IMEI`, you will need to add the following permissions enabled:
+If you are using an Ad Network that targets the `IMEI` for the apps not on Google Play store, you will need to add the following permissions enabled.
+**If you promote apps only on Google play store, you don't need to enable this permission.**
 
 ```xml
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
