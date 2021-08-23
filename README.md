@@ -249,9 +249,8 @@ To opt-in/opt-out specific device-related parameters, you can use `optInParams()
 
 - `optInParams()` will only send device-related parameters that are specified. `optOutParams()` will send all device-related parameters except ones that are specified.
 
-- Please note that we require the following parameters to properly track devices in Tenjin's system. If one of these mandatory parameters is missing the event will not be processed or recorded.
+- Please note that we require the following parameter to properly track devices in Tenjin's system. If the mandatory parameter is missing the event will not be processed or recorded.
 
-  - `ip_address`
   - `advertising_id`
 
 - If you are targeting IMEI and/or OAID Ad Networks, these params are required:
