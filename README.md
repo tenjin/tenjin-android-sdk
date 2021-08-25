@@ -175,6 +175,8 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 instance.connect();
 ```
 
+**NOTE:** Please make sure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+
 ## <a id="app-store"></a> App Store
 
 By default, <a href="https://play.google.com/" target="_new">Google Play</a> is the default App Store. If you are publishing in a different App Store, update to the appropriate `TenjinSDK.AppStoreType.*` value:
