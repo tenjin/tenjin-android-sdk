@@ -79,9 +79,9 @@ dependencies {
 
 ## <a id="oaid"></a>OAID and other Android App Stores
 
-Tenjin supports promoting on other Android App Stores using the Android OAID. We have the following options for integrating OAID libraries. **If you plan to develop app outside of Google Play, make sure to implement these OAID libraries.**
+Tenjin supports promoting on other Android App Stores using the Android OAID. We have the following requirements for integrating OAID libraries. **If you plan to develop app outside of Google Play, make sure to implement these OAID libraries.**
 
-### <a id="msa-oaid"></a>MSA OAID (In China)
+### <a id="msa-oaid"></a>MSA OAID
 
 For integration with the <a href="http://www.msa-alliance.cn/col.jsp?id=120" target="_new">MSA libary</a>, download the following <a href="msa-oaid/oaid_sdk_1.0.25.aar">oaid_sdk_1.0.25.aar</a> and <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a>.
 
@@ -91,7 +91,7 @@ Add the following to your project gradle file:
 implementation files('libs/oaid_sdk_1.0.23.aar')
 ```
 
-Be sure to copy the <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a> file to the `assets/supplierconfig.json` folder of your project.
+Be sure to copy the <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a> file to the `assets` folder of your project.
 
 Set your App Store Type value to `other`:
 
@@ -101,14 +101,13 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 instance.setAppStore(TenjinSDK.AppStoreType.other);
 ```
 
-### <a id="huawei-oaid"></a>Huawei OAID (Outside China)
+### <a id="huawei-oaid"></a>Huawei OAID
 
 For integration with the <a href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="_new">Huawei OAID libary</a>, add the following to your project:
 
 In your `build.gradle` file, add the Maven address for the Huawei SDKs:
 
 ```
-
 allprojects {
     repositories {
         google()
@@ -116,7 +115,6 @@ allprojects {
         maven { url 'https://developer.huawei.com/repo/' }
     }
 }
-
 ```
 
 ```java
