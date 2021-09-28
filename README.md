@@ -79,7 +79,7 @@ dependencies {
 
 ## <a id="oaid"></a>OAID and other Android App Stores
 
-Tenjin supports promoting on other Android App Stores using the Android OAID. We have the following requirements for integrating OAID libraries. **If you plan to develop app outside of Google Play, make sure to implement these OAID libraries.**
+Tenjin supports promoting your app on other Android App Stores using the Android OAID. We have the following requirements for integrating OAID libraries. **If you plan to release your app outside of Google Play, make sure to implement these OAID libraries.**
 
 ### <a id="msa-oaid"></a>MSA OAID
 MSA OAID is an advertising ID for devices manufactured in China that the MSA (Mobile Security Alliance) provides. For integration with the <a href="http://www.msa-alliance.cn/col.jsp?id=120" target="_new">MSA libary</a>, download the following <a href="msa-oaid/oaid_sdk_1.0.25.aar">oaid_sdk_1.0.25.aar</a> and <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a>.
