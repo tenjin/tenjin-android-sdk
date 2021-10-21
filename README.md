@@ -82,7 +82,7 @@ dependencies {
 Tenjin supports promoting your app on other Android App Stores using the Android OAID. We have the following requirements for integrating OAID libraries. **If you plan to release your app outside of Google Play, make sure to implement these OAID libraries.**
 
 ### <a id="msa-oaid"></a>MSA OAID
-MSA OAID is an advertising ID for devices manufactured in China that the MSA (Mobile Security Alliance) provides. For integration with the <a href="http://www.msa-alliance.cn/col.jsp?id=120" target="_new">MSA libary</a>, download the following <a href="msa-oaid/oaid_sdk_1.0.25.aar">oaid_sdk_1.0.25.aar</a> and <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a>.
+MSA OAID is an advertising ID for devices manufactured in China that the MSA (Mobile Security Alliance) provides. For integration with the <a href="http://www.msa-alliance.cn/col.jsp?id=120" target="_new">MSA libary</a>, download the following <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/oaid_sdk_1.0.25.aar" target="_new">oaid_sdk_1.0.25.aar</a> and <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/supplierconfig.json" target="_new">supplierconfig.json</a>.
 
 Add the following to your project gradle file:
 
@@ -90,7 +90,7 @@ Add the following to your project gradle file:
 implementation files('libs/oaid_sdk_1.0.23.aar')
 ```
 
-Be sure to copy the <a href="msa-oaid/supplierconfig.json">supplierconfig.json</a> file to the `assets` folder of your project.
+Be sure to copy the <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/supplierconfig.json" target="_new">supplierconfig.json</a> file to the `assets` folder of your project.
 
 Set your App Store Type value to `other`:
 
