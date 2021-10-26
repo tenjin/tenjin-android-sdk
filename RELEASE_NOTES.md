@@ -1,53 +1,45 @@
-v1.9.3
+v1.0.0
 ----
-- Fix bug where not correctly closing BufferedReader
+- Base API for adding events
 
-v1.8.3
+v1.0.1
 ----
-Added support for Google Play Install Referrer: https://developer.android.com/google/play/installreferrer/library.html
+- Refactoring for improvements on event and value API
 
-v1.8.0 - v1.8.2
+v1.0.2
 ----
-Bug fixes:
-Fix double encoding
-Clean up parameters
+- Update for POST instead of GET
+- Add transaction API for sending data to `/purchase` API - includes currency, quantity, unit price, and productID
 
-v1.7.9
+v1.1.0
 ----
-- Add App Device User Agent params
+- Allow SDK to accept INSTALL_REFERRER and pass it on connect
+- Update the OS_VERSION to reflect the integer version of the OS_VERSION
 
-v1.7.8
+v1.1.1
 ----
-- Encode POST params
+- Pass referrer on the first ping for referral installs
 
-v1.7.7
+v1.2.0
 ----
-- Properly queue HTTP calls. Make sure `connect` runs before all other events.  Eliminate duplicate calls.
+- Check to make sure that eventValue is an integer
 
-v1.7.6
+v1.3.0
 ----
-- Fix crashes in HttpConnection: http://crashes.to/s/d335e1fc6a7, http://crashes.to/s/3cdaa402bd5
+- Add overloaded `transaction` method that accepts `purchaseData` and `signature` to validate in app purchases
 
-v1.7.5
+v1.4.0
 ----
-- Move to HTTPS
+- Include Amazon app store support
 
-v1.7.4
+v1.4.1
 ----
-- Make sure deferred deeplinks are propery decoded and encoded once
+- Make sure to check params are valid before sending events
+- Add a method to accept `int` values in `eventWithNameAndValue`
 
-v1.7.3
+v1.4.2
 ----
-- Always send getDeeplink callback regardless of having deeplink
-
-v1.7.2
-----
-- Add logic to retry requests for non-200 response.
-- Add logic for `getUser` thread to only happen after `connect` thread
-
-v1.7.1
-----
-- Add native attribution deeplink url support for tenjin sdk
+- Add `device` parameter to pass `MANUFACTURER` and `MODEL`
 
 v1.5.0
 ----
@@ -56,45 +48,93 @@ v1.5.0
 - Add `timezone` parameter for device timezone
 - Handle HTTP errors in HttpConnection
 
-v1.4.2
+v1.7.1
 ----
-- Add `device` parameter to pass `MANUFACTURER` and `MODEL`
+- Add native attribution deeplink url support for tenjin sdk
 
-v1.4.1
+v1.7.2
 ----
-- Make sure to check params are valid before sending events
-- Add a method to accept `int` values in `eventWithNameAndValue`
+- Add logic to retry requests for non-200 response.
+- Add logic for `getUser` thread to only happen after `connect` thread
 
-v1.4.0
+v1.7.3
 ----
-- Include Amazon app store support
+- Always send getDeeplink callback regardless of having deeplink
 
-v1.3.0
+v1.7.4
 ----
-- Add overloaded `transaction` method that accepts `purchaseData` and `signature` to validate in app purchases
+- Make sure deferred deeplinks are propery decoded and encoded once
 
-v1.2.0
+v1.7.5
 ----
-- Check to make sure that eventValue is an integer
+- Move to HTTPS
 
-v1.1.1
+v1.7.6
 ----
-- Pass referrer on the first ping for referral installs
+- Fix crashes in HttpConnection: http://crashes.to/s/d335e1fc6a7, http://crashes.to/s/3cdaa402bd5
 
-v1.1.0
+v1.7.7
 ----
-- Allow SDK to accept INSTALL_REFERRER and pass it on connect
-- Update the OS_VERSION to reflect the integer version of the OS_VERSION
+- Properly queue HTTP calls. Make sure `connect` runs before all other events.  Eliminate duplicate calls.
 
-v1.0.2
+v1.7.8
 ----
-- Update for POST instead of GET
-- Add transaction API for sending data to `/purchase` API - includes currency, quantity, unit price, and productID
+- Encode POST params
 
-v1.0.1
+v1.7.9
 ----
-- Refactoring for improvements on event and value API
+- Add App Device User Agent params
 
-v1.0.0
+v1.8.0 - v1.8.2
 ----
-- Base API for adding events
+- Bug fixes:
+    * Fix double encoding
+    * Clean up parameters
+
+v1.8.3
+----
+Added support for Google Play Install Referrer: https://developer.android.com/google/play/installreferrer/library.html
+
+v1.9.3
+----
+- Fix bug where not correctly closing BufferedReader
+
+v1.10.2
+----
+- CI Unification
+
+v1.11.0
+----
+- Prepend wrapper version to sent sdk_version on outgoing requests
+
+v1.12.0
+----
+- Redesign parameter collection
+- Heavy refactoring of TenjinSDK class / file.
+- Reduce time to first request
+- Async startup operations running from HandlerThread instance, instead of AsyncEvent
+
+v1.12.1
+----
+- Clean up AndroidManifest.xml to allow tools:replace
+
+v1.12.2
+----
+- Remove tools:replace
+
+v1.12.3
+----
+- Add JAR file back to build
+
+v1.12.4
+----
+- Support OAID
+- Huawei Install Referrer Support
+
+v1.12.5
+----
+- OAID Support
+
+v1.12.6
+----
+- Fix MSA OAID
