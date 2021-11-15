@@ -496,6 +496,41 @@ instance.appendAppSubversion(8888);
 instance.connect();
 ```
 
+Tenjin + MoPub Impression Level Ad Revenue Integration
+-------
+
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from MoPub, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+
+> *NOTE* Please ensure you have the latest MoPub Android SDK installed (> 5.7.0) and Impression Level Ad Revenue is enabled for your MoPub Account
+
+```
+public class DemoActivity extends Activity implements BannerAdListener, ImpressionListener {
+
+	private TenjinSDK tenjinInstance;
+
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // MoPub Banner
+        moPubBanner = (MoPubView) findViewById(R.id.banner_ad_view);
+        moPubBanner.setAdUnitId("<MoPub Ad unit ID>");
+        moPubBanner.setBannerAdListener(this);
+        ImpressionsEmitter.addListener(this);
+    }
+
+    @Override
+    public void onImpression(@NonNull String s, @Nullable ImpressionData impressionData) {
+        JSONObject jsonImpressionData = impressionData.getJsonRepresentation();
+        tenjinInstance.eventAdImpressionMoPub(jsonImpressionData);
+    }
+ }
+}
+
+```
 # <a id="testing"></a>Testing
 
 You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app. You should see a live events come in:
