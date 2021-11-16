@@ -180,7 +180,12 @@ instance.connect();
 
 ## <a id="app-store"></a> App Store
 
-By default, <a href="https://play.google.com/" target="_new">Google Play</a> is the default App Store. If you are publishing in a different App Store, update to the appropriate `TenjinSDK.AppStoreType.*` value:
+We support three app store options,
+1. googleplay
+2. amazon
+3. other
+
+By default, <b>unspecified</b> is the default App Store. If you are publishing in a specific App Store, update the app store value to the appropriate app store value. The app store value <b>other</b> is used for Huawei AppGallery and other app stores:
 
 1. `AndroidManifest.xml`:
 
@@ -197,12 +202,6 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 
 instance.setAppStore(TenjinSDK.AppStoreType.{{APP_STORE_TYPE_VALUE}});
 ```
-
-Current `AppStoreType` options:
-
-- `googleplay`
-- `amazon`
-- `other`
 
 ## <a id="gdpr"></a> GDPR
 
