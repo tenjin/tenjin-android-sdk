@@ -10,7 +10,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
 # Table of contents
 - [Permissions](#permissions)
 - [SDK Integration](#sdk-integration)
-  - [Google Play Services](#google-play-services)
+  - [Android Advertising ID (AAID)](#play-services-ads-identifier)
   - [OAID](#oaid)
     - [MSA OAID](#msa-oaid)
     - [Huawei OAID](#huawei-oaid)
@@ -66,13 +66,13 @@ dependencies {
 }
 ```
 
-## <a id="google-play-services"></a>Google Play Services and Install Referrer
+## <a id="play-services-ads-identifier"></a>Android Advertising ID (AAID) and Install Referrer
 
-If you are distributing your app with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup" target="_new">Google Play Services</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+If you are distributing your app with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
 
 ```java
 dependencies {
-  implementation 'com.google.android.gms:play-services-analytics:{version}'
+  implementation 'com.google.android.gms:play-services-ads-identifier:{version}'
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
 ```
@@ -87,7 +87,7 @@ MSA OAID is an advertising ID for devices manufactured in China that the MSA (Mo
 Add the following to your project gradle file:
 
 ```
-implementation files('libs/oaid_sdk_1.0.23.aar')
+implementation files('libs/oaid_sdk_1.0.25.aar')
 ```
 
 Be sure to copy the <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/supplierconfig.json" target="_new">supplierconfig.json</a> file to the `assets` folder of your project.
