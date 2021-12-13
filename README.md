@@ -53,7 +53,10 @@ If you are using an Ad Network that targets the `IMEI` for the apps not on Googl
 
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
 2. Add the Tenjin SDK into your Android Studio project. Go to the Project Navigator in Android Studio. Select the option `Project` in the Project Navigator. You will find the `libs` folder under the `app` module of your Android Studio project.
-3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder.
+3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder. 
+   <br /><br />
+   ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio")
+   <br /><br />
 4. In your Android Studio project under `app` module, select the `build.gradle` file,  and add the following under the dependencies block:
 ```java
 dependencies {
