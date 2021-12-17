@@ -139,12 +139,6 @@ v1.12.6
 ----
 - Fix MSA OAID
 
-v1.12.7
+v1.12.0601
 ----
-- Replace depcreated play-services-analytics with play-services-ads-identifier
-- Update Android dependencies
-    - Java support version from 8 to 11
-    - installreferrer from 1.0 to 2.2
-    - Android Compile Sdk version from 29 to 30
-    - Gradle version from 6.5 to 7.3
-    - Android Gradle Plugin version from 3.6.4 to 7.0.3
+- Replace depcreated play-services- analytics with play-services-ads-identifier
