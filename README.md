@@ -65,6 +65,8 @@ dependencies {
 }
 ```
 
+> Note: Starting tenjin-android-sdkv1.12.7 and higher you need to remove `jcenter()` from `build.gradle`. As Android Gradle version 7.0.3 throws an [warning](https://blog.gradle.org/jcenter-shutdown#:~:text=Gradle%207.0%20will%20also%20deprecate,will%20emit%20a%20deprecation%20warning.&text=Based%20on%20the%20current%20timeline,February%201%2C%202022%20without%20changes.) for `jcenter()` deprecation.
+
 ## <a id="play-services-ads-identifier"></a>Android Advertising ID (AAID) and Install Referrer
 
 If you are distributing your app with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
@@ -108,7 +110,6 @@ In your `build.gradle` file, add the Maven address for the Huawei SDKs:
 allprojects {
     repositories {
         google()
-        jcenter()
         maven { url 'https://developer.huawei.com/repo/' }
     }
 }
