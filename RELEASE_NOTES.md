@@ -148,3 +148,16 @@ v1.12.7
     - Android Compile Sdk version from 29 to 30
     - Gradle version from 6.5 to 7.3
     - Android Gradle Plugin version from 3.6.4 to 7.0.3
+
+v1.12.8
+----
+- Update play-services-ads-identifier from 16.0.0 to 17.1.0
+- Add support for AndroidX
+- Downgrade dependencies and project settings
+    - Gradle version from 7.3 to 6.5
+    - Android Gradle Plugin version from 7.0.3 to 3.6.4
+    - Android Build Tools version from 30.0.2 to 29.0.2
+    - Android Compile Sdk version from 30 to 29
+    - Java support version from 11 to 8
+    - junit from 4.13.2 to  4.12
+    - mockito-core from 4.0.0 to 1.10.19
