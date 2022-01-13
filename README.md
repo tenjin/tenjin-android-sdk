@@ -35,7 +35,7 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
 
-Starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.7 in order to use the below permission.
+Starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
 ```xml
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 ```
@@ -64,8 +64,6 @@ dependencies {
     implementation files('libs/tenjin.aar')
 }
 ```
-
-> Note: Starting tenjin-android-sdkv1.12.7 and higher you need to remove `jcenter()` from `build.gradle`. As Android Gradle version 7.0.3 throws an [warning](https://blog.gradle.org/jcenter-shutdown#:~:text=Gradle%207.0%20will%20also%20deprecate,will%20emit%20a%20deprecation%20warning.&text=Based%20on%20the%20current%20timeline,February%201%2C%202022%20without%20changes.) for `jcenter()` deprecation.
 
 ## <a id="play-services-ads-identifier"></a>Android Advertising ID (AAID) and Install Referrer
 
