@@ -161,3 +161,7 @@ v1.12.8
     - Java support version from 11 to 8
     - junit from 4.13.2 to  4.12
     - mockito-core from 4.0.0 to 1.10.19
+
+v1.12.9
+----
+- AppLovin Impression Level Ad Revenue
