@@ -164,5 +164,4 @@ v1.12.8
 
 v1.12.9
 ----
-- Update play-services-ads-identifier to 17.1.0
 - AppLovin Impression Level Ad Revenue
