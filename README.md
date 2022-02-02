@@ -542,7 +542,6 @@ public class DemoActivity extends Activity implements BannerAdListener, Impressi
         JSONObject jsonImpressionData = impressionData.getJsonRepresentation();
         tenjinInstance.eventAdImpressionMoPub(jsonImpressionData);
     }
- }
 }
 
 ```
@@ -599,7 +598,51 @@ public class DemoActivity extends Activity implements MaxAdRevenueListener {
     public void onAdRevenuePaid(MaxAd maxAd) {
         tenjinInstance.eventAdImpressionAppLovin(maxAd);
     }
- }
+}
+```
+
+Tenjin + IronSource Impression Level Ad Revenue Integration
+-------
+
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from IronSource, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+
+> *NOTE* Please ensure you have the latest IronSource Android SDK installed (> 1.7.13.1)
+
+```
+public class DemoActivity extends Activity implements ImpressionDataListener {
+
+    private TenjinSDK tenjinInstance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // Initialize IronSource
+        IronSource.addImpressionDataListener(this);
+        IronSource.init(this, "<IronSource App Key>", AD_UNIT.BANNER);
+
+        // IronSource Banner
+        initIronSourceBanner();
+    }
+
+    private void initIronSourceBanner() {
+        ISBannerSize size = ISBannerSize.BANNER;
+        IronSourceBannerLayout ironSourceBannerLayout = IronSource.createBanner(this, size);
+
+        FrameLayout bannerFrameLayout = findViewById(R.id.bannerFrameLayout);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT);
+        bannerFrameLayout.addView(ironSourceBannerLayout, 0, layoutParams);
+
+        IronSource.loadBanner(ironSourceBannerLayout);
+    }
+
+    @Override public void onImpressionSuccess(ImpressionData impressionData) {
+        instance.eventAdImpressionIronSource(impressionData);
+    }
 }
 
 ```
