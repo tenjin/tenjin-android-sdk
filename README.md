@@ -576,6 +576,7 @@ public class DemoActivity extends Activity implements MaxAdRevenueListener {
 
     private void initAppLovinBanner() {
         MaxAdView adView = new MaxAdView("<Applovin Ad unit ID>", this);
+        adView.setPlacement("Placement name Banner");
         adView.setRevenueListener(this);
 
         // Set the height of the banner ad based on the device type.
