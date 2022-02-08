@@ -546,6 +546,64 @@ public class DemoActivity extends Activity implements BannerAdListener, Impressi
 }
 
 ```
+
+Tenjin + AppLovin Impression Level Ad Revenue Integration
+-------
+
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from AppLovin, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+
+> *NOTE* Please ensure you have the latest AppLovin Android SDK installed (> 10.3.5)
+
+```
+public class DemoActivity extends Activity implements MaxAdRevenueListener {
+
+    private TenjinSDK tenjinInstance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // Initialize AppLovin
+        AppLovinSdk.getInstance(this).setMediationProvider(AppLovinMediationProvider.MAX);
+        AppLovinSdk.initializeSdk(this);
+
+        // AppLovin Banner
+        initAppLovinBanner();
+    }
+
+    private void initAppLovinBanner() {
+        MaxAdView adView = new MaxAdView("<Applovin Ad unit ID>", this);
+        adView.setPlacement("Placement name Banner");
+        adView.setRevenueListener(this);
+
+        // Set the height of the banner ad based on the device type.
+        final boolean isTablet = AppLovinSdkUtils.isTablet(this);
+        final int heightPx = AppLovinSdkUtils.dpToPx(this, isTablet ? 90 : 50);
+        // Banner width must match the screen to be fully functional.
+        adView.setLayoutParams(
+            new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, heightPx));
+
+        // Need to set the background or background color for banners to be fully functional.
+        adView.setBackgroundColor(Color.BLACK);
+
+        final ViewGroup rootView = findViewById(android.R.id.content);
+        rootView.addView(adView);
+
+        // Load the first ad.
+        adView.loadAd();
+    }
+
+    @Override
+    public void onAdRevenuePaid(MaxAd maxAd) {
+        tenjinInstance.eventAdImpressionAppLovin(maxAd);
+    }
+ }
+}
+
+```
 # <a id="testing"></a>Testing
 
 You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app. You should see a live events come in:
