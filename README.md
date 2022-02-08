@@ -646,6 +646,51 @@ public class DemoActivity extends Activity implements ImpressionDataListener {
 }
 
 ```
+
+Tenjin + HyperBid Impression Level Ad Revenue Integration
+-------
+
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from HyperBid, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+
+> *NOTE* Please ensure you have the latest HyperBid Android SDK installed (>= 5.7.78)
+
+```
+public class DemoActivity extends Activity implements HBBannerExListener {
+
+    private TenjinSDK tenjinInstance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // Initialize HyperBid
+        HBSDK.checkInit(this);
+        HBSDK.setAppChannel(<HyperBid App Channel>);
+        HBSDK.setAppSubChannel(<HyperBid App Sub Channel>);
+        HBSDK.start(getApplicationContext(), <HyperBid App Id>, <HyperBid App Key>);
+
+        // HyperBid Banner
+        initHyperBidBanner();
+    }
+
+    private void initHyperBidBanner() {
+        final FrameLayout frameLayout = findViewById(R.id.bannerFrameLayout);
+        bannerView = new HBBannerView(this);
+        bannerView.setPlacementId(<HyperBid Placement Banner Ad Id>);
+        frameLayout.addView(bannerView);
+        bannerView.setBannerAdListener(this);
+        bannerView.loadAd();
+    }
+
+    @Override public void onBannerShow(HBAdInfo hbAdInfo) {
+        instance.eventAdImpressionHyperBid(hbAdInfo);
+    }
+}
+
+```
 # <a id="testing"></a>Testing
 
 You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app. You should see a live events come in:
