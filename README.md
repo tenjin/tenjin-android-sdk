@@ -640,7 +640,8 @@ public class DemoActivity extends Activity implements ImpressionDataListener {
         IronSource.loadBanner(ironSourceBannerLayout);
     }
 
-    @Override public void onImpressionSuccess(ImpressionData impressionData) {
+    @Override
+    public void onImpressionSuccess(ImpressionData impressionData) {
         instance.eventAdImpressionIronSource(impressionData);
     }
 }
@@ -685,12 +686,51 @@ public class DemoActivity extends Activity implements HBBannerExListener {
         bannerView.loadAd();
     }
 
-    @Override public void onBannerShow(HBAdInfo hbAdInfo) {
+    @Override
+    public void onBannerShow(HBAdInfo hbAdInfo) {
         instance.eventAdImpressionHyperBid(hbAdInfo);
     }
 }
 
 ```
+
+Tenjin + AdMob Impression Level Ad Revenue Integration
+-------
+
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from AdMob, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+
+> *NOTE* Please ensure you have the latest AdMob Android SDK installed (>= 20.5.0)
+
+```
+public class DemoActivity extends Activity {
+
+    private TenjinSDK tenjinInstance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // Initialize AdMob
+        MobileAds.initialize(this, initializationStatus -> initBanner());
+
+        // AdMob Banner
+        initAdMobBanner();
+    }
+
+    private void initAdMobBanner() {
+        AdView adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+        adView.setOnPaidEventListener(adValue -> instance.eventAdImpressionAdMob(adValue, adView));
+    }
+}
+
+
+```
+
 # <a id="testing"></a>Testing
 
 You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app. You should see a live events come in:
