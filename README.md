@@ -27,6 +27,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
 - [Impression Level Ad Revenue Integration](#ilrd)
   - [Tenjin + MoPub Impression Level Ad Revenue Integration](#mopub)
   - [Tenjin + AppLovin Impression Level Ad Revenue Integration](#applovin)
+  - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
 - [Testing](#testing)
 
 # <a id="permissions"></a> Permissions
@@ -519,6 +520,7 @@ instance.connect();
 Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
 - MoPub
 - AppLovin
+- IronSource
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this feature, follow the below instuctions.
 
@@ -607,10 +609,7 @@ public class DemoActivity extends Activity implements MaxAdRevenueListener {
 }
 ```
 
-Tenjin + IronSource Impression Level Ad Revenue Integration
--------
-
-Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from IronSource, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+## <a id="ironsource"></a>Tenjin + IronSource Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest IronSource Android SDK installed (> 1.7.13.1)
 
