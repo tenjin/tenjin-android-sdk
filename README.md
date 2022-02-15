@@ -5,20 +5,25 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
 - Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/RELEASE_NOTES.md" target="_new">Release Notes</a> to see detailed version history of changes.
 - We recommend using the latest version of <a href="https://developer.android.com/studio/index.html" target="_new">Android Studio</a>.
 - For Unity integration, please visit https://github.com/tenjin/tenjin-unity-sdk.
-- For any issues or support, please contact: support@tenjin.com
+- For any issues or support, please contact: support@tenjin.com.
 
 # Table of contents
-- [Permissions](#permissions)
-- [SDK Integration](#sdk-integration)
-  - [Android Advertising ID (AAID)](#play-services-ads-identifier)
-  - [OAID](#oaid)
-    - [MSA OAID](#msa-oaid)
-    - [Huawei OAID](#huawei-oaid)
-    - [Huawei Install Referrer](#huawei-install-referrer)
-  - [Proguard](#proguard)
+- [Initial setup](#setup)
+  - [Google Play or Amazon store](#google-play)
+    - [Permissions](#google-play-permissions)
+    - [Android Advertising ID (AAID)](#play-services-ads-identifier-google-play)
+    - [App Store](#google-play-app-store)
+  - [Android other store](#android-other)
+    - [Permissions](#android-other-permissons)
+    - [Android Advertising ID (AAID)](#play-services-ads-identifier-android-other)
+    - [OAID](#oaid)
+      - [MSA OAID](#msa-oaid)
+      - [Huawei OAID](#huawei-oaid)
+      - [Huawei Install Referrer](#huawei-install-referrer)
+    - [App Store](#android-other-app-store)
+- [Proguard settings](#proguard)
 - [Integration](#integration)
   - [App Initilization](#initialization)
-  - [App Store](#app-store)
   - [GDPR](#gdpr)
   - [Purchase Events](#purchase-events)
   - [Custom Events](#custom-events)
@@ -30,34 +35,12 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
 - [Testing](#testing)
 
-# <a id="permissions"></a> Permissions
-
-The Tenjin SDK requires the following permissions:
-
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
-```
-
-Starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
-```xml
-<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-```
-
-If you are using an Ad Network that targets the `IMEI` for the apps not on Google Play store, you will need to add the following permissions enabled.
-**If you promote apps only on Google play store, you don't need to enable this permission.**
-
-```xml
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-```
-
-# <a id="sdk-integration"></a> SDK Integration
-
-### Android Studio
+# <a id="setup"></a> Initial setup
+## Android Studio
 
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
 2. Add the Tenjin SDK into your Android Studio project. Go to the Project Navigator in Android Studio. Select the option `Project` in the Project Navigator. You will find the `libs` folder under the `app` module of your Android Studio project.
-3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder. 
+3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder.
    <br /><br />
    ![AndroidStudio](https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio")
    <br /><br />
@@ -69,9 +52,68 @@ dependencies {
 }
 ```
 
-## <a id="play-services-ads-identifier"></a>Android Advertising ID (AAID) and Install Referrer
+## <a id="google-play"></a>Google Play or Amazon store
+If you distribute your apps on Google Play store or Amazon store, implement the following initial setups.
 
-If you are distributing your app with Google Play, you will need to add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+### <a id="google-play-permissions"></a>Permission
+The Tenjin SDK requires the following permissions:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
+```
+
+Also, starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
+```xml
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+```
+
+### <a id="play-services-ads-identifier-google-play"></a>Android Advertising ID (AAID) and Install Referrer
+Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+
+```java
+dependencies {
+  implementation 'com.google.android.gms:play-services-ads-identifier:{version}'
+  implementation 'com.android.installreferrer:installreferrer:{version}'
+}
+```
+### <a id="google-play-app-store"></a>App Store
+By default, <b>unspecified</b> is the default App Store. Update the app store value to either <b>googleplay</b> or <b>amazon</b>, depending on your app.
+
+1. `AndroidManifest.xml`:
+
+```xml
+<meta-data
+    android:name="TENJIN_APP_STORE"
+    android:value="googleplay" />
+```
+
+2. `setAppStore()`:
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+
+instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
+```
+
+## <a id="android-other"></a>Other Android store
+If you distribute your apps outside of Google Play store or Amazon store(Other Android store), implement the following initial setups.
+
+### <a id="android-other-permissons"></a>Permission
+The Tenjin SDK requires the following permissions:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
+```
+
+Also, starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
+```xml
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+```
+
+### <a id="play-services-ads-identifier-android-other"></a>Android Advertising ID (AAID) and Install Referrer
+Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
 
 ```java
 dependencies {
@@ -80,11 +122,15 @@ dependencies {
 }
 ```
 
-## <a id="oaid"></a>OAID and other Android App Stores
+If you are using an Ad Network that targets the IMEI, you will need to add the following permissions enabled.
+```xml
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
 
-Tenjin supports promoting your app on other Android App Stores using the Android OAID. We have the following requirements for integrating OAID libraries. **If you plan to release your app outside of Google Play, make sure to implement these OAID libraries.**
+### <a id="oaid"></a>OAID
+Tenjin supports promoting your app on other Android App Stores using the Android OAID. We have the following requirements for integrating OAID libraries.
 
-### <a id="msa-oaid"></a>MSA OAID
+#### <a id="msa-oaid"></a>MSA OAID
 MSA OAID is an advertising ID for devices manufactured in China that the MSA (Mobile Security Alliance) provides. For integration with the <a href="http://www.msa-alliance.cn/col.jsp?id=120" target="_new">MSA libary</a>, download the following <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/oaid_sdk_1.0.25.aar" target="_new">oaid_sdk_1.0.25.aar</a> and <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/supplierconfig.json" target="_new">supplierconfig.json</a>.
 
 Add the following to your project gradle file:
@@ -95,15 +141,7 @@ implementation files('libs/oaid_sdk_1.0.25.aar')
 
 Be sure to copy the <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/msa-oaid/supplierconfig.json" target="_new">supplierconfig.json</a> file to the `assets` folder of your project.
 
-Set your App Store Type value to `other`:
-
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
-
-instance.setAppStore(TenjinSDK.AppStoreType.other);
-```
-
-### <a id="huawei-oaid"></a>Huawei OAID
+#### <a id="huawei-oaid"></a>Huawei OAID
 For outside of China, you can collect OAID using the library provided by Huawei. For integration with the <a href="https://developer.huawei.com/consumer/en/codelab/HMSAdsOAID/index.html#3" target="_new">Huawei OAID libary</a>, add the following to your project:
 
 In your `build.gradle` file, add the Maven address for the Huawei SDKs:
@@ -123,16 +161,7 @@ dependencies {
 }
 ```
 
-Set your App Store Type value to `other`:
-
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
-
-instance.setAppStore(TenjinSDK.AppStoreType.other);
-```
-
-### <a id="huawei-install-referrer"></a>Huawei Install Referrer
-
+#### <a id="huawei-install-referrer"></a>Huawei Install Referrer
 If you are marketing your app with <a href="https://appgallery.huawei.com/" target="_new">Huawei App Gallery</a>, add both the `Huawei OAID` SDK from above and the <a href="https://developer.huawei.com/consumer/en/codelab/HMSAdsTransformOAID/index.html#3" target="_new">Install Referrer</a> library.
 
 ```java
@@ -142,6 +171,24 @@ dependencies {
     implementation 'com.huawei.hms:ads-installreferrer:{version}'
 
 }
+```
+### <a id="android-other-app-store"></a>App Store
+By default, <b>unspecified</b> is the default App Store. Update the app store value to <b>other</b>.
+
+1. `AndroidManifest.xml`:
+
+```xml
+<meta-data
+    android:name="TENJIN_APP_STORE"
+    android:value="other" />
+```
+
+2. `setAppStore()`:
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+
+instance.setAppStore(TenjinSDK.AppStoreType.other);
 ```
 
 ## <a id="proguard"></a>Proguard Settings
@@ -197,31 +244,6 @@ instance.connect();
 ```
 
 **NOTE:** Please make sure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
-
-## <a id="app-store"></a> App Store
-
-We support three app store options,
-1. googleplay
-2. amazon
-3. other
-
-By default, <b>unspecified</b> is the default App Store. If you are publishing in a specific App Store, update the app store value to the appropriate app store value. The app store value <b>other</b> is used for Huawei AppGallery and other app stores:
-
-1. `AndroidManifest.xml`:
-
-```xml
-<meta-data
-    android:name="TENJIN_APP_STORE"
-    android:value="{{APP_STORE_TYPE_VALUE}}" />
-```
-
-2. `setAppStore()`:
-
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
-
-instance.setAppStore(TenjinSDK.AppStoreType.{{APP_STORE_TYPE_VALUE}});
-```
 
 ## <a id="gdpr"></a> GDPR
 
