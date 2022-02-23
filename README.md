@@ -33,8 +33,6 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Tenjin + MoPub Impression Level Ad Revenue Integration](#mopub)
   - [Tenjin + AppLovin Impression Level Ad Revenue Integration](#applovin)
   - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
-  - [Tenjin + HyperBid Impression Level Ad Revenue Integration](#hyperbid)
-  - [Tenjin + AdMob Impression Level Ad Revenue Integration](#admob)
 - [Testing](#testing)
 
 # <a id="setup"></a> Initial setup
@@ -669,91 +667,12 @@ public class DemoActivity extends Activity implements ImpressionDataListener {
         IronSource.loadBanner(ironSourceBannerLayout);
     }
 
-    @Override
-    public void onImpressionSuccess(ImpressionData impressionData) {
+    @Override public void onImpressionSuccess(ImpressionData impressionData) {
         instance.eventAdImpressionIronSource(impressionData);
     }
 }
 
 ```
-
-## <a id="hyperbid"></a>Tenjin + HyperBid Impression Level Ad Revenue Integration
-
-> *NOTE* Please ensure you have the latest HyperBid Android SDK installed (>= 5.7.78)
-
-```
-public class DemoActivity extends Activity implements HBBannerExListener {
-
-    private TenjinSDK tenjinInstance;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // Initialize Tenjin
-        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
-
-        // Initialize HyperBid
-        HBSDK.checkInit(this);
-        HBSDK.setAppChannel(<HyperBid App Channel>);
-        HBSDK.setAppSubChannel(<HyperBid App Sub Channel>);
-        HBSDK.start(getApplicationContext(), <HyperBid App Id>, <HyperBid App Key>);
-
-        // HyperBid Banner
-        initHyperBidBanner();
-    }
-
-    private void initHyperBidBanner() {
-        final FrameLayout frameLayout = findViewById(R.id.bannerFrameLayout);
-        bannerView = new HBBannerView(this);
-        bannerView.setPlacementId(<HyperBid Placement Banner Ad Id>);
-        frameLayout.addView(bannerView);
-        bannerView.setBannerAdListener(this);
-        bannerView.loadAd();
-    }
-
-    @Override
-    public void onBannerShow(HBAdInfo hbAdInfo) {
-        instance.eventAdImpressionHyperBid(hbAdInfo);
-    }
-}
-
-```
-
-## <a id="admob"></a>Tenjin + AdMob Impression Level Ad Revenue Integration
-
-> *NOTE* Please ensure you have the latest AdMob Android SDK installed (>= 20.5.0)
-
-```
-public class DemoActivity extends Activity {
-
-    private TenjinSDK tenjinInstance;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // Initialize Tenjin
-        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
-
-        // Initialize AdMob
-        MobileAds.initialize(this, initializationStatus -> initBanner());
-
-        // AdMob Banner
-        initAdMobBanner();
-    }
-
-    private void initAdMobBanner() {
-        AdView adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-        adView.setOnPaidEventListener(adValue -> instance.eventAdImpressionAdMob(adValue, adView));
-    }
-}
-
-
-```
-
 # <a id="testing"></a>Testing
 
 You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send a test events from your app. You should see a live events come in:
