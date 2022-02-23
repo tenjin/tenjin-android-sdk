@@ -34,6 +34,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Tenjin + AppLovin Impression Level Ad Revenue Integration](#applovin)
   - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
   - [Tenjin + HyperBid Impression Level Ad Revenue Integration](#hyperbid)
+  - [Tenjin + AdMob Impression Level Ad Revenue Integration](#admob)
 - [Testing](#testing)
 
 # <a id="setup"></a> Initial setup
@@ -719,10 +720,7 @@ public class DemoActivity extends Activity implements HBBannerExListener {
 
 ```
 
-Tenjin + AdMob Impression Level Ad Revenue Integration
--------
-
-Tenjin supports the ability to integrate with the Impression Level Ad Revenue feature from AdMob, which allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this, simply follow the below instuctions.
+## <a id="admob"></a>Tenjin + AdMob Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest AdMob Android SDK installed (>= 20.5.0)
 
