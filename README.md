@@ -35,6 +35,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
   - [Tenjin + HyperBid Impression Level Ad Revenue Integration](#hyperbid)
   - [Tenjin + AdMob Impression Level Ad Revenue Integration](#admob)
+  - [Tenjin + TopOn Impression Level Ad Revenue Integration](#topon)
 - [Testing](#testing)
 
 # <a id="setup"></a> Initial setup
@@ -750,7 +751,48 @@ public class DemoActivity extends Activity {
         adView.setOnPaidEventListener(adValue -> instance.eventAdImpressionAdMob(adValue, adView));
     }
 }
+```
 
+## <a id="topon"></a>Tenjin + TopOn Impression Level Ad Revenue Integration
+
+> *NOTE* Please ensure you have the latest TopOn Android SDK installed (>= 5.7.99)
+
+```
+public class DemoActivity extends Activity implements ATBannerExListener {
+
+    private TenjinSDK tenjinInstance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // Initialize TopOn
+        ATSDK.integrationChecking(this);
+        ATSDK.setChannel(<TopOn App Channel>);
+        ATSDK.setSubChannel(<TopOn App Sub Channel>);
+        ATSDK.init(getApplicationContext(), <TopOn App Id>, <TopOn App Key>);
+
+        // TopOn Banner
+        initTopOnBanner();
+    }
+
+    private void initTopOnBanner() 
+        final FrameLayout frameLayout = findViewById(R.id.bannerFrameLayout);
+        bannerView = new ATBannerView(this);
+        bannerView.setPlacementId(<TopOn Placement Banner Ad Id>);
+        frameLayout.addView(bannerView);
+        bannerView.setBannerAdListener(this);
+        bannerView.loadAd();
+    }
+
+    @Override
+    public void onBannerShow(ATAdInfo atAdInfo) {
+        instance.eventAdImpressionTopOn(atAdInfo);
+    }
+}
 
 ```
 
