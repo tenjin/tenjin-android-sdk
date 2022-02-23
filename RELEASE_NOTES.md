@@ -169,3 +169,11 @@ v1.12.9
 v1.12.10
 ----
 - IronSource Impression Level Ad Revenue
+
+v1.12.11
+----
+- HyperBid Impression Level Ad Revenue
+
+v1.12.12
+----
+- AdMob Impression Level Ad Revenue
