@@ -54,6 +54,8 @@ dependencies {
 }
 ```
 
+> We have a demo project - [tenjin-android-sdk-demo](https://github.com/tenjin/tenjin-android-sdk-demo) that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
+
 ## <a id="google-play"></a>Google Play or Amazon store
 If you distribute your apps on Google Play store or Amazon store, implement the following initial setups.
 
