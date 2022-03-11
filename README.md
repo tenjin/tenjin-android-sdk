@@ -30,11 +30,11 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Deferred Deeplink](#deferred-deeplink)
   - [App Subversion](#subversion)
 - [Impression Level Ad Revenue Integration](#ilrd)
-  - [Tenjin + MoPub Impression Level Ad Revenue Integration](#mopub)
-  - [Tenjin + AppLovin Impression Level Ad Revenue Integration](#applovin)
-  - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
-  - [Tenjin + HyperBid Impression Level Ad Revenue Integration](#hyperbid)
-  - [Tenjin + AdMob Impression Level Ad Revenue Integration](#admob)
+  - [MoPub Impression Level Ad Revenue Integration](#mopub)
+  - [AppLovin Impression Level Ad Revenue Integration](#applovin)
+  - [IronSource Impression Level Ad Revenue Integration](#ironsource)
+  - [HyperBid Impression Level Ad Revenue Integration](#hyperbid)
+  - [AdMob Impression Level Ad Revenue Integration](#admob)
 - [Testing](#testing)
 
 # <a id="setup"></a> Initial setup
@@ -547,10 +547,12 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 - MoPub
 - AppLovin
 - IronSource
+- HyperBid
+- AdMob
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this feature, follow the below instuctions.
 
-## <a id="mopub"></a>Tenjin + MoPub Impression Level Ad Revenue Integration
+## <a id="mopub"></a>MoPub Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest MoPub Android SDK installed (> 5.7.0) and Impression Level Ad Revenue is enabled for your MoPub Account
 
@@ -582,7 +584,7 @@ public class DemoActivity extends Activity implements BannerAdListener, Impressi
 
 ```
 
-## <a id="applovin"></a>Tenjin + AppLovin Impression Level Ad Revenue Integration
+## <a id="applovin"></a>AppLovin Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest AppLovin Android SDK installed (> 10.3.5)
 
@@ -635,7 +637,7 @@ public class DemoActivity extends Activity implements MaxAdRevenueListener {
 }
 ```
 
-## <a id="ironsource"></a>Tenjin + IronSource Impression Level Ad Revenue Integration
+## <a id="ironsource"></a>IronSource Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest IronSource Android SDK installed (> 1.7.13.1)
 
@@ -679,7 +681,7 @@ public class DemoActivity extends Activity implements ImpressionDataListener {
 
 ```
 
-## <a id="hyperbid"></a>Tenjin + HyperBid Impression Level Ad Revenue Integration
+## <a id="hyperbid"></a>HyperBid Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest HyperBid Android SDK installed (>= 5.7.78)
 
@@ -722,7 +724,7 @@ public class DemoActivity extends Activity implements HBBannerExListener {
 
 ```
 
-## <a id="admob"></a>Tenjin + AdMob Impression Level Ad Revenue Integration
+## <a id="admob"></a>AdMob Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest AdMob Android SDK installed (>= 20.5.0)
 
