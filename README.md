@@ -30,12 +30,12 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Deferred Deeplink](#deferred-deeplink)
   - [App Subversion](#subversion)
 - [Impression Level Ad Revenue Integration](#ilrd)
-  - [Tenjin + MoPub Impression Level Ad Revenue Integration](#mopub)
-  - [Tenjin + AppLovin Impression Level Ad Revenue Integration](#applovin)
-  - [Tenjin + IronSource Impression Level Ad Revenue Integration](#ironsource)
-  - [Tenjin + HyperBid Impression Level Ad Revenue Integration](#hyperbid)
-  - [Tenjin + AdMob Impression Level Ad Revenue Integration](#admob)
-  - [Tenjin + TopOn Impression Level Ad Revenue Integration](#topon)
+  - [MoPub Impression Level Ad Revenue Integration](#mopub)
+  - [AppLovin Impression Level Ad Revenue Integration](#applovin)
+  - [IronSource Impression Level Ad Revenue Integration](#ironsource)
+  - [HyperBid Impression Level Ad Revenue Integration](#hyperbid)
+  - [AdMob Impression Level Ad Revenue Integration](#admob)
+  - [TopOn Impression Level Ad Revenue Integration](#topon)
 - [Testing](#testing)
 
 # <a id="setup"></a> Initial setup
@@ -54,6 +54,8 @@ dependencies {
     implementation files('libs/tenjin.aar')
 }
 ```
+
+> We have a demo project - [tenjin-android-sdk-demo](https://github.com/tenjin/tenjin-android-sdk-demo) that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
 
 ## <a id="google-play"></a>Google Play or Amazon store
 If you distribute your apps on Google Play store or Amazon store, implement the following initial setups.
@@ -546,10 +548,13 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 - MoPub
 - AppLovin
 - IronSource
+- HyperBid
+- AdMob
+- TopOn
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this feature, follow the below instuctions.
 
-## <a id="mopub"></a>Tenjin + MoPub Impression Level Ad Revenue Integration
+## <a id="mopub"></a>MoPub Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest MoPub Android SDK installed (> 5.7.0) and Impression Level Ad Revenue is enabled for your MoPub Account
 
@@ -581,7 +586,7 @@ public class DemoActivity extends Activity implements BannerAdListener, Impressi
 
 ```
 
-## <a id="applovin"></a>Tenjin + AppLovin Impression Level Ad Revenue Integration
+## <a id="applovin"></a>AppLovin Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest AppLovin Android SDK installed (> 10.3.5)
 
@@ -632,9 +637,10 @@ public class DemoActivity extends Activity implements MaxAdRevenueListener {
         tenjinInstance.eventAdImpressionAppLovin(maxAd);
     }
 }
+
 ```
 
-## <a id="ironsource"></a>Tenjin + IronSource Impression Level Ad Revenue Integration
+## <a id="ironsource"></a>IronSource Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest IronSource Android SDK installed (> 1.7.13.1)
 
@@ -678,7 +684,7 @@ public class DemoActivity extends Activity implements ImpressionDataListener {
 
 ```
 
-## <a id="hyperbid"></a>Tenjin + HyperBid Impression Level Ad Revenue Integration
+## <a id="hyperbid"></a>HyperBid Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest HyperBid Android SDK installed (>= 5.7.78)
 
@@ -721,7 +727,7 @@ public class DemoActivity extends Activity implements HBBannerExListener {
 
 ```
 
-## <a id="admob"></a>Tenjin + AdMob Impression Level Ad Revenue Integration
+## <a id="admob"></a>AdMob Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest AdMob Android SDK installed (>= 20.5.0)
 
@@ -751,9 +757,10 @@ public class DemoActivity extends Activity {
         adView.setOnPaidEventListener(adValue -> instance.eventAdImpressionAdMob(adValue, adView));
     }
 }
+
 ```
 
-## <a id="topon"></a>Tenjin + TopOn Impression Level Ad Revenue Integration
+## <a id="topon"></a>TopOn Impression Level Ad Revenue Integration
 
 > *NOTE* Please ensure you have the latest TopOn Android SDK installed (>= 5.7.99)
 
