@@ -35,6 +35,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [IronSource Impression Level Ad Revenue Integration](#ironsource)
   - [HyperBid Impression Level Ad Revenue Integration](#hyperbid)
   - [AdMob Impression Level Ad Revenue Integration](#admob)
+  - [TopOn Impression Level Ad Revenue Integration](#topon)
 - [Testing](#testing)
 
 # <a id="setup"></a> Initial setup
@@ -549,6 +550,7 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 - IronSource
 - HyperBid
 - AdMob
+- TopOn
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisment show to a user. To enable this feature, follow the below instuctions.
 
@@ -635,6 +637,7 @@ public class DemoActivity extends Activity implements MaxAdRevenueListener {
         tenjinInstance.eventAdImpressionAppLovin(maxAd);
     }
 }
+
 ```
 
 ## <a id="ironsource"></a>IronSource Impression Level Ad Revenue Integration
@@ -755,6 +758,48 @@ public class DemoActivity extends Activity {
     }
 }
 
+```
+
+## <a id="topon"></a>TopOn Impression Level Ad Revenue Integration
+
+> *NOTE* Please ensure you have the latest TopOn Android SDK installed (>= 5.7.99)
+
+```
+public class DemoActivity extends Activity implements ATBannerExListener {
+
+    private TenjinSDK tenjinInstance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize Tenjin
+        this.tenjinInstance = TenjinSDK.getInstance(this, "<Tenjin API Key>");
+
+        // Initialize TopOn
+        ATSDK.integrationChecking(this);
+        ATSDK.setChannel(<TopOn App Channel>);
+        ATSDK.setSubChannel(<TopOn App Sub Channel>);
+        ATSDK.init(getApplicationContext(), <TopOn App Id>, <TopOn App Key>);
+
+        // TopOn Banner
+        initTopOnBanner();
+    }
+
+    private void initTopOnBanner() 
+        final FrameLayout frameLayout = findViewById(R.id.bannerFrameLayout);
+        bannerView = new ATBannerView(this);
+        bannerView.setPlacementId(<TopOn Placement Banner Ad Id>);
+        frameLayout.addView(bannerView);
+        bannerView.setBannerAdListener(this);
+        bannerView.loadAd();
+    }
+
+    @Override
+    public void onBannerShow(ATAdInfo atAdInfo) {
+        instance.eventAdImpressionTopOn(atAdInfo);
+    }
+}
 
 ```
 

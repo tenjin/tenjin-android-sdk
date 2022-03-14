@@ -177,3 +177,7 @@ v1.12.11
 v1.12.12
 ----
 - AdMob Impression Level Ad Revenue
+
+v1.12.13
+----
+- TopOn Impression Level Ad Revenue
