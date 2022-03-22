@@ -68,7 +68,7 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
 
-Also, starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
+Later this year, Google Play Services will require all API level 32 (Android 13) apps using the advertising_id(Android Advertising ID (AAID)) to declare the Google Play Services AD_ID permission (shown below) in their manifest file. **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
 ```xml
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 ```
@@ -112,7 +112,7 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
 
-Also, starting from **April 1st 2022**, the following permission is required to obtain Google advertising ID for apps with target API level set to 31 (Android 12). **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
+Later this year, Google Play Services will require all API level 32 (Android 13) apps using the advertising_id(Android Advertising ID (AAID)) to declare the Google Play Services AD_ID permission (shown below) in their manifest file. **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
 ```xml
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 ```
