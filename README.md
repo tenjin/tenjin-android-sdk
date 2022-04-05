@@ -28,14 +28,15 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Purchase Events][18]
   - [Custom Events][19]
   - [Deferred Deeplink][20]
-  - [App Subversion][21]
-- [Impression Level Ad Revenue Integration][22]
-  - [AppLovin Impression Level Ad Revenue Integration][23]
-  - [IronSource Impression Level Ad Revenue Integration][24]
-  - [HyperBid Impression Level Ad Revenue Integration][25]
-  - [AdMob Impression Level Ad Revenue Integration][26]
-  - [TopOn Impression Level Ad Revenue Integration][27]
-- [Testing][28]
+  - [Server-to-server integration][21]
+  - [App Subversion][22]
+- [Impression Level Ad Revenue Integration][23]
+  - [AppLovin Impression Level Ad Revenue Integration][24]
+  - [IronSource Impression Level Ad Revenue Integration][25]
+  - [HyperBid Impression Level Ad Revenue Integration][26]
+  - [AdMob Impression Level Ad Revenue Integration][27]
+  - [TopOn Impression Level Ad Revenue Integration][28]
+- [Testing][29]
 
 # <a id="setup"></a> Initial setup
 ## Android Studio
@@ -54,7 +55,7 @@ dependencies {
 }
 ```
 
-> We have a demo project - [tenjin-android-sdk-demo][29] that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
+> We have a demo project - [tenjin-android-sdk-demo][30] that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
 
 ## <a id="google-play"></a>Google Play or Amazon store
 If you distribute your apps on Google Play Store or Amazon store, implement the following initial setups.
@@ -343,27 +344,27 @@ instance.connect();
 | Param                | Description                  | Reference     |
 | -------------------- | ---------------------------- | ------------- |
 | ip\_address          | IP Address                   |               |
-| advertising\_id      | Device Advertising ID        | [Android][30] |
-| limit\_ad\_tracking  | limit ad tracking enabled    | [Android][31] |
-| oaid                 | Open Advertising ID          | [Android][32] |
-| imei                 | Device IMEI                  | [Android][33] |
+| advertising\_id      | Device Advertising ID        | [Android][31] |
+| limit\_ad\_tracking  | limit ad tracking enabled    | [Android][32] |
+| oaid                 | Open Advertising ID          | [Android][33] |
+| imei                 | Device IMEI                  | [Android][34] |
 | platform             | Platform                     | Android       |
-| referrer             | Google Play Install Referrer | [Android][34] |
-| os\_version          | operating system version     | [Android][35] |
-| device               | device name                  | [Android][36] |
-| device\_manufacturer | device manufacturer          | [Android][37] |
-| device\_model        | device model                 | [Android][38] |
-| device\_brand        | device brand                 | [Android][39] |
-| device\_product      | device product               | [Android][40] |
-| carrier              | phone carrier                | [Android][41] |
-| connection\_type     | cellular or wifi             | [Android][42] |
-| screen\_width        | device screen width          | [Android][43] |
-| screen\_height       | device screen height         | [Android][44] |
-| os\_version\_release | operating system version     | [Android][45] |
-| build\_id            | build ID                     | [Android][46] |
-| locale               | device locale                | [Android][47] |
-| country              | locale country               | [Android][48] |
-| timezone             | timezone                     | [Android][49] |
+| referrer             | Google Play Install Referrer | [Android][35] |
+| os\_version          | operating system version     | [Android][36] |
+| device               | device name                  | [Android][37] |
+| device\_manufacturer | device manufacturer          | [Android][38] |
+| device\_model        | device model                 | [Android][39] |
+| device\_brand        | device brand                 | [Android][40] |
+| device\_product      | device product               | [Android][41] |
+| carrier              | phone carrier                | [Android][42] |
+| connection\_type     | cellular or wifi             | [Android][43] |
+| screen\_width        | device screen width          | [Android][44] |
+| screen\_height       | device screen height         | [Android][45] |
+| os\_version\_release | operating system version     | [Android][46] |
+| build\_id            | build ID                     | [Android][47] |
+| locale               | device locale                | [Android][48] |
+| country              | locale country               | [Android][49] |
+| timezone             | timezone                     | [Android][50] |
 
 <br/>
 
@@ -530,6 +531,10 @@ public class TenjinDemo extends ActionBarActivity {
     }
 ```
 
+## <a id="server-to-server"></a>Server-to-server integration
+
+Tenjin offers server-to-server integration, which is a paid feature. If you want to access to the documentation, please send email to support@tenjin.com and discuss the pricing.
+
 ## <a id="subversion"></a>App Subversion parameter for A/B Testing (requires DataVault)
 
 If you are running A/B tests and want to report the differences, we can append a numeric value to your app version using the `appendAppSubversion()` method. For example, if your app version `1.0.1`, and set `appendAppSubversion(8888)`, it will report app version as `1.0.1.8888`.
@@ -553,6 +558,8 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. To enable this feature, follow the below instructions.
 
+> *NOTE*: ILRD is a paid product, please contact your Tenjin account manager to discuss the price.
+ 
 ## <a id="applovin"></a>AppLovin Impression Level Ad Revenue Integration
 
 > *NOTE*, Please ensure you have the latest AppLovin Android SDK installed (\> 10.3.5)
@@ -795,35 +802,36 @@ You can verify if the integration is working through our <a href="https://www.te
 [18]:	#purchase-events
 [19]:	#custom-events
 [20]:	#deferred-deeplink
-[21]:	#subversion
-[22]:	#ilrd
-[23]:	#applovin
-[24]:	#ironsource
-[25]:	#hyperbid
-[26]:	#admob
-[27]:	#topon
-[28]:	#testing
-[29]:	https://github.com/tenjin/tenjin-android-sdk-demo
-[30]:	https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)
-[31]:	https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()
-[32]:	http://www.msa-alliance.cn/col.jsp?id=120
-[33]:	https://developer.android.com/reference/android/telephony/TelephonyManager#getImei()
-[34]:	https://developer.android.com/google/play/installreferrer/index.html
-[35]:	https://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT
-[36]:	https://developer.android.com/reference/android/os/Build.html#DEVICE
-[37]:	https://developer.android.com/reference/android/os/Build.html#MANUFACTURER
-[38]:	https://developer.android.com/reference/android/os/Build.html#MODEL
-[39]:	https://developer.android.com/reference/android/os/Build.html#BRAND
-[40]:	https://developer.android.com/reference/android/os/Build.html#PRODUCT
-[41]:	https://developer.android.com/reference/android/telephony/TelephonyManager.html#getSimOperatorName()
-[42]:	https://developer.android.com/reference/android/net/ConnectivityManager.html#getActiveNetworkInfo()
-[43]:	https://developer.android.com/reference/android/util/DisplayMetrics.html#widthPixels
-[44]:	https://developer.android.com/reference/android/util/DisplayMetrics.html#heightPixels
-[45]:	https://developer.android.com/reference/android/os/Build.VERSION.html#RELEASE
-[46]:	https://developer.android.com/reference/android/os/Build.html
-[47]:	https://developer.android.com/reference/java/util/Locale.html#getDefault()
+[21]:	#server-to-server
+[22]:	#subversion
+[23]:	#ilrd
+[24]:	#applovin
+[25]:	#ironsource
+[26]:	#hyperbid
+[27]:	#admob
+[28]:	#topon
+[29]:	#testing
+[30]:	https://github.com/tenjin/tenjin-android-sdk-demo
+[31]:	https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)
+[32]:	https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info.html#isLimitAdTrackingEnabled()
+[33]:	http://www.msa-alliance.cn/col.jsp?id=120
+[34]:	https://developer.android.com/reference/android/telephony/TelephonyManager#getImei()
+[35]:	https://developer.android.com/google/play/installreferrer/index.html
+[36]:	https://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT
+[37]:	https://developer.android.com/reference/android/os/Build.html#DEVICE
+[38]:	https://developer.android.com/reference/android/os/Build.html#MANUFACTURER
+[39]:	https://developer.android.com/reference/android/os/Build.html#MODEL
+[40]:	https://developer.android.com/reference/android/os/Build.html#BRAND
+[41]:	https://developer.android.com/reference/android/os/Build.html#PRODUCT
+[42]:	https://developer.android.com/reference/android/telephony/TelephonyManager.html#getSimOperatorName()
+[43]:	https://developer.android.com/reference/android/net/ConnectivityManager.html#getActiveNetworkInfo()
+[44]:	https://developer.android.com/reference/android/util/DisplayMetrics.html#widthPixels
+[45]:	https://developer.android.com/reference/android/util/DisplayMetrics.html#heightPixels
+[46]:	https://developer.android.com/reference/android/os/Build.VERSION.html#RELEASE
+[47]:	https://developer.android.com/reference/android/os/Build.html
 [48]:	https://developer.android.com/reference/java/util/Locale.html#getDefault()
-[49]:	https://developer.android.com/reference/java/util/TimeZone.html
+[49]:	https://developer.android.com/reference/java/util/Locale.html#getDefault()
+[50]:	https://developer.android.com/reference/java/util/TimeZone.html
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio"
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
