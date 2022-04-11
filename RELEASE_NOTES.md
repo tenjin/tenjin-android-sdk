@@ -181,3 +181,8 @@ v1.12.12
 v1.12.13
 ----
 - TopOn Impression Level Ad Revenue
+
+v1.12.14
+----
+- Bug fix for non-numeric values in `publisher_revenue_decimal` and `publisher_revenue_micro` ILRD paramters
+- Deprecate support for mopub ILRD
