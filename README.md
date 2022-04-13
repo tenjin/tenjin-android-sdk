@@ -30,7 +30,7 @@ The native Android SDK for Tenjin. To learn more about Tenjin and our product of
   - [Deferred Deeplink][20]
   - [Server-to-server integration][21]
   - [App Subversion][22]
-  - [getAttributionInfo method][23]
+  - [Attribution Info][23]
 - [Impression Level Ad Revenue Integration][24]
   - [AppLovin Impression Level Ad Revenue Integration][25]
   - [IronSource Impression Level Ad Revenue Integration][26]
@@ -548,9 +548,23 @@ instance.appendAppSubversion(8888);
 instance.connect();
 ```
 
-## <a id="getattributioninfo"></a>getAttributionInfo method
+## <a id="attributioninfo"></a>Attribution Info
 
 Description on how to use getAttributionInfo method.
+
+Below are the attribution info parameters, that are returned when the attribution info callback is used:
+
+| Parameter               | Description                   | Example of returned value            |
+| ----------------------- | ----------------------------- | ------------------------------------ |
+| advertising\_id         | Advertising ID of the device  | 11de7924d076456d9a203c8dee56632a     |
+| ad\_network             | Ad network of the campaign    | organic                              |
+| campaign\_id            | Tenjin campaign ID            | 6ebd3332-68f8-4919-875c-73fe6780d4f7 |
+| campaign\_name          | Tenjin campaign name          | Organic                              |
+
+**NOTE:** Please note that those values are returned only if they are available.
+
+Example of returned values:
+{campaign_name=Organic, ad_network=organic, advertising_id=be277924d076456d9a203c8dee5663d3, campaign_id=6ebd3333-68f8-4919-875c-73fd6780d4f7}
 
 ```java
 import com.tenjin.android.TenjinSDK;
@@ -593,15 +607,6 @@ public class TenjinDemo extends ActionBarActivity {
 
     }
 ```
-
-Below are the parameters, if available, that are returned to the attribution info callback:
-
-| Parameter               | Description                                                      |
-| ----------------------- | ---------------------------------------------------------------- |
-| advertising\_id         | Advertising ID of the device                                     |
-| ad\_network             | Ad network of the campaign                                       |
-| campaign\_id            | Tenjin campaign ID                                               |
-| campaign\_name          | Tenjin campaign name                                             |
 
 # <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
@@ -860,7 +865,7 @@ You can verify if the integration is working through our <a href="https://www.te
 [20]:	#deferred-deeplink
 [21]:	#server-to-server
 [22]:	#subversion
-[23]:   #getattributioninfo
+[23]:   #attributioninfo
 [24]:	#ilrd
 [25]:	#applovin
 [26]:	#ironsource
