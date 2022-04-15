@@ -550,7 +550,7 @@ instance.connect();
 
 ## <a id="attributioninfo"></a>Attribution Info
 
-Description on how to use getAttributionInfo method.
+Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
 Below are the attribution info parameters, that are returned when the attribution info callback is used:
 
@@ -562,9 +562,6 @@ Below are the attribution info parameters, that are returned when the attributio
 | campaign\_name          | Tenjin campaign name          | Organic                              |
 
 **NOTE:** Please note that those values are returned only if they are available.
-
-Example of returned values:
-{campaign_name=Organic, ad_network=organic, advertising_id=be277924d076456d9a203c8dee5663d3, campaign_id=6ebd3333-68f8-4919-875c-73fd6780d4f7}
 
 ```java
 import com.tenjin.android.TenjinSDK;
