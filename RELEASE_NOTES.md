@@ -177,7 +177,13 @@ v1.12.11
 v1.12.12
 ----
 - AdMob Impression Level Ad Revenue
+- Added public method `getAttributionInfo`
 
 v1.12.13
 ----
 - TopOn Impression Level Ad Revenue
+
+v1.12.14
+----
+- Bug fix for non-numeric values in `publisher_revenue_decimal` and `publisher_revenue_micro` ILRD parameters
+- Deprecate support for mopub ILRD
