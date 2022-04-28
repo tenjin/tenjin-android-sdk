@@ -440,92 +440,10 @@ Keep in mind that this event will not work if the value passed not an integer.
 
 ## <a id="deferred-deeplink"></a>Deferred Deeplink
 
-Tenjin supports the ability to direct users to a specific part of your app after a new attributed installation via Tenjin's campaign tracking URLs. You can utilize the `getDeeplink` method and callback to access the deferred deeplink through the data object. To test, you can follow the instructions found <a href="http://help.tenjin.io/t/how-do-i-use-and-test-deferred-deeplinks-with-my-campaigns/547">here</a>.
+Tenjin supports the ability to direct users to a specific part of your app after a new attributed installation via Tenjin's campaign tracking URLs. 
+You can utilize the `getDeeplink` method and callback to access the deferred deeplink through the data object. 
 
-```java
-import com.tenjin.android.TenjinSDK;
-import com.tenjin.android.Callback;
-
-public class TenjinDemo extends ActionBarActivity {
-
-    //...other callbacks are here
-
-    @Override
-    public void onResume() {
-        //standard code
-        super.onResume()
-
-        //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
-        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
-        instance.connect();
-
-        instance.getDeeplink(new Callback() {
-            @Override
-            public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
-                if (clickedTenjinLink) {
-                    if (isFirstSession) {
-                        if (data.containsKey(TenjinSDK.DEEPLINK_URL)) {
-                           // use the deferred_deeplink_url to direct the user to a specific part of your app
-                        }
-                    }
-                }
-            }
-        });
-
-        //Your other code...
-        ...
-
-    }
-```
-
-Below are the parameters, if available, that are returned to the deferred deeplink callback:
-
-| Parameter               | Description                                                      |
-| ----------------------- | ---------------------------------------------------------------- |
-| advertising\_id         | Advertising ID of the device                                     |
-| ad\_network             | Ad network of the campaign                                       |
-| campaign\_id            | Tenjin campaign ID                                               |
-| campaign\_name          | Tenjin campaign name                                             |
-| site\_id                | Site ID of source app                                            |
-| referrer                | The referrer params from the app store                           |
-| deferred\_deeplink\_url | The deferred deep-link of the campaign                           |
-| clickedTenjinLink       | Boolean representing if the device was tracked by Tenjin         |
-| isFirstSession          | Boolean representing if this is the first session for the device |
-
-You can also use the v1.7.1+ SDK for handling post-install logic by checking the `isFirstSession` param. For example, if you have a paid app, you can register your paid app install in the following way:
-
-```java
-import com.tenjin.android.TenjinSDK;
-
-public class TenjinDemo extends ActionBarActivity {
-
-    //...other callbacks are here
-
-    @Override
-    public void onResume() {
-        //standard code
-        super.onResume()
-
-        //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
-        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
-        instance.connect();
-
-        instance.getDeeplink(new Callback() {
-            @Override
-            public void onSuccess(boolean clickedTenjinLink, boolean isFirstSession, Map<String, String> data) {
-                if (isFirstSession) {
-                  // send paid app price and revenue to Tenjin
-                }
-            }
-        });
-
-        //Your other code...
-        ...
-
-    }
-```
+:warning: **NOTE: Deferred Deeplink is a paid feature, so please contact your Tenjin account manager if you are interested in.**
 
 ## <a id="server-to-server"></a>Server-to-server integration
 
@@ -544,61 +462,9 @@ instance.connect();
 ```
 
 ## <a id="attributioninfo"></a>Attribution Info
-
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
-Below are the attribution info parameters, that are returned when the attribution info callback is used:
-
-| Parameter               | Description                   | Example of returned value            |
-| ----------------------- | ----------------------------- | ------------------------------------ |
-| advertising\_id         | Advertising ID of the device  | 11de7924d076456d9a203c8dee56632a     |
-| ad\_network             | Ad network of the campaign    | organic                              |
-| campaign\_id            | Tenjin campaign ID            | 6ebd3332-68f8-4919-875c-73fe6780d4f7 |
-| campaign\_name          | Tenjin campaign name          | Organic                              |
-
-**NOTE:** Please note that those values are returned only if they are available.
-
-```java
-import com.tenjin.android.TenjinSDK;
-import com.tenjin.android.Callback;
-
-public class TenjinDemo extends ActionBarActivity {
-
-    //...other callbacks are here
-
-    @Override
-    public void onResume() {
-        //standard code
-        super.onResume()
-
-        //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
-        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
-        instance.connect();
-
-        instance.getAttributionInfo(new Callback() {
-            @Override
-            public void onSuccess(Map<String, String> data) {
-                if (data.containsKey(TenjinConsts.ATTR_PARAM_ADVERTISING_ID)) {
-                   // Advertising ID of the device
-                }
-                if (data.containsKey(TenjinConsts.ATTR_PARAM_AD_NETWORK)) {
-                   // Ad network of the campaign 
-                }
-                if (data.containsKey(TenjinConsts.ATTR_PARAM_CAMPAIGN_ID)) {
-                   // Tenjin campaign ID  
-                }
-                if (data.containsKey(TenjinConsts.ATTR_PARAM_CAMPAIGN_NAME)) {
-                   // Tenjin campaign name
-                }
-            }
-        });
-
-        //Your other code...
-        ...
-
-    }
-```
+:warning: **NOTE: Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.**
 
 # <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
