@@ -164,11 +164,14 @@ v1.12.8
 
 v1.12.9
 ----
+- Refactor AdvertiserInfo class with new set methods for advertisingId and limitAdTracking
+- Bugfix for referral parameter not being sent on first start of the SDK
 - AppLovin Impression Level Ad Revenue
 
 v1.12.10
 ----
 - IronSource Impression Level Ad Revenue
+- Refactor tenjin paramter ad_revenue_network to ad_revenue_mediation
 
 v1.12.11
 ----
