@@ -202,7 +202,7 @@ instance.setAppStore(TenjinSDK.AppStoreType.other);
 -keep public class com.google.android.gms.common.** { *; }
 -keep public class com.android.installreferrer.** { *; }
 -keep class * extends java.util.ListResourceBundle {
-    protected Object[][] getContents();
+    protected java.lang.Object[][] getContents();
 }
 -keepattributes *Annotation*
 ```
