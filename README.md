@@ -1,6 +1,6 @@
 # Summary
 
-The native Android SDK for Tenjin. To learn more about Tenjin and our product offering, please visit https://www.tenjin.com.
+The Tenjin Android SDK allows users to track events and installs in their Android apps. To learn more about Tenjin and our product offering, please visit https://www.tenjin.com.
 
 - Please see our <a href="https://github.com/tenjin/tenjin-android-sdk/blob/master/RELEASE_NOTES.md" target="_new">Release Notes</a> to see detailed version history of changes.
 - We recommend using the latest version of <a href="https://developer.android.com/studio/index.html" target="_new">Android Studio</a>.
