@@ -190,3 +190,7 @@ v1.12.14
 ----
 - Bug fix for non-numeric values in `publisher_revenue_decimal` and `publisher_revenue_micro` ILRD parameters
 - Deprecate support for mopub ILRD
+
+v1.12.15
+----
+- Bug fix for not getting `advertising_id` on Huawei devices
