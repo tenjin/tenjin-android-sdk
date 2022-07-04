@@ -438,6 +438,11 @@ Using the example above, the Tenjin dashboard will sum and average the values fo
 
 Keep in mind that this event will not work if the value passed not an integer.
 
+```
+//Integrate a custom event with a distinct name and value - ie. paying 100 virtual coins for an item
+instance.eventWithNameAndValue("item", "1");
+```
+
 ## <a id="deferred-deeplink"></a>Deferred Deeplink
 
 Tenjin supports the ability to direct users to a specific part of your app after a new attributed installation via Tenjin's campaign tracking URLs. 
