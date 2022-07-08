@@ -194,3 +194,7 @@ v1.12.14
 v1.12.15
 ----
 - Bug fix for not getting `advertising_id` on Huawei devices
+
+v1.12.16
+----
+- Added retry logic in case `getAttributionInfo` data can't be fetched
