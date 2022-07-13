@@ -35,7 +35,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
 - [Proguard settings][14]
 - [Testing][30]
 
-# <a id="setup"></a> Initial setup
+# <a id="setup"></a> Basic Integration
 ## Android Studio
 
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
