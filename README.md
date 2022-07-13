@@ -21,8 +21,9 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
       - [MSA OAID][10]
       - [Huawei OAID][11]
       - [Huawei Install Referrer][12]
-    - [App Initialization][26]
     - [App Store][13]
+    - [App Initialization][26]
+  - [Proguard settings][14]
 - [Additional Integration][15]
   - [GDPR][17]
   - [Purchase Events][18]
@@ -32,7 +33,6 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [App Subversion][22]
   - [Attribution Info][23]
   - [Impression Level Ad Revenue Integration][24]
-- [Proguard settings][14]
 - [Testing][30]
 
 # <a id="setup"></a> Basic Integration
