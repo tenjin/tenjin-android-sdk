@@ -110,6 +110,8 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 instance.connect();
 ```
 
+**NOTE:** If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
+
 **NOTE:** Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ## <a id="android-other"></a>Other Android store
