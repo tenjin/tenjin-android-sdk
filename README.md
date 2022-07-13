@@ -8,22 +8,22 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
 - For any issues or support, please contact: support@tenjin.com.
 
 # Table of contents
-- [Initial setup][1]
+- [Basic Integration][1]
   - [Google Play or Amazon store][2]
-	- [Permissions][3]
-	- [Android Advertising ID (AAID)][4]
-	- [App Store][5]
+    - [Permissions][3]
+    - [Android Advertising ID (AAID)][4]
+    - [App Store][5]
+    - [App Initialization][25]
   - [Android other store][6]
-	- [Permissions][7]
-	- [Android Advertising ID (AAID)][8]
-	- [OAID][9]
-	  - [MSA OAID][10]
-	  - [Huawei OAID][11]
-	  - [Huawei Install Referrer][12]
-	- [App Store][13]
-- [Proguard settings][14]
-- [Integration][15]
-  - [App Initilization][16]
+    - [Permissions][7]
+    - [Android Advertising ID (AAID)][8]
+    - [OAID][9]
+      - [MSA OAID][10]
+      - [Huawei OAID][11]
+      - [Huawei Install Referrer][12]
+    - [App Initialization][26]
+    - [App Store][13]
+- [Additional Integration][15]
   - [GDPR][17]
   - [Purchase Events][18]
   - [Custom Events][19]
@@ -31,7 +31,8 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [Server-to-server integration][21]
   - [App Subversion][22]
   - [Attribution Info][23]
-- [Impression Level Ad Revenue Integration][24]
+  - [Impression Level Ad Revenue Integration][24]
+- [Proguard settings][14]
 - [Testing][30]
 
 # <a id="setup"></a> Initial setup
@@ -97,6 +98,19 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 
 instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 ```
+
+### <a id="google-play-initialization"></a> App Initialization
+1. Get your `<API_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
+2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
+3. In the `onResume` method of your main `Activity` class, add the following line of code:
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+
+instance.connect();
+```
+
+**NOTE:** Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ## <a id="android-other"></a>Other Android store
 If you distribute your apps outside of Google Play Store or Amazon store(Other Android store), implement the following initial setups.
@@ -194,6 +208,19 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
 instance.setAppStore(TenjinSDK.AppStoreType.other);
 ```
 
+### <a id="android-other-initialization"></a> App Initialization
+1. Get your `<API_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
+2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
+3. In the `onCreate` method of your main `Activity` class, add the following line of code:
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+
+instance.connect();
+```
+
+**NOTE:** Please ensure you implement this code on every `onCreate`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+
 ## <a id="proguard"></a>Proguard Settings
 
 ```java
@@ -232,21 +259,7 @@ If you are using Huawei libraries, you can to use these setttings:
 -keep interface com.huawei.hms.ads.** { *; }
 ```
 
-# <a id="integration"></a> Integration
-
-## <a id="initialization"></a> App Initialization
-
-1. Get your `<API_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
-2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
-3. In the `onResume` method of your main `Activity` class, add the following line of code:
-
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
-
-instance.connect();
-```
-
-**NOTE:** Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+# <a id="integration"></a> Additional Integration
 
 ## <a id="gdpr"></a> GDPR
 
@@ -471,7 +484,7 @@ Tenjin supports retrieving of attributes, which are required for developers to g
 
 :warning: **NOTE: Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.**
 
-# <a id="ilrd"></a>Impression Level Ad Revenue Integration
+## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
 Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
 - AppLovin
@@ -509,7 +522,6 @@ You can verify if the integration is working through our <a href="https://www.te
 [13]:	#android-other-app-store
 [14]:	#proguard
 [15]:	#integration
-[16]:	#initialization
 [17]:	#gdpr
 [18]:	#purchase-events
 [19]:	#custom-events
@@ -518,6 +530,8 @@ You can verify if the integration is working through our <a href="https://www.te
 [22]:	#subversion
 [23]:   #attributioninfo
 [24]:	#ilrd
+[25]:	#google-play-initialization
+[26]:	#android-other-initialization
 [30]:	#testing
 [31]:	https://github.com/tenjin/tenjin-android-sdk-demo
 [32]:	https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)
