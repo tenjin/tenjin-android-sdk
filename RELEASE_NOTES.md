@@ -198,3 +198,8 @@ v1.12.15
 v1.12.16
 ----
 - Added retry logic in case `getAttributionInfo` data can't be fetched
+
+v1.12.17
+----
+- Improved `getAttributionInfo` retry logic
+- Improved Google Ads dependency management
