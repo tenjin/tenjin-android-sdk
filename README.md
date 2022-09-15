@@ -94,18 +94,18 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
 2. `setAppStore()`:
 
 ```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 
 instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 ```
 
 ### <a id="google-play-initialization"></a> App Initialization
-1. Get your `<API_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
+1. Get your `<SDK_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onResume` method of your main `Activity` class, add the following line of code:
 
 ```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 
 instance.connect();
 ```
@@ -205,18 +205,18 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
 2. `setAppStore()`:
 
 ```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 
 instance.setAppStore(TenjinSDK.AppStoreType.other);
 ```
 
 ### <a id="android-other-initialization"></a> App Initialization
-1. Get your `<API_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
+1. Get your `<SDK_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onCreate` method of your main `Activity` class, add the following line of code:
 
 ```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 
 instance.connect();
 ```
@@ -279,8 +279,8 @@ public class TenjinDemo extends ActionBarActivity {
         super.onResume()
 
         //Integrate TenjinSDK connect call
-        String apiKey = "<API_KEY>";
-        TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+        String sdkKey = "<SDK_KEY>";
+        TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
 
         boolean userOptIn = checkOptInValue();
 
@@ -329,8 +329,8 @@ To opt-in/opt-out specific device-related parameters, you can use `optInParams()
 If you want to only get specific device-related parameters, use `optInParams()`. In example below, we will only these device-related parameters: `ip_address`, `advertising_id`, `limit_ad_tracking`, and `referrer`.
 
 ```java
-String apiKey = "<API_KEY>";
-TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+String sdkKey = "<SDK_KEY>";
+TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
 
 String[] optInParams = {"ip_address", "advertising_id", "limit_ad_tracking", "referrer"};
 instance.optInParams(optInParams);
@@ -341,8 +341,8 @@ instance.connect();
 If you want to send ALL parameters except specific device-related parameters, use `optOutParams()`. In the example below, we will send ALL device-related parameters except:
 
 ```java
-String apiKey = "<API_KEY>";
-TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+String sdkKey = "<SDK_KEY>";
+TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
 
 String[] optOutParams = {"locale", "timezone", "build_id"};
 instance.optOutParams(optOutParams);
@@ -427,8 +427,8 @@ You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 The custom interactions with your app can be tied to level cost from each acquisition source that you use through Tenjin's service. Here is an example of usage:
 
 ```java
-String apiKey = <API_KEY>;
-TenjinSDK instance = TenjinSDK.getInstance(this, apiKey);
+String sdkKey = <SDK_KEY>;
+TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
 
 //Integrate a custom event with a distinct name - ie. swiping right on the screen
 instance.eventWithName("swipe_right");
@@ -442,8 +442,8 @@ You can use the Tenjin SDK to pass a custom event with an integer value: `eventW
 Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful.
 
 ```java
-String apiKey = <API_KEY>;
-TenjinSDK.instance = TenjinSDK.getInstance(this, apiKey);
+String sdkKey = <SDK_KEY>;
+TenjinSDK.instance = TenjinSDK.getInstance(this, sdkKey);
 
 //Integrate a custom event with a distinct name and value - ie. paying 100 virtual coins for an item
 instance.eventWithNameAndValue("item", 100);
@@ -476,7 +476,7 @@ If you are running A/B tests and want to report the differences, we can append a
 This data will appear within DataVault, where you will be able to run reports using the app subversion values.
 
 ```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 instance.appendAppSubversion(8888);
 instance.connect();
 ```
