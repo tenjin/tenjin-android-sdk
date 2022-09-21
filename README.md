@@ -100,7 +100,8 @@ instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 ```
 
 ### <a id="google-play-initialization"></a> App Initialization
-1. Get your `<SDK_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
+1. Get your `SDK_KEY` from your app page. Note: `SDK_KEY` is unique for each of your app. You can create up to 3 keys for the same app.
+![image-3]
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onResume` method of your main `Activity` class, add the following line of code:
 
@@ -211,7 +212,8 @@ instance.setAppStore(TenjinSDK.AppStoreType.other);
 ```
 
 ### <a id="android-other-initialization"></a> App Initialization
-1. Get your `<SDK_KEY>` from your <a href="https://www.tenjin.io/dashboard/docs" target="_new">Tenjin dashboard</a>.
+1. Get your `SDK_KEY` from your app page. Note: `SDK_KEY` is unique for each of your app. You can create up to 3 keys for the same app.
+   ![image-3]
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onCreate` method of your main `Activity` class, add the following line of code:
 
@@ -559,3 +561,4 @@ You can verify if the integration is working through our <a href="https://www.te
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio"
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
+[image-3]:	https://s3.amazonaws.com/tenjin-instructions/app_api_key.png
