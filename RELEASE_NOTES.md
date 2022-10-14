@@ -203,3 +203,7 @@ v1.12.17
 ----
 - Improved `getAttributionInfo` retry logic
 - Improved Google Ads dependency management
+
+v1.12.18
+----
+- Improved `getAttributionInfo` retry logic
