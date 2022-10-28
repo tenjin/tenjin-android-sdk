@@ -207,3 +207,7 @@ v1.12.17
 v1.12.18
 ----
 - Improved `getAttributionInfo` retry logic
+
+v1.12.19
+----
+- Added `creative_name` and `site_id` parameters to `getAttributionInfo()` response
