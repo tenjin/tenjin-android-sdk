@@ -36,6 +36,12 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
 - [Testing][30]
 
 # <a id="setup"></a> Basic Integration
+### Manual Installation
+Please use the steps listed below under the section 'Android Studio.'
+
+### Maven
+If you use Maven, add implementation `com.tenjin:android-sdk:VERSION` to your `Gradle` dependencies and add `mavenCentral()` to the source repositories if it’s not there already.
+
 ## Android Studio
 
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
@@ -492,7 +498,7 @@ Tenjin supports retrieving of attributes, which are required for developers to g
 
 Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
 - AppLovin
-- IronSource
+- Unity LevelPlay
 - HyperBid
 - AdMob
 - TopOn
