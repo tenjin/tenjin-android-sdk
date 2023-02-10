@@ -32,7 +32,8 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [Server-to-server integration][21]
   - [App Subversion][22]
   - [Attribution Info][23]
-  - [Impression Level Ad Revenue Integration][24]
+  - [Customer User ID][24]
+  - [Impression Level Ad Revenue Integration][25]
 - [Testing][30]
 
 # <a id="setup"></a> Basic Integration
@@ -493,6 +494,19 @@ instance.connect();
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
 :warning: **NOTE: Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.**
+
+## <a id="customer-user-id"></a>Customer User ID
+You can set and get customer user id to send as a parameter on events.
+
+`.setCustomerUserId(userId: "user_id")`
+
+`.getCustomerUserId()`
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+instance.setCustomerUserId(userId: "user_id");
+userId = instance.getCustomerUserId(); 
+```
 
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
