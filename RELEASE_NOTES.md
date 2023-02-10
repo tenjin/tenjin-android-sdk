@@ -211,3 +211,7 @@ v1.12.18
 v1.12.19
 ----
 - Added `creative_name` and `site_id` parameters to `getAttributionInfo()` response
+
+v1.12.20
+----
+- Added new methods `setCustomerUserId` and `getCustomerUserId`
