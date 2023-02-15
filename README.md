@@ -33,7 +33,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [App Subversion][22]
   - [Attribution Info][23]
   - [Customer User ID][24]
-  - [Impression Level Ad Revenue Integration][25]
+  - [Impression Level Ad Revenue Integration][27]
 - [Testing][30]
 
 # <a id="setup"></a> Basic Integration
@@ -552,10 +552,11 @@ You can verify if the integration is working through our <a href="https://www.te
 [20]:	#deferred-deeplink
 [21]:	#server-to-server
 [22]:	#subversion
-[23]:   #attributioninfo
-[24]:	#ilrd
+[23]: #attributioninfo
+[24]:	#customer-user-id
 [25]:	#google-play-initialization
 [26]:	#android-other-initialization
+[27]:	#ilrd
 [30]:	#testing
 [31]:	https://github.com/tenjin/tenjin-android-sdk-demo
 [32]:	https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.html#getAdvertisingIdInfo(android.content.Context)
