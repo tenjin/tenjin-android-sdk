@@ -215,3 +215,8 @@ v1.12.19
 v1.12.20
 ----
 - Added new methods `setCustomerUserId` and `getCustomerUserId`
+
+v1.12.21
+----
+- Added support for retry/cache of events and IAP
+- Added `remote_campaign_id` parameter to `getAttributionInfo()` response

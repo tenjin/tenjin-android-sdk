@@ -33,6 +33,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [App Subversion][22]
   - [Attribution Info][23]
   - [Customer User ID][24]
+  - [Retry/cache events and IAP][52]
   - [Impression Level Ad Revenue Integration][27]
 - [Testing][30]
 
@@ -508,6 +509,16 @@ instance.setCustomerUserId(userId: "user_id");
 userId = instance.getCustomerUserId(); 
 ```
 
+## <a id="retry-cache"></a>Retry/cache of events/IAP
+You can enable/disable retrying and caching events and IAP when requests fail or users don't have internet connection. These events will be sent after a new event has been added to the queue and user has recovered connection.
+
+`.setCacheEventSetting(setting: true)`
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+instance..setCacheEventSetting(setting: true);
+```
+
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
 Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
@@ -579,6 +590,7 @@ You can verify if the integration is working through our <a href="https://www.te
 [49]:	https://developer.android.com/reference/java/util/Locale.html#getDefault()
 [50]:	https://developer.android.com/reference/java/util/Locale.html#getDefault()
 [51]:	https://developer.android.com/reference/java/util/TimeZone.html
+[52]: #retry-cache
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio"
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
