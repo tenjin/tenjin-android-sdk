@@ -516,7 +516,7 @@ You can enable/disable retrying and caching events and IAP when requests fail or
 
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
-instance..setCacheEventSetting(setting: true);
+instance.setCacheEventSetting(setting: true);
 ```
 
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
