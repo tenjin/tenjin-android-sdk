@@ -220,3 +220,7 @@ v1.12.21
 ----
 - Added support for retry/cache of events and IAP
 - Added `remote_campaign_id` parameter to `getAttributionInfo()` response
+
+v1.12.22
+----
+- Added CAS Impression Level Ad Revenue
