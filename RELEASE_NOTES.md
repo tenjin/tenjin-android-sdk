@@ -224,3 +224,7 @@ v1.12.21
 v1.12.22
 ----
 - Added CAS Impression Level Ad Revenue
+
+v1.12.23
+----
+- Added TradPlus Impression Level Ad Revenue
