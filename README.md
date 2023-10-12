@@ -45,14 +45,14 @@ Please use the steps listed below under the section 'Android Studio.'
 If you use Maven, add implementation `com.tenjin:android-sdk:VERSION` to your `Gradle` dependencies and add `mavenCentral()` to the source repositories if it’s not there already.
 
 ## Android Studio
-
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
 2. Add the Tenjin SDK into your Android Studio project. Go to the Project Navigator in Android Studio. Select the option `Project` in the Project Navigator. You will find the `libs` folder under the `app` module of your Android Studio project.
 3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder.
-   <br /><br />
+  <br />
    ![AndroidStudio][image-1]
-   <br /><br />
+   <br />
 4. In your Android Studio project under `app` module, select the `build.gradle` file,  and add the following under the dependencies block:
+
 ```java
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
@@ -89,7 +89,7 @@ dependencies {
 }
 ```
 ### <a id="google-play-app-store"></a>App Store
-By default, <b>unspecified</b> is the default App Store. Update the app store value to either <b>googleplay</b> or <b>amazon</b>, depending on your app.
+By default, <b>unspecified</b> is the default App Store. Update the app store value to either <b>googleplay</b>, <b>amazon</b>, or <b>other</b> depending on your app.
 
 1. `AndroidManifest.xml`:
 
@@ -107,6 +107,13 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 ```
 
+#### App Store Options
+```java
+  TenjinSDK.AppStoreType.googleplay // Google Play App Store
+  TenjinSDK.AppStoreType.amazon     // Amazon AppStore
+  TenjinSDK.AppStoreType.other      // Other
+```
+
 ### <a id="google-play-initialization"></a> App Initialization
 1. Get your `SDK_KEY` from your app page. Note: `SDK_KEY` is unique for each of your app. You can create up to 3 keys for the same app.
 ![image-3]
@@ -115,16 +122,13 @@ instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
-
+instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 instance.connect();
 ```
 
 **NOTE:** If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
 
 **NOTE:** Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
-
-## <a id="android-other"></a>Other Android store
-If you distribute your apps outside of Google Play Store or Amazon store(Other Android store), implement the following initial setups.
 
 ### <a id="android-other-permissons"></a>Permission
 The Tenjin SDK requires the following permissions:
@@ -271,7 +275,7 @@ If you are using Huawei libraries, you can to use these setttings:
 -keep interface com.huawei.hms.ads.** { *; }
 ```
 
-# <a id="integration"></a> Additional Integration
+# <a id="integration"></a> Additional Integrations
 
 ## <a id="gdpr"></a> GDPR
 
@@ -391,9 +395,14 @@ instance.connect();
 
 ## <a id="purchase-events"></a>Purchase Events
 
-To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. Tenjin will validate `transaction` receipts for you. Kindly note that we currently only support IAP transactions from Google Play.
+To understand user revenue and purchase behavior, developers can send `transaction` events to Tenjin. Tenjin will validate `transaction` receipts for you. Kindly note that we currently only support IAP transactions from Google Play and Amazon AppStore.
 
-**IMPORTANT:** You will need to add your app's public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. You can retrieve your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> \> Select your app \> Development Tools \> Services & APIs.
+
+### <a id="purchase-events-google-play-iap"></a>Google Play IAP
+
+**IMPORTANT:** You will need to add your Base64-encoded RSA public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
+
+You can retrieve your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> \> Select your app \> Development Tools \> Services & APIs. After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
 
 <br/>
 <img src="https://s3.amazonaws.com/tenjin-instructions/android_pk.png" />
@@ -419,6 +428,57 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 }
 
 ```
+
+### <a id="purchase-events-amazon-iap"></a>Amazon AppStore IAP
+
+**IMPORTANT:** You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
+
+You can retrieve your Amazon Shared Key from the <a href="https://developer.amazon.com/settings/console/sdk/shared-key/"> Amazon AppStore Developer Console</a>.
+
+After entering your Amazon Shared Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
+
+```java
+public void transactionAmazon(String productId, String currencyCode, int quantity, double unitPrice, String receiptId, String userId, String receipt)
+```
+
+Example:
+
+```java
+
+  public void handlePurchase(final Receipt receipt, final UserData userData) {
+      try {
+          if (receipt.isCanceled()) {
+              revokeConsumablePurchase(receipt, userData);
+          } else {
+              Log.d(TAG, "=====================> RECEIPT: " + receipt.toString());
+              Log.d(TAG, "=====================> USER: " + userData.toString());
+
+              String productId = receipt.getSku();
+
+              // The Amazon IAP Receipt does not have currency, quantity, or price
+              // You will need to set those values accordingly.
+              //
+              String currencyCode = "USD";
+              int quantity = 1;
+              double price = 1.00;
+
+              String userId = userData.getUserId();
+              String receiptId = receipt.getReceiptId();
+              String purchaseData = receipt.toString();
+
+              TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+              instance.setAppStore(TenjinSDK.AppStoreType.amazon);
+              instance.transactionAmazon(productId, currencyCode, quantity, price, receiptId, userId, purchaseData);
+
+          }
+      } catch (final Throwable e) {
+          mainActivity.showMessage("Purchase cannot be completed, please retry");
+      }
+  }
+
+```
+
+### IAP Purchase Validation
 
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
