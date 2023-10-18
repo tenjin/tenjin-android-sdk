@@ -232,3 +232,7 @@ v1.12.23
 v1.12.24
 ----
 - Added support for Java 8
+
+v1.13.0
+----
+- Added Amazon IAP transactions
