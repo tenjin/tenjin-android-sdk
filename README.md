@@ -29,7 +29,6 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [GDPR][17]
   - [Purchase Events][18]
   - [Custom Events][19]
-  - [Deferred Deeplink][20]
   - [Server-to-server integration][21]
   - [App Subversion][22]
   - [LiveOps Campaigns][23]
@@ -546,14 +545,6 @@ Keep in mind that this event will not work if the value passed not an integer.
 //Integrate a custom event with a distinct name and value - ie. paying 100 virtual coins for an item
 instance.eventWithNameAndValue("item", "1");
 ```
----
-## <a id="deferred-deeplink"></a>Deferred Deeplink
-
-Tenjin supports the ability to direct users to a specific part of your app after a new attributed installation via Tenjin's campaign tracking URLs. 
-You can utilize the `getDeeplink` method and callback to access the deferred deeplink through the data object. 
-
-:warning: **NOTE: Deferred Deeplink is a paid feature, so please contact your Tenjin account manager if you are interested in.**
-
 ---
 ## <a id="server-to-server"></a>Server-to-server integration
 
