@@ -32,7 +32,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [Deferred Deeplink][20]
   - [Server-to-server integration][21]
   - [App Subversion][22]
-  - [Attribution Info][23]
+  - [LiveOps Campaigns][23]
   - [Customer User ID][24]
   - [Retry/cache events and IAP][52]
   - [Impression Level Ad Revenue Integration][27]
@@ -573,10 +573,10 @@ instance.connect();
 ```
 
 ---
-## <a id="attributioninfo"></a>Attribution Info
+## <a id="attributioninfo"></a>LiveOps Campaigns
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
-:warning: **NOTE: Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.**
+:warning: **NOTE: LiveOps Campaigns is a paid feature, so please contact your Tenjin account manager if you are interested in.**
 
 ---
 ## <a id="customer-user-id"></a>Customer User ID
