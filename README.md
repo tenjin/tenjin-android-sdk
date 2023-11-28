@@ -425,7 +425,6 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
     TenjinSDK instance = getTenjinInstance();
     instance.transaction(sku, currencyCode, 1, price, purchaseData, dataSignature);
 }
-
 ```
 
 ### <a id="purchase-events-amazon-iap"></a>Amazon AppStore IAP
@@ -511,7 +510,6 @@ TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
 
 //Integrate a custom event with a distinct name - ie. swiping right on the screen
 instance.eventWithName("swipe_right");
-
 ```
 
 ## Custom Events with values:
