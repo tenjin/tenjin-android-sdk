@@ -543,7 +543,7 @@ instance.connect();
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
 > [!WARNING]
-> Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.**
+> Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.
 
 ## <a id="customer-user-id"></a>Customer User ID
 You can set and get customer user id to send as a parameter on events.
@@ -582,7 +582,7 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. To enable this feature, follow the below instructions.
 
 > [!WARNING]
-> ILRD is a paid feature, so please contact your Tenjin account manager to discuss the price at first before sending ILRD events.**
+> ILRD is a paid feature, so please contact your Tenjin account manager to discuss the price at first before sending ILRD events.
 
 # <a id="testing"></a>Testing
 
