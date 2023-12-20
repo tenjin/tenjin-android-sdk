@@ -48,19 +48,17 @@ If you use Maven, add implementation `com.tenjin:android-sdk:VERSION` to your `G
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
 2. Add the Tenjin SDK into your Android Studio project. Go to the Project Navigator in Android Studio. Select the option `Project` in the Project Navigator. You will find the `libs` folder under the `app` module of your Android Studio project.
 3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder.
-  <br />
-   ![AndroidStudio][image-1]
-   <br />
+    ![][image-1]
 4. In your Android Studio project under `app` module, select the `build.gradle` file,  and add the following under the dependencies block:
 
-```java
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation files('libs/tenjin.aar')
-}
-```
+    ```java
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+        implementation files('libs/tenjin.aar')
+    }
+    ```
 
-> We have a demo project - [tenjin-android-sdk-demo][31] that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
+    > We have a demo project - [tenjin-android-sdk-demo][31] that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
 
 ## <a id="google-play"></a>Google Play or Amazon store
 If you distribute your apps on Google Play Store or Amazon store, implement the following initial setups.
@@ -120,15 +118,17 @@ instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onResume` method of your main `Activity` class, add the following line of code:
 
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
-instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
-instance.connect();
-```
+    ```java
+    TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+    instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
+    instance.connect();
+    ```
 
-**NOTE:** If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
+> [!NOTE]
+> If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
 
-**NOTE:** Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+> [!NOTE]
+> Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ### <a id="android-other-permissons"></a>Permission
 The Tenjin SDK requires the following permissions:
@@ -229,13 +229,14 @@ instance.setAppStore(TenjinSDK.AppStoreType.other);
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onCreate` method of your main `Activity` class, add the following line of code:
 
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+    ```java
+    TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+    
+    instance.connect();
+    ```
 
-instance.connect();
-```
-
-**NOTE:** Please ensure you implement this code on every `onCreate`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+> [!NOTE]
+> Please ensure you implement this code on every `onCreate`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ## <a id="proguard"></a>Proguard Settings
 
@@ -404,9 +405,7 @@ To understand user revenue and purchase behavior, developers can send `transacti
 
 You can retrieve your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> \> Select your app \> Development Tools \> Services & APIs. After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
 
-<br/>
 <img src="https://s3.amazonaws.com/tenjin-instructions/android_pk.png" />
-<br/><br/>
 
 After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
 
@@ -417,7 +416,6 @@ public void transaction(String productId, String currencyCode, int quantity, dou
 Example:
 
 ```java
-
 public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCode) {
     String sku = purchase.getSku();
     String purchaseData = purchase.getOriginalJson();
@@ -426,12 +424,12 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
     TenjinSDK instance = getTenjinInstance();
     instance.transaction(sku, currencyCode, 1, price, purchaseData, dataSignature);
 }
-
 ```
 
 ### <a id="purchase-events-amazon-iap"></a>Amazon AppStore IAP
 
-**IMPORTANT:** You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
+> [!IMPORTANT]
+> You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
 
 You can retrieve your Amazon Shared Key from the <a href="https://developer.amazon.com/settings/console/sdk/shared-key/"> Amazon AppStore Developer Console</a>.
 
@@ -444,53 +442,50 @@ public void transactionAmazon(String productId, String currencyCode, int quantit
 Example:
 
 ```java
+public void handlePurchase(final Receipt receipt, final UserData userData) {
+    try {
+        if (receipt.isCanceled()) {
+            revokeConsumablePurchase(receipt, userData);
+        } else {
+            Log.d(TAG, "=====================> RECEIPT: " + receipt.toString());
+            Log.d(TAG, "=====================> USER: " + userData.toString());
 
-  public void handlePurchase(final Receipt receipt, final UserData userData) {
-      try {
-          if (receipt.isCanceled()) {
-              revokeConsumablePurchase(receipt, userData);
-          } else {
-              Log.d(TAG, "=====================> RECEIPT: " + receipt.toString());
-              Log.d(TAG, "=====================> USER: " + userData.toString());
+            String productId = receipt.getSku();
 
-              String productId = receipt.getSku();
+            // The Amazon IAP Receipt does not have currency, quantity, or price
+            // You will need to set those values accordingly.
+            //
+            String currencyCode = "USD";
+            int quantity = 1;
+            double price = 1.00;
 
-              // The Amazon IAP Receipt does not have currency, quantity, or price
-              // You will need to set those values accordingly.
-              //
-              String currencyCode = "USD";
-              int quantity = 1;
-              double price = 1.00;
+            String userId = userData.getUserId();
+            String receiptId = receipt.getReceiptId();
+            String purchaseData = receipt.toString();
 
-              String userId = userData.getUserId();
-              String receiptId = receipt.getReceiptId();
-              String purchaseData = receipt.toString();
+            TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+            instance.setAppStore(TenjinSDK.AppStoreType.amazon);
+            instance.transactionAmazon(productId, currencyCode, quantity, price, receiptId, userId, purchaseData);
 
-              TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
-              instance.setAppStore(TenjinSDK.AppStoreType.amazon);
-              instance.transactionAmazon(productId, currencyCode, quantity, price, receiptId, userId, purchaseData);
-
-          }
-      } catch (final Throwable e) {
-          mainActivity.showMessage("Purchase cannot be completed, please retry");
-      }
-  }
-
+        }
+    } catch (final Throwable e) {
+        mainActivity.showMessage("Purchase cannot be completed, please retry");
+    }
+}
 ```
 
 ### IAP Purchase Validation
 
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
-<br/>
 <img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png" />
-<br/>
 
 **Disclaimer:** If you are implementing purchase events on Tenjin for the first time, make sure to verify the data with other tools you’re using before you start scaling up your user acquisition campaigns using purchase data.
 
 ## <a id="custom-events"></a>Custom Events
 
-**NOTE:** The initialization event `connect()` must come before sending any custom events.
+> [!NOTE]
+> The initialization event `connect()` must come before sending any custom events.
 
 You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 
@@ -528,13 +523,6 @@ Keep in mind that this event will not work if the value passed not an integer.
 instance.eventWithNameAndValue("item", "1");
 ```
 
-## <a id="deferred-deeplink"></a>Deferred Deeplink
-
-Tenjin supports the ability to direct users to a specific part of your app after a new attributed installation via Tenjin's campaign tracking URLs. 
-You can utilize the `getDeeplink` method and callback to access the deferred deeplink through the data object. 
-
-:warning: **NOTE: Deferred Deeplink is a paid feature, so please contact your Tenjin account manager if you are interested in.**
-
 ## <a id="server-to-server"></a>Server-to-server integration
 
 Tenjin offers server-to-server integration, which is a paid feature. If you want to access to the documentation, please send email to support@tenjin.com and discuss the pricing.
@@ -554,7 +542,8 @@ instance.connect();
 ## <a id="attributioninfo"></a>Attribution Info
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
-:warning: **NOTE: Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.**
+> [!WARNING]
+> Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.
 
 ## <a id="customer-user-id"></a>Customer User ID
 You can set and get customer user id to send as a parameter on events.
@@ -592,7 +581,8 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. To enable this feature, follow the below instructions.
 
-:warning: **NOTE: ILRD is a paid feature, so please contact your Tenjin account manager to discuss the price at first before sending ILRD events.**
+> [!WARNING]
+> ILRD is a paid feature, so please contact your Tenjin account manager to discuss the price at first before sending ILRD events.
 
 # <a id="testing"></a>Testing
 
@@ -654,6 +644,6 @@ You can verify if the integration is working through our <a href="https://www.te
 [51]:	https://developer.android.com/reference/java/util/TimeZone.html
 [52]: #retry-cache
 
-[image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio"
+[image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
 [image-3]:	https://s3.amazonaws.com/tenjin-instructions/app_api_key.png
