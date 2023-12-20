@@ -14,7 +14,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
     - [Android Advertising ID (AAID)][4]
     - [App Store][5]
     - [App Initialization][25]
-  - [Android other store][6]
+  - [Other Android store][6]
     - [Permissions][7]
     - [Android Advertising ID (AAID)][8]
     - [OAID][9]
@@ -28,10 +28,9 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [GDPR][17]
   - [Purchase Events][18]
   - [Custom Events][19]
-  - [Deferred Deeplink][20]
   - [Server-to-server integration][21]
   - [App Subversion][22]
-  - [Attribution Info][23]
+  - [LiveOps Campaigns][23]
   - [Customer User ID][24]
   - [Retry/cache events and IAP][52]
   - [Impression Level Ad Revenue Integration][27]
@@ -71,7 +70,7 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
 
-Later this year, Google Play Services will require all API level 32 (Android 13) apps using the advertising_id(Android Advertising ID (AAID)) to declare the Google Play Services AD_ID permission (shown below) in their manifest file. **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
+Google Play requires all API level 32 (Android 13) apps using the advertising_id(Android Advertising ID (AAID)) to declare the Google Play Services AD_ID permission (shown below) in their manifest file. **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
 
 ```xml
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
@@ -91,30 +90,30 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
 
 1. `AndroidManifest.xml`:
 
-```xml
-<meta-data
-    android:name="TENJIN_APP_STORE"
-    android:value="googleplay" />
-```
+    ```xml
+    <meta-data
+        android:name="TENJIN_APP_STORE"
+        android:value="googleplay" />
+    ```
 
 2. `setAppStore()`:
 
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
-
-instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
-```
+    ```java
+    TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+    
+    instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
+    ```
 
 #### App Store Options
+
 ```java
   TenjinSDK.AppStoreType.googleplay // Google Play App Store
   TenjinSDK.AppStoreType.amazon     // Amazon AppStore
-  TenjinSDK.AppStoreType.other      // Other
 ```
 
-### <a id="google-play-initialization"></a> App Initialization
+### <a id="google-play-initialization"></a>App Initialization
 1. Get your `SDK_KEY` from your app page. Note: `SDK_KEY` is unique for each of your app. You can create up to 3 keys for the same app.
-![image-3]
+   ![image-3]
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
 3. In the `onResume` method of your main `Activity` class, add the following line of code:
 
@@ -123,14 +122,16 @@ instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
     instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
     instance.connect();
     ```
-
 > [!NOTE]
 > If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
 
 > [!NOTE]
 > Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
-### <a id="android-other-permissons"></a>Permission
+## <a id="other-android-store"></a>Other Android store
+If you distribute your apps outside of Google Play Store or Amazon store(Other Android store), implement the following initial setups.
+
+### <a id="other-android-permissons"></a>Permission
 The Tenjin SDK requires the following permissions:
 
 ```xml
@@ -138,13 +139,13 @@ The Tenjin SDK requires the following permissions:
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to get network connectivity (i.e. wifi vs. mobile) -->
 ```
 
-Later this year, Google Play Services will require all API level 32 (Android 13) apps using the advertising_id(Android Advertising ID (AAID)) to declare the Google Play Services AD_ID permission (shown below) in their manifest file. **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
+Google Play Services requires all API level 32 (Android 13) apps using the advertising_id(Android Advertising ID (AAID)) to declare the Google Play Services AD_ID permission (shown below) in their manifest file. **Please add this permission as soon as possible.** You are also required to update the tenjin-android-sdk to version 1.12.8 in order to use the below permission.
 
 ```xml
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 ```
 
-### <a id="play-services-ads-identifier-android-other"></a>Android Advertising ID (AAID) and Install Referrer
+### <a id="play-services-ads-identifier-other-android"></a>Android Advertising ID (AAID) and Install Referrer
 Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
 
 ```java
@@ -204,26 +205,26 @@ dependencies {
 
 }
 ```
-### <a id="android-other-app-store"></a>App Store
+### <a id="other-android-app-store"></a>App Store
 By default, <b>unspecified</b> is the default App Store. Update the app store value to <b>other</b>.
 
 1. `AndroidManifest.xml`:
 
-```xml
-<meta-data
-    android:name="TENJIN_APP_STORE"
-    android:value="other" />
-```
+    ```xml
+    <meta-data
+        android:name="TENJIN_APP_STORE"
+        android:value="other" />
+    ```
 
 2. `setAppStore()`:
 
-```java
-TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+    ```java
+    TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+    
+    instance.setAppStore(TenjinSDK.AppStoreType.other);
+    ```
 
-instance.setAppStore(TenjinSDK.AppStoreType.other);
-```
-
-### <a id="android-other-initialization"></a> App Initialization
+### <a id="other-android-initialization"></a> App Initialization
 1. Get your `SDK_KEY` from your app page. Note: `SDK_KEY` is unique for each of your app. You can create up to 3 keys for the same app.
    ![image-3]
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
@@ -337,6 +338,7 @@ To opt-in/opt-out specific device-related parameters, you can use `optInParams()
 - If you intend to use Google AdWords, these params are required:
   - `platform`
   - `os_version`
+  - `app_version`
   - `locale`
   - `device_model`
   - `build_id`
@@ -391,8 +393,6 @@ instance.connect();
 | locale               | device locale                | [Android][49] |
 | country              | locale country               | [Android][50] |
 | timezone             | timezone                     | [Android][51] |
-
-<br/>
 
 ## <a id="purchase-events"></a>Purchase Events
 
@@ -482,6 +482,18 @@ You can verify if the IAP validation is working through our <a href="https://www
 
 **Disclaimer:** If you are implementing purchase events on Tenjin for the first time, make sure to verify the data with other tools you’re using before you start scaling up your user acquisition campaigns using purchase data.
 
+:warning: Please ensure to 'acknowledge' the purchase event before sending it to Tenjin. For more details, read <a href="https://developer.android.com/google/play/billing/integrate#non-consumable-products" target="_blank">here</a>.
+
+:warning: **(Flexible App Store Commission setup)**
+
+Choose between 15% and 30% App Store’s revenue commission via our new setup. The steps are -
+* Go to CONFIGURE --> Apps
+* Click on the app you want to change it for
+* Under the ‘App Store Commission’ section click ‘Edit’
+* Choose 30% or 15% as your desired app store commission.
+* Select the start date and end date (Or you can keep the end date blank if you dont want an end date)
+* Click Save (note: the 15% commission can be applied only to dates moving forward and not historical dates. So please set the start date from the date you make the change and forward)
+
 ## <a id="custom-events"></a>Custom Events
 
 > [!NOTE]
@@ -497,7 +509,6 @@ TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
 
 //Integrate a custom event with a distinct name - ie. swiping right on the screen
 instance.eventWithName("swipe_right");
-
 ```
 
 ## Custom Events with values:
@@ -539,7 +550,7 @@ instance.appendAppSubversion(8888);
 instance.connect();
 ```
 
-## <a id="attributioninfo"></a>Attribution Info
+## <a id="attributioninfo"></a>LiveOps Campaigns
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
 > [!WARNING]
@@ -599,14 +610,14 @@ You can verify if the integration is working through our <a href="https://www.te
 [3]:	#google-play-permissions
 [4]:	#play-services-ads-identifier-google-play
 [5]:	#google-play-app-store
-[6]:	#android-other
-[7]:	#android-other-permissons
-[8]:	#play-services-ads-identifier-android-other
+[6]:	#other-android-store
+[7]:	#other-android-permissons
+[8]:	#play-services-ads-identifier-other-android
 [9]:	#oaid
 [10]:	#msa-oaid
 [11]:	#huawei-oaid
 [12]:	#huawei-install-referrer
-[13]:	#android-other-app-store
+[13]:	#other-android-app-store
 [14]:	#proguard
 [15]:	#integration
 [17]:	#gdpr
@@ -615,10 +626,10 @@ You can verify if the integration is working through our <a href="https://www.te
 [20]:	#deferred-deeplink
 [21]:	#server-to-server
 [22]:	#subversion
-[23]: #attributioninfo
+[23]:   #attributioninfo
 [24]:	#customer-user-id
 [25]:	#google-play-initialization
-[26]:	#android-other-initialization
+[26]:	#other-android-initialization
 [27]:	#ilrd
 [30]:	#testing
 [31]:	https://github.com/tenjin/tenjin-android-sdk-demo
