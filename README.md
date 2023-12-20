@@ -47,9 +47,7 @@ If you use Maven, add implementation `com.tenjin:android-sdk:VERSION` to your `G
 1. Download the latest Android SDK from <a href="https://github.com/tenjin/tenjin-android-sdk/releases" target="_new">here.</a>
 2. Add the Tenjin SDK into your Android Studio project. Go to the Project Navigator in Android Studio. Select the option `Project` in the Project Navigator. You will find the `libs` folder under the `app` module of your Android Studio project.
 3. You need to add the file `tenjin.jar` or `tenjin.aar` to the `libs` folder.
-<br>
-   ![AndroidStudio][image-1]
-<br>
+    ![][image-1]
 4. In your Android Studio project under `app` module, select the `build.gradle` file,  and add the following under the dependencies block:
 
     ```java
@@ -59,7 +57,7 @@ If you use Maven, add implementation `com.tenjin:android-sdk:VERSION` to your `G
     }
     ```
 
-> We have a demo project - [tenjin-android-sdk-demo][31] that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
+    > We have a demo project - [tenjin-android-sdk-demo][31] that demonstrates the integration of tenjin-android-sdk. You can this project as example to understand how to integrate the tenjin-android-sdk.
 
 ## <a id="google-play"></a>Google Play or Amazon store
 If you distribute your apps on Google Play Store or Amazon store, implement the following initial setups.
@@ -124,9 +122,11 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
     instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
     instance.connect();
     ```
-**NOTE:** If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
+> [!NOTE]
+> If your app has the logic to ask user's consent between `onCreate` and `onResume`, use `onCreate` instead of `onResume` for Tenjin SDK initialization because users who don't consent won't be tracked on `onResume`.
 
-**NOTE:** Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+> [!NOTE]
+> Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ## <a id="other-android-store"></a>Other Android store
 If you distribute your apps outside of Google Play Store or Amazon store(Other Android store), implement the following initial setups.
@@ -236,7 +236,8 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
     instance.connect();
     ```
 
-**NOTE:** Please ensure you implement this code on every `onCreate`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+> [!NOTE]
+> Please ensure you implement this code on every `onCreate`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ## <a id="proguard"></a>Proguard Settings
 
@@ -404,9 +405,7 @@ To understand user revenue and purchase behavior, developers can send `transacti
 
 You can retrieve your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> \> Select your app \> Development Tools \> Services & APIs. After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
 
-<br/>
 <img src="https://s3.amazonaws.com/tenjin-instructions/android_pk.png" />
-<br/><br/>
 
 After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
 
@@ -429,7 +428,8 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 
 ### <a id="purchase-events-amazon-iap"></a>Amazon AppStore IAP
 
-**IMPORTANT:** You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
+> [!IMPORTANT]
+> You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
 
 You can retrieve your Amazon Shared Key from the <a href="https://developer.amazon.com/settings/console/sdk/shared-key/"> Amazon AppStore Developer Console</a>.
 
@@ -478,9 +478,7 @@ public void handlePurchase(final Receipt receipt, final UserData userData) {
 
 You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
-<br/>
 <img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png" />
-<br/>
 
 **Disclaimer:** If you are implementing purchase events on Tenjin for the first time, make sure to verify the data with other tools you’re using before you start scaling up your user acquisition campaigns using purchase data.
 
@@ -498,7 +496,8 @@ Choose between 15% and 30% App Store’s revenue commission via our new setup. T
 
 ## <a id="custom-events"></a>Custom Events
 
-**NOTE:** The initialization event `connect()` must come before sending any custom events.
+> [!NOTE]
+> The initialization event `connect()` must come before sending any custom events.
 
 You can use the Tenjin SDK to pass a custom event: `eventWithName(String name)`.
 
@@ -554,7 +553,8 @@ instance.connect();
 ## <a id="attributioninfo"></a>LiveOps Campaigns
 Tenjin supports retrieving of attributes, which are required for developers to get analytics installation id (previously known as tenjin reference id). This parameter can be used when there is no advertising id.
 
-:warning: **NOTE: LiveOps Campaigns is a paid feature, so please contact your Tenjin account manager if you are interested in.**
+> [!WARNING]
+> Attribution Info is a paid feature, so please contact your Tenjin account manager if you are interested in.
 
 ## <a id="customer-user-id"></a>Customer User ID
 You can set and get customer user id to send as a parameter on events.
@@ -592,7 +592,8 @@ Tenjin supports the ability to integrate with the Impression Level Ad Revenue (I
 
 This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. To enable this feature, follow the below instructions.
 
-:warning: **NOTE: ILRD is a paid feature, so please contact your Tenjin account manager to discuss the price at first before sending ILRD events.**
+> [!WARNING]
+> ILRD is a paid feature, so please contact your Tenjin account manager to discuss the price at first before sending ILRD events.
 
 # <a id="testing"></a>Testing
 
@@ -654,6 +655,6 @@ You can verify if the integration is working through our <a href="https://www.te
 [51]:	https://developer.android.com/reference/java/util/TimeZone.html
 [52]: #retry-cache
 
-[image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png "studio"
+[image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
 [image-3]:	https://s3.amazonaws.com/tenjin-instructions/app_api_key.png
