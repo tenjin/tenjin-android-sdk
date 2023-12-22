@@ -236,3 +236,7 @@ v1.12.24
 v1.13.0
 ----
 - Added Amazon IAP transactions
+
+v1.14.0
+----
+- Add `optInOutUsingCMP` method to manage GDPR opt-in/opt-out through CMP consents
