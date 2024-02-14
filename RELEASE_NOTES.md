@@ -240,3 +240,8 @@ v1.13.0
 v1.14.0
 ----
 - Add `optInOutUsingCMP` method to manage GDPR opt-in/opt-out through CMP consents
+
+v1.15.0
+----
+- Capture and send Google DMA parameters `ad_personalization` and `ad_user_data`
+- Add `deferred_deeplink_url` and `click_id` to `getAttributionInfo` method
