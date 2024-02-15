@@ -34,6 +34,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [Customer User ID][24]
   - [Analytics Installation ID][53]
   - [Opt in/Opt out using CMP consents][54]
+  - [Google DMA parameters][55]
   - [Retry/cache events and IAP][52]
   - [Impression Level Ad Revenue Integration][27]
 - [Testing][30]
@@ -591,6 +592,16 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 optInOut = instance.optInOutUsingCMP(); 
 ```
 
+## <a id="google-dma"></a>Google DMA parameters
+Tenjin automatically sends Google DMA parameters (`ad_personalization` and `ad_user_data`) if you use a CMP in your app based in user's consents. If you'd like to override those parameters or you don't use a CMP 'you can use the following method:
+
+`setGoogleDMAParameters(boolean, boolean)`
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+instance.setGoogleDMAParameters(adPersonalization, adUserData); 
+```
+
 ## <a id="retry-cache"></a>Retry/cache of events/IAP
 You can enable/disable retrying and caching events and IAP when requests fail or users don't have internet connection. These events will be sent after a new event has been added to the queue and user has recovered connection.
 
@@ -678,6 +689,7 @@ You can verify if the integration is working through our <a href="https://www.te
 [52]: #retry-cache
 [53]: #analytics-id
 [54]: #optin-cmp
+[55]: #google-dma
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
