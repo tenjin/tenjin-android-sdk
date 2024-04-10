@@ -158,6 +158,17 @@ dependencies {
 }
 ```
 
+To be able to collect <a href="https://developers.facebook.com/docs/app-ads/meta-install-referrer/" target="_new">Meta's Install Referrer</a>, add these queries to your Android Manifest:
+```xml
+<queries>
+  <package android:name="com.facebook.katana" />
+</queries>
+
+<queries>
+  <package android:name="com.instagram.android" />
+</queries>
+```
+
 If you are using an Ad Network that targets the IMEI, you will need to add the following permissions enabled.
 ```xml
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />

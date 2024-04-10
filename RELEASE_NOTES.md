@@ -249,3 +249,7 @@ v1.15.0
 v1.15.1
 ----
 - Add opt out (`optOutGoogleDMA`) and opt in (`optInGoogleDMA`) methods for Google DMA
+
+v1.16.0
+----
+- Add support for Meta install referrer
