@@ -88,6 +88,18 @@ dependencies {
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
 ```
+
+To be able to collect <a href="https://developers.facebook.com/docs/app-ads/meta-install-referrer/" target="_new">Meta's Install Referrer</a>, add these queries to your Android Manifest:
+```xml
+<queries>
+  <package android:name="com.facebook.katana" />
+</queries>
+
+<queries>
+  <package android:name="com.instagram.android" />
+</queries>
+```
+
 ### <a id="google-play-app-store"></a>App Store
 By default, <b>unspecified</b> is the default App Store. Update the app store value to either <b>googleplay</b>, <b>amazon</b>, or <b>other</b> depending on your app.
 
@@ -156,17 +168,6 @@ dependencies {
   implementation 'com.google.android.gms:play-services-ads-identifier:{version}'
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
-```
-
-To be able to collect <a href="https://developers.facebook.com/docs/app-ads/meta-install-referrer/" target="_new">Meta's Install Referrer</a>, add these queries to your Android Manifest:
-```xml
-<queries>
-  <package android:name="com.facebook.katana" />
-</queries>
-
-<queries>
-  <package android:name="com.instagram.android" />
-</queries>
 ```
 
 If you are using an Ad Network that targets the IMEI, you will need to add the following permissions enabled.
