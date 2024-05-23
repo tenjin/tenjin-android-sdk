@@ -258,3 +258,7 @@ v1.16.2
 ----
 - Adjust attribution retry times
 - Deprecate `eventWithNameAndValue` receiving string value
+
+v1.16.3
+----
+- Update Meta Install Referrer implementation
