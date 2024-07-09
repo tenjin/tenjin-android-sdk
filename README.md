@@ -89,6 +89,8 @@ dependencies {
 }
 ```
 
+#### Meta Install Referrer integration
+
 To be able to collect <a href="https://developers.facebook.com/docs/app-ads/meta-install-referrer/" target="_new">Meta's Install Referrer</a>, add these queries to your Android Manifest:
 ```xml
 <queries>
@@ -98,6 +100,16 @@ To be able to collect <a href="https://developers.facebook.com/docs/app-ads/meta
 <queries>
   <package android:name="com.instagram.android" />
 </queries>
+```
+
+If you haven't set up Facebook's SDK (Meta) yet, add the following to your `AndroidManifest.xml` file:
+```xml
+<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+```
+
+Next, add this value to your `strings.xml` file:
+```xml
+<string name="facebook_app_id" translatable="false">YOUR_APP_ID</string>
 ```
 
 ### <a id="google-play-app-store"></a>App Store
@@ -538,7 +550,7 @@ instance.eventWithName("swipe_right");
 
 ## Custom Events with values:
 
-You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)` or `eventWithNameAndValue(String name, int value)`.
+You can use the Tenjin SDK to pass a custom event with an integer value: `eventWithNameAndValue(String name, String value)`.
 
 Passing an integer `value` with an event's `name` allows marketers to sum up and track averages of the values passed for that metric in the Tenjin dashboard. If you plan to use DataVault, these values can be used to derive additional metrics that can be useful.
 
@@ -551,13 +563,6 @@ instance.eventWithNameAndValue("item", 100);
 ```
 
 Using the example above, the Tenjin dashboard will sum and average the values for all events with the name `item`.
-
-Keep in mind that this event will not work if the value passed not an integer.
-
-```
-//Integrate a custom event with a distinct name and value - ie. paying 100 virtual coins for an item
-instance.eventWithNameAndValue("item", "1");
-```
 
 ## <a id="server-to-server"></a>Server-to-server integration
 
