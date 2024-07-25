@@ -262,3 +262,7 @@ v1.16.2
 v1.16.3
 ----
 - Update Meta Install Referrer implementation
+
+v1.16.5
+----
+- Improved the process for retrieving Google Advertising ID (GAID)
