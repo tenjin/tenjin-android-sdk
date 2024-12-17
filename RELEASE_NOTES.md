@@ -266,3 +266,7 @@ v1.16.3
 v1.16.5
 ----
 - Improved the process for retrieving Google Advertising ID (GAID)
+
+v1.16.6
+----
+- Improve the process for retrieving Install Referrer
