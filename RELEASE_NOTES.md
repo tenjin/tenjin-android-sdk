@@ -270,3 +270,7 @@ v1.16.5
 v1.16.6
 ----
 - Improve the process for retrieving Install Referrer
+
+v1.16.7
+----
+- Add extra layer of security to HTTP requests
