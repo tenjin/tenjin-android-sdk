@@ -34,6 +34,7 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
   - [LiveOps Campaigns][23]
   - [Customer User ID][24]
   - [Analytics Installation ID][53]
+  - [User Profile - LiveOps Metrics][56]
   - [Google DMA parameters][55]
   - [Retry/cache events and IAP][52]
   - [Impression Level Ad Revenue Integration][27]
@@ -79,12 +80,13 @@ Google Play requires all API level 32 (Android 13) apps using the advertising_id
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 ```
 
-### <a id="play-services-ads-identifier-google-play"></a>Android Advertising ID (AAID) and Install Referrer
+### <a id="play-services-ads-identifier-google-play"></a>Android Advertising ID (AAID), Install Referrer and AppSetID
 Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
 
 ```java
 dependencies {
   implementation 'com.google.android.gms:play-services-ads-identifier:{version}'
+  implementation 'com.google.android.gms:play-services-appset:{version}'
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
 ```
@@ -167,12 +169,13 @@ Google Play Services requires all API level 32 (Android 13) apps using the adver
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 ```
 
-### <a id="play-services-ads-identifier-other-android"></a>Android Advertising ID (AAID) and Install Referrer
+### <a id="play-services-ads-identifier-other-android"></a>Android Advertising ID (AAID), Install Referrer and AppSetID
 Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
 
 ```java
 dependencies {
   implementation 'com.google.android.gms:play-services-ads-identifier:{version}'
+  implementation 'com.google.android.gms:play-services-appset:{version}'
   implementation 'com.android.installreferrer:installreferrer:{version}'
 }
 ```
@@ -601,7 +604,119 @@ You can get the analytics id which is generated randomly and saved in the local 
 
 ```java
 TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
-analyticsId = instance.getAnalyticsInstallationId; 
+analyticsId = instance.getAnalyticsInstallationId;
+```
+
+## <a id="user-profile"></a>User Profile - LiveOps Metrics
+
+The Tenjin Android SDK automatically tracks user engagement metrics to help you understand player behavior and lifetime value. These metrics are collected automatically and can be accessed programmatically.
+
+### Automatic Tracking
+
+The SDK automatically tracks:
+- **Session metrics**: Session count, duration, first/last session dates
+- **In-App Purchases (IAP)**: Transaction count, revenue by currency, purchased product IDs
+- **Ad Revenue (ILRD)**: Impression-level revenue from supported ad networks
+
+### Retrieving User Profile Data
+
+#### Get Full Profile Object
+
+Returns a `UserProfileData` object with all metrics:
+
+```java
+import com.tenjin.android.TenjinSDK;
+import com.tenjin.android.userprofile.UserProfileData;
+
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+UserProfileData profile = instance.getUserProfile();
+
+// Session metrics
+int sessionCount = profile.getSessionCount();
+long totalTime = profile.getTotalSessionTime();
+long avgLength = profile.getAverageSessionLength();
+long lastSession = profile.getLastSessionLength();
+long currentSession = profile.getCurrentSessionDuration();
+Long firstSession = profile.getFirstSessionDate();
+Long lastSessionDate = profile.getLastSessionDate();
+
+// IAP metrics
+int iapCount = profile.getIapTransactionCount();
+Map<String, Double> revenueByCurrency = profile.getIapRevenueByCurrency();
+List<String> productIDs = profile.getPurchasedProductIDs();
+
+// ILRD metrics
+double totalAdRevenue = profile.getTotalILRDRevenueUSD();
+Map<String, Double> revenueByNetwork = profile.getIlrdRevenueByNetwork();
+```
+
+**Available Properties (Java getters):**
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getSessionCount()` | `int` | Total number of sessions |
+| `getTotalSessionTime()` | `long` | Total time in milliseconds |
+| `getAverageSessionLength()` | `long` | Average session in milliseconds |
+| `getLastSessionLength()` | `long` | Last completed session in milliseconds |
+| `getCurrentSessionDuration()` | `long` | Current active session in milliseconds |
+| `getFirstSessionDate()` | `Long` | First session timestamp (ms since epoch) |
+| `getLastSessionDate()` | `Long` | Last session timestamp (ms since epoch) |
+| `getIapTransactionCount()` | `int` | Total IAP count |
+| `getIapRevenueByCurrency()` | `Map<String, Double>` | Revenue by currency code |
+| `getPurchasedProductIDs()` | `List<String>` | Sorted product IDs |
+| `getTotalILRDRevenueUSD()` | `double` | Total ad revenue USD |
+| `getIlrdRevenueByNetwork()` | `Map<String, Double>` | Ad revenue by network |
+
+#### Get Profile as Dictionary
+
+Returns a map with all metrics for easy serialization:
+
+```java
+Map<String, Object> profileDict = instance.getUserProfileDictionary();
+
+// Example usage
+Integer sessionCount = (Integer) profileDict.get("session_count");
+String firstSession = (String) profileDict.get("first_session_date");
+Map<String, Double> iapRevenue = (Map<String, Double>) profileDict.get("iap_revenue_by_currency");
+List<String> productIds = (List<String>) profileDict.get("purchased_product_ids");
+```
+
+**Dictionary Keys (Always Present):**
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `session_count` | `Integer` | Total sessions |
+| `total_session_time` | `Long` | Total time (milliseconds) |
+| `average_session_length` | `Long` | Average session (milliseconds) |
+| `last_session_length` | `Long` | Last session (milliseconds) |
+| `iap_transaction_count` | `Integer` | Total IAP count |
+| `total_ilrd_revenue_usd` | `Double` | Total ad revenue USD |
+
+**Dictionary Keys (Conditional - only if available):**
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `first_session_date` | `String` | ISO8601 formatted date |
+| `last_session_date` | `String` | ISO8601 formatted date |
+| `current_session_length` | `Long` | Active session duration (milliseconds) |
+| `iap_revenue_by_currency` | `Map<String, Double>` | Map of currency → revenue |
+| `purchased_product_ids` | `List<String>` | Sorted list of product IDs |
+| `ilrd_revenue_by_network` | `Map<String, Double>` | Map of network → revenue |
+
+#### Reset Profile
+
+Clears all user profile data:
+
+```java
+instance.resetUserProfile();
+```
+
+### Session Configuration
+
+Customize session timeout (default 30 minutes):
+
+```java
+UserProfileManager.setSessionTimeoutMs(600000); // 10 minutes
 ```
 
 ## <a id="google-dma"></a>Google DMA parameters
@@ -710,6 +825,7 @@ You can verify if the integration is working through our <a href="https://www.te
 [53]: #analytics-id
 [54]: #optin-cmp
 [55]: #google-dma
+[56]: #user-profile
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
