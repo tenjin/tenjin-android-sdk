@@ -274,3 +274,7 @@ v1.16.6
 v1.16.7
 ----
 - Add extra layer of security to HTTP requests
+
+v1.17.0
+----
+- Add User Profile - LiveOps Analytics metrics
