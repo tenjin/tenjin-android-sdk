@@ -278,3 +278,7 @@ v1.16.7
 v1.17.0
 ----
 - Add User Profile - LiveOps Analytics metrics
+
+v1.17.1
+----
+- Update Java version to improve support for plugins
