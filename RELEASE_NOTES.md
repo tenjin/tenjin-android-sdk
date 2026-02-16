@@ -282,3 +282,7 @@ v1.17.0
 v1.17.1
 ----
 - Update Java version to improve support for plugins
+
+v1.17.2
+----
+- Update compileSdkVersion and targetSdkVersion to improve support for plugins
