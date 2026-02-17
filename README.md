@@ -253,7 +253,7 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
 1. Get your `SDK_KEY` from your app page. Note: `SDK_KEY` is unique for each of your app. You can create up to 3 keys for the same app.
    ![image-3]
 2. In your Activity, import Tenjin: `import com.tenjin.android.TenjinSDK;`
-3. In the `onCreate` method of your main `Activity` class, add the following line of code:
+3. In the `onResume` method of your main `Activity` class, add the following line of code:
 
     ```java
     TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
@@ -262,7 +262,7 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
     ```
 
 > [!NOTE]
-> Please ensure you implement this code on every `onCreate`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
+> Please ensure you implement this code on every `onResume`, not only on the first app open of the app. If we notice that you don't follow our recommendation, we can't give you proper support or your account might be suspended.
 
 ## <a id="proguard"></a>Proguard Settings
 
