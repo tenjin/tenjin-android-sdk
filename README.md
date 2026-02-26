@@ -274,7 +274,16 @@ By default, <b>unspecified</b> is the default App Store. Update the app store va
 -keep class * extends java.util.ListResourceBundle {
     protected java.lang.Object[][] getContents();
 }
+
+# Keep the signatures that Gson/TypeToken rely on
+-keepattributes Signature
 -keepattributes *Annotation*
+
+# General Gson/TypeToken protection
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
+
+
 ```
 
 Do not obfuscate oaid classes:
