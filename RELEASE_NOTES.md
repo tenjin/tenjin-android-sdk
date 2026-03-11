@@ -286,3 +286,7 @@ v1.17.1
 v1.17.2
 ----
 - Update compileSdkVersion and targetSdkVersion to improve support for plugins
+
+v1.17.3
+----
+- Improve concurrency between `connect()` and `getAttributionInfo()` calls
