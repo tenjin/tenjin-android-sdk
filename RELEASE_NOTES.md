@@ -290,3 +290,8 @@ v1.17.2
 v1.17.3
 ----
 - Improve concurrency between `connect()` and `getAttributionInfo()` calls
+
+v1.17.4
+----
+- Improve advertising ID retrieval and fallback mechanism
+- Fix crash on API 23 by replacing getOrDefault
