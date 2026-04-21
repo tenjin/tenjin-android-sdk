@@ -295,3 +295,7 @@ v1.17.4
 ----
 - Improve advertising ID retrieval and fallback mechanism
 - Fix crash on API 23 by replacing getOrDefault
+
+v1.18.0
+----
+- Integrated CloudX ILRD
