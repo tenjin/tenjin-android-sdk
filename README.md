@@ -7,7 +7,18 @@ The Tenjin Android SDK allows users to track events and installs in their Androi
 - For Unity integration, please visit https://github.com/tenjin/tenjin-unity-sdk.
 - For any issues or support, please contact: support@tenjin.com.
 
+# Integrate with an AI assistant (LLM)
+
+You can integrate the Tenjin Android SDK with the help of an AI assistant (Claude, Cursor, GitHub Copilot, etc.). Paste the following prompt into your assistant of choice:
+
+```
+Add Tenjin SDK to my project using: https://raw.githubusercontent.com/tenjin/sdk-llm-guides/main/guides/android/llm-guide.md
+```
+
+The guide walks the assistant through the complete integration. For more details, see the [Tenjin SDK Guides for LLMs](https://github.com/tenjin/sdk-llm-guides).
+
 # Table of contents
+- [Integrate with an AI assistant (LLM)](#integrate-with-an-ai-assistant-llm)
 - [Basic Integration][1]
   - [Google Play or Amazon store][2]
     - [Permissions][3]
