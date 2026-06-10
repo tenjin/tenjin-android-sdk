@@ -6,7 +6,6 @@
 
 - Description
 
-**Steps:**
+**Testing Steps:**
 
-- [ ] Merged by Assignee
-- [ ] Branch removed
+- [ ]
