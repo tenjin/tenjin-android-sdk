@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.21.0 (2026-06-26)
+
+
+### Features
+
+* add persisted connect-dedup window to Android SDK
+* cap in-memory event queue at 500 with FIFO eviction
+* flush event queue on connect dedup
+
+
+### Bug Fixes
+
+* rename RELEASE_NOTES to RELEASE_NOTES.md in external repo sync
+* set HTTP connect timeout to 30s and read timeout to 60s
+
 ## 1.20.0 (2026-06-10)
 
 
