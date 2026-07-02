@@ -1,0 +1,94 @@
+# Copyright 2026 Tenjin
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Release RC
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'RC version (e.g. 1.12.14-rc01)'
+        required: true
+      branch:
+        description: 'Branch to release from'
+        required: true
+        default: 'master'
+
+permissions:
+  contents: write
+
+jobs:
+  release-rc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update version in RELEASE_NOTES.md
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          # Add new RC version entry at the top of RELEASE_NOTES.md
+          sed -i '1i\
+v'"$VERSION"\
+----\
+- Release candidate\
+\' RELEASE_NOTES.md
+
+      - name: Update version in README.md
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          # Update the version reference in README.md (Maven dependency line)
+          sed -i 's/implementation `com\.tenjin:android-sdk:[^`]*`/implementation `com.tenjin:android-sdk:'"$VERSION"'`/g' README.md
+
+      - name: Commit and push
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          git add RELEASE_NOTES.md README.md
+          git commit -m "chore: release v${VERSION}"
+          git push origin "${{ inputs.branch }}"
+
+      - name: Tag and create pre-release
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"
+
+          # Find the previous tag to use as baseline for release notes
+          PREVIOUS_TAG=$(git tag -l 'v*' --sort=-version:refname --merged HEAD | grep -v "v${VERSION}" | head -1)
+
+          if [ -n "$PREVIOUS_TAG" ]; then
+            gh release create "v${VERSION}" \
+              --title "v${VERSION}" \
+              --generate-notes \
+              --notes-start-tag "$PREVIOUS_TAG" \
+              --prerelease
+          else
+            gh release create "v${VERSION}" \
+              --title "v${VERSION}" \
+              --generate-notes \
+              --prerelease
+          fi
