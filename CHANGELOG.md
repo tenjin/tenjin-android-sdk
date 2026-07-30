@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.22.0 (2026-07-30)
+
+
+### Features
+
+* ingest Firebase app instance ID automatically as a parameter
+
+
+### Bug Fixes
+
+* remove Play Billing types from TenjinSDK method signatures
+* wait for startup completion before sending connect
+
 ## 1.21.0 (2026-06-26)
 
 
