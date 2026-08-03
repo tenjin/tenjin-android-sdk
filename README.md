@@ -769,6 +769,13 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 instance.setCacheEventSetting(setting: true);
 ```
 
+> [!IMPORTANT]
+> This setting is stored on the device and persists across app sessions. Once a build has enabled it, removing the `setCacheEventSetting` call in a later release will **not** disable caching for existing users, because the previously stored value stays in effect. To turn it off, explicitly call:
+>
+> ```java
+> instance.setCacheEventSetting(setting: false);
+> ```
+
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
 Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
