@@ -778,16 +778,21 @@ instance.setCacheEventSetting(setting: true);
 
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
-Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
-- AppLovin MAX
-- Unity LevelPlay
-- HyperBid
-- AdMob
-- TopOn
-- Clever Ads Solutions (CAS)
-- TradPlus
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from the mediation providers below. Each method receives the impression payload from the mediation callback as a `JSONObject` or JSON string; follow the linked guide for the full setup of each provider.
 
-This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. Access to the integration guide is [here](https://tenjin.com/docs/category/ad-revenue-ad-mediation-setup/).
+| Provider | Method | Setup guide |
+|----------|--------|-------------|
+| AppLovin MAX | `instance.eventAdImpressionAppLovin(json)` | [Guide](https://tenjin.com/docs/android-applovin-max/) |
+| Unity LevelPlay | `instance.eventAdImpressionIronSource(json)` | [Guide](https://tenjin.com/docs/android-unity-levelplay/) |
+| AdMob | `instance.eventAdImpressionAdMob(json)` | [Guide](https://tenjin.com/docs/android-admob/) |
+| HyperBid | `instance.eventAdImpressionHyperBid(json)` | |
+| TopOn | `instance.eventAdImpressionTopOn(json)` | [Guide](https://tenjin.com/docs/android-topon-chinese/) |
+| Clever Ads Solutions (CAS) | `instance.eventAdImpressionCAS(json)` | [Guide](https://tenjin.com/docs/android-cas/) |
+| TradPlus | `instance.eventAdImpressionTradPlus(json)` | [Guide](https://tenjin.com/docs/android-tradplus/) |
+| CloudX | `instance.eventAdImpressionCloudX(json)` | [Guide](https://tenjin.com/docs/android-cloudx/) |
+| Other providers | `instance.eventAdImpressionCustom(json)` | See [Custom mediation](#custom-mediation) |
+
+This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. Access to the full documentation is [here](https://tenjin.com/docs/category/ad-revenue/).
 
 ### Custom mediation
 
