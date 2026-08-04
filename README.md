@@ -769,18 +769,49 @@ TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
 instance.setCacheEventSetting(setting: true);
 ```
 
+> [!IMPORTANT]
+> This setting is stored on the device and persists across app sessions. Once a build has enabled it, removing the `setCacheEventSetting` call in a later release will **not** disable caching for existing users, because the previously stored value stays in effect. To turn it off, explicitly call:
+>
+> ```java
+> instance.setCacheEventSetting(setting: false);
+> ```
+
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
-Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from,
-- AppLovin MAX
-- Unity LevelPlay
-- HyperBid
-- AdMob
-- TopOn
-- Clever Ads Solutions (CAS)
-- TradPlus
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from the mediation providers below. Each method receives the impression payload from the mediation callback as a `JSONObject` or JSON string; follow the linked guide for the full setup of each provider.
 
-This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. Access to the integration guide is [here](https://tenjin.com/docs/category/ad-revenue-ad-mediation-setup/).
+| Provider | Method | Setup guide |
+|----------|--------|-------------|
+| AppLovin MAX | `instance.eventAdImpressionAppLovin(json)` | [Guide](https://tenjin.com/docs/android-applovin-max/) |
+| Unity LevelPlay | `instance.eventAdImpressionIronSource(json)` | [Guide](https://tenjin.com/docs/android-unity-levelplay/) |
+| AdMob | `instance.eventAdImpressionAdMob(json)` | [Guide](https://tenjin.com/docs/android-admob/) |
+| HyperBid | `instance.eventAdImpressionHyperBid(json)` | |
+| TopOn | `instance.eventAdImpressionTopOn(json)` | [Guide](https://tenjin.com/docs/android-topon-chinese/) |
+| Clever Ads Solutions (CAS) | `instance.eventAdImpressionCAS(json)` | [Guide](https://tenjin.com/docs/android-cas/) |
+| TradPlus | `instance.eventAdImpressionTradPlus(json)` | [Guide](https://tenjin.com/docs/android-tradplus/) |
+| CloudX | `instance.eventAdImpressionCloudX(json)` | [Guide](https://tenjin.com/docs/android-cloudx/) |
+| Other providers | `instance.eventAdImpressionCustom(json)` | See [Custom mediation](#custom-mediation) |
+
+This feature allows you to receive events which correspond to your ad revenue is affected by each advertisement show to a user. Access to the full documentation is [here](https://tenjin.com/docs/category/ad-revenue/).
+
+### Custom mediation
+
+If your mediation provider is not on the list above, you can report impressions with the generic custom mediation method, available since v1.19.0. Pass a JSON object (or a JSON string) with your impression data. Required fields are `network_name`, `currency`, and either `revenue_decimal` (revenue for this impression) or `revenue_cpm` (revenue per 1,000 impressions); the full list of accepted fields is in the [ILRD API documentation](https://tenjin.com/docs/impression-level-revenue-data-api-s2s/). Impressions sent this way are reported under the `custom` mediation source, with `ad_revenue_mediation` and the device parameters set automatically by the SDK.
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<SDK_KEY>");
+
+JSONObject impression = new JSONObject();
+impression.put("network_name", "my_network");
+impression.put("mediation_country", "US");
+impression.put("currency", "USD");
+impression.put("ad_unit_id", "my_ad_unit_id");
+impression.put("ad_format", "banner");
+impression.put("revenue_decimal", 0.001);
+impression.put("precision", "BID");
+
+instance.eventAdImpressionCustom(impression);
+```
 
 # <a id="testing"></a>Testing
 
