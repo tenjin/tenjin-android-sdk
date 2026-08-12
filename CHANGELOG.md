@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.23.0 (2026-08-12)
+
+
+### Features
+
+* Capture the deeplink an app is opened with and report it on the app-open event, so re-engagement conversions can be attributed to the originating campaign
+
 ## 1.22.0 (2026-07-30)
 
 
