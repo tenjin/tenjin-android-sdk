@@ -456,7 +456,7 @@ To understand user revenue and purchase behavior, developers can send `transacti
 
 ### <a id="purchase-events-google-play-iap"></a>Google Play IAP
 
-**IMPORTANT:** You will need to add your Base64-encoded RSA public key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
+**IMPORTANT:** You will need to add your Base64-encoded RSA public key in the <a href="https://www.tenjin.com/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
 
 You can retrieve your Base64-encoded RSA public key from the <a href="https://play.google.com/apps/publish/"> Google Play Developer Console</a> \> Select your app \> Development Tools \> Services & APIs. After entering your Public Key into the Tenjin dashboard for your app, you can use the Tenjin SDK method below:
 
@@ -484,7 +484,7 @@ public void sendPurchaseEvent(Purchase purchase, Double price, String currencyCo
 ### <a id="purchase-events-amazon-iap"></a>Amazon AppStore IAP
 
 > [!IMPORTANT]
-> You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.io/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
+> You will need to add the Amazon Shared Key in the <a href="https://www.tenjin.com/dashboard/apps" target="_new">Tenjin dashboard</a> \> Your Android App \> Edit. 
 
 You can retrieve your Amazon Shared Key from the <a href="https://developer.amazon.com/settings/console/sdk/shared-key/"> Amazon AppStore Developer Console</a>.
 
@@ -531,7 +531,7 @@ public void handlePurchase(final Receipt receipt, final UserData userData) {
 
 ### IAP Purchase Validation
 
-You can verify if the IAP validation is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
+You can verify if the IAP validation is working through our <a href="https://www.tenjin.com/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. You should see a live event come in:
 
 <img src="https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png" />
 
@@ -784,7 +784,7 @@ This feature allows you to receive events which correspond to your ad revenue is
 
 # <a id="testing"></a>Testing
 
-You can verify if the integration is working through our <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -\> <a href="https://www.tenjin.io/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.io/dashboard/sdk_diagnostics">SDK Live page</a> and send the test events from your app. You should see live events come in:
+You can verify if the integration is working through our <a href="https://www.tenjin.com/dashboard/sdk_diagnostics">Live Test Device Data Tool</a>. Add your `advertising_id` or `IDFA/GAID` to the list of test devices. You can find this under Support -\> <a href="https://www.tenjin.com/dashboard/debug_app_users">Test Devices</a>. Go to the <a href="https://www.tenjin.com/dashboard/sdk_diagnostics">SDK Live page</a> and send the test events from your app. You should see live events come in:
 
 <br />
 
