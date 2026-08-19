@@ -40,6 +40,7 @@ The guide walks the assistant through the complete integration. For more details
     - [Opt in/Opt out using CMP consents][54]
   - [Purchase Events][18]
   - [Custom Events][19]
+  - [App-Open Deeplink][57]
   - [Server-to-server integration][21]
   - [App Subversion][22]
   - [LiveOps Campaigns][23]
@@ -582,6 +583,43 @@ instance.eventWithNameAndValue("item", 100);
 
 Using the example above, the Tenjin dashboard will sum and average the values for all events with the name `item`.
 
+## <a id="app-open-deeplink"></a>App-Open Deeplink
+
+As of SDK v1.23.0, Tenjin can capture the deeplink (App Link or custom scheme) an app is opened with and report it on the app-open event, so re-engagement conversions can be attributed to the originating campaign.
+
+**Cold launches are captured automatically** — the SDK observes activity lifecycle callbacks and reports the launching `Intent` for you as long as it's created from your launch activity's own context (the common `TenjinSDK.getInstance(this, sdkKey)` integration). **Warm opens — an already-running activity receiving a new deeplink via `onNewIntent` — must be reported explicitly**, since only the activity itself sees that intent:
+
+```kotlin
+override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    setIntent(intent)
+    TenjinSDK.getInstance(this, sdkKey).handleOpenIntent(intent)
+}
+```
+
+For `onNewIntent` to fire on an already-running activity instead of creating a new instance, declare the activity with `android:launchMode="singleTop"` (or an equivalent mode) in your `AndroidManifest.xml`, alongside the intent filter for your deeplink scheme/host:
+
+```xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTop"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="your_scheme" />
+    </intent-filter>
+</activity>
+```
+
+If you have the raw URL instead of an `Intent` (for example, in a plugin wrapper), use `handleOpenUrl(String url)` instead:
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, sdkKey);
+instance.handleOpenUrl("your_scheme://promo?gclid=test");
+```
+
 ## <a id="server-to-server"></a>Server-to-server integration
 
 Tenjin offers [server-to-server integration](https://tenjin.com/docs/server-to-server-s2s-setup/). This allows you to send your Install and post-Install events directly from your servers to Tenjin servers without needing an SDK integration.
@@ -876,6 +914,7 @@ You can verify if the integration is working through our <a href="https://www.te
 [54]: #optin-cmp
 [55]: #google-dma
 [56]: #user-profile
+[57]: #app-open-deeplink
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
