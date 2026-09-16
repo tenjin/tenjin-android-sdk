@@ -39,6 +39,7 @@ The guide walks the assistant through the complete integration. For more details
   - [GDPR][17]
     - [Opt in/Opt out using CMP consents][54]
   - [Purchase Events][18]
+    - [Subscription Tracking][58]
   - [Custom Events][19]
   - [App-Open Deeplink][57]
   - [Server-to-server integration][21]
@@ -550,6 +551,39 @@ Choose between 0%, 15% and 30% App Store’s revenue commission via our new setu
 * Select the start date and end date (Or you can keep the end date blank if you dont want an end date)
 * Click Save (note: the commission can be applied only to dates moving forward and not historical dates. So please set the start date from the date you make the change and forward)
 
+## <a id="subscription-tracking"></a>Subscription Tracking
+
+Track Google Play subscription purchases with Tenjin for server-side verification and attribution. See [SUBSCRIPTIONS_TRACKING.md](SUBSCRIPTIONS_TRACKING.md) for the full guide, including Google Play Billing integration examples.
+
+Requires Tenjin Android SDK 1.22.0+ and Google Play Billing Library 5.0+.
+
+**Subscription tracking is opt-in and is not automatic just from initializing/connecting the SDK.** You must explicitly call one of the `subscription(...)` methods below from your Play Billing purchase-handling code. If general events are showing up on the dashboard but subscription events are not, this is the most common cause.
+
+> [!IMPORTANT]
+> Subscriptions are verified against the Google Play Developer API, so Tenjin needs Google Play Developer API access for your app, configured in the <a href="https://www.tenjin.com/dashboard/apps" target="_new">Tenjin dashboard</a>. This is separate from the Base64-encoded RSA public key used for one-time IAP validation. Contact support@tenjin.com if you are unsure whether your app is set up.
+
+Pass the Play Billing `Purchase` you receive in `PurchasesUpdatedListener`. Price and currency are not on the `Purchase` object, so take them from the matching `ProductDetails` pricing phase:
+
+```java
+public void subscription(Object purchase, double price, String currency)
+```
+
+```java
+TenjinSDK instance = TenjinSDK.getInstance(this, "<API_KEY>");
+instance.subscription(purchase, 9.99, "USD");
+```
+
+> [!NOTE]
+> The parameter is typed `Object`, not `Purchase`, on purpose: Play Billing is an optional dependency of the Tenjin SDK, so no Tenjin method signature may reference a billing type. Just pass the `Purchase` — it is cast internally.
+
+If you do not have a Play Billing `Purchase` object (for example when a third-party IAP library brokers the purchase), pass the fields manually:
+
+```java
+public void subscription(String productId, String purchaseToken, double price, String currency, long purchaseDate, String receipt, String signature)
+```
+
+`productId` and `purchaseToken` are required; the remaining fields are optional. Send one event per subscription — Tenjin resolves renewals server-side from the purchase token.
+
 ## <a id="custom-events"></a>Custom Events
 
 > [!NOTE]
@@ -915,6 +949,7 @@ You can verify if the integration is working through our <a href="https://www.te
 [55]: #google-dma
 [56]: #user-profile
 [57]: #app-open-deeplink
+[58]: #subscription-tracking
 
 [image-1]:	https://tenjin-instructions.s3.amazonaws.com/android_jar.png
 [image-2]:	https://s3.amazonaws.com/tenjin-instructions/sdk_live_purchase_events_2.png
