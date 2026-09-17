@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.24.0 (2026-09-17)
+
+
+### Features
+
+* Add demo app + docs for AdMob Next-Gen ILRD, end-to-end verification
+* Add ILRD support for AdMob Next-Gen SDK
+* add tenjin_parameter_0..5 to attribution info response
+
+
+### Bug Fixes
+
+* make GAID retry-on-repairable-Play-Services-error actually retry
+
 ## 1.23.0 (2026-08-12)
 
 
