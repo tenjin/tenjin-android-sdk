@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 (2026-10-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* The SDK is now minified. Classes that are public in Java but internal to the SDK (for example TenjinConsts, UserProfileManager and the utils.adnetwork helpers) may lose members the SDK doesn't use. The documented API (TenjinSDK, its callbacks, Transaction, AdvertiserInfo, UserProfileData, AppStoreType) is unchanged.
+
+### Features
+
+* Add opt-in automatic Play Billing subscription and purchase tracking
+* add ProGuard consumer rules and obfuscation pipeline support
+
+
+### Bug Fixes
+
+* keep FirebaseAnalytics.getAppInstanceId in R8-minified apps
+
 ## 1.24.0 (2026-09-17)
 
 
