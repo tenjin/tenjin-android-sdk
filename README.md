@@ -850,13 +850,14 @@ instance.setCacheEventSetting(setting: true);
 
 ## <a id="ilrd"></a>Impression Level Ad Revenue Integration
 
-Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from the mediation providers below. Each method receives the impression payload from the mediation callback as a `JSONObject` or JSON string; follow the linked guide for the full setup of each provider.
+Tenjin supports the ability to integrate with the Impression Level Ad Revenue (ILRD) feature from the mediation providers below. Each method receives the impression payload from the mediation callback as a `JSONObject` or JSON string (AdMob Next-Gen also accepts the `AdValue` and ad objects directly); follow the linked guide for the full setup of each provider.
 
 | Provider | Method | Setup guide |
 |----------|--------|-------------|
 | AppLovin MAX | `instance.eventAdImpressionAppLovin(json)` | [Guide](https://tenjin.com/docs/android-applovin-max/) |
 | Unity LevelPlay | `instance.eventAdImpressionIronSource(json)` | [Guide](https://tenjin.com/docs/android-unity-levelplay/) |
 | AdMob | `instance.eventAdImpressionAdMob(json)` | [Guide](https://tenjin.com/docs/android-admob/) |
+| AdMob Next-Gen (GMA Next-Gen SDK, Tenjin 1.24.0+) | `instance.eventAdImpressionAdMobNextGen(adValue, ad)` from the ad's `onAdPaid(adValue)` callback | [Guide](https://tenjin.com/docs/android-admob/) |
 | HyperBid | `instance.eventAdImpressionHyperBid(json)` | |
 | TopOn | `instance.eventAdImpressionTopOn(json)` | [Guide](https://tenjin.com/docs/android-topon-chinese/) |
 | Clever Ads Solutions (CAS) | `instance.eventAdImpressionCAS(json)` | [Guide](https://tenjin.com/docs/android-cas/) |
