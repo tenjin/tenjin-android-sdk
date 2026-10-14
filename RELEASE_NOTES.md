@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 (2026-10-14)
+
+
+### Bug Fixes
+
+* convert CAS and TradPlus CPM to per-impression revenue for User Profile
+* drop ILRD impressions with no ad revenue data instead of crashing
+* give each ILRD helper its own reflection settings
+
 ## 2.0.0 (2026-10-05)
 
 
