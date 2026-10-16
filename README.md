@@ -94,7 +94,9 @@ Google Play requires all API level 32 (Android 13) apps using the advertising_id
 ```
 
 ### <a id="play-services-ads-identifier-google-play"></a>Android Advertising ID (AAID), Install Referrer and AppSetID
-Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+Add the <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a>, <a href="https://developer.android.com/identity/app-set-id" target="_new">AppSetID</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries to your build.gradle file.
+
+**Note:** The Tenjin SDK only collects the AppSetID if your app includes Google's `play-services-appset` library. If it is missing, events are sent without an AppSetID.
 
 ```java
 dependencies {
@@ -183,7 +185,9 @@ Google Play Services requires all API level 32 (Android 13) apps using the adver
 ```
 
 ### <a id="play-services-ads-identifier-other-android"></a>Android Advertising ID (AAID), Install Referrer and AppSetID
-Add <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries, add it to your build.gradle file.
+Add the <a href="https://developers.google.com/android/guides/setup#list-dependencies" target="_new">Android Advertising ID (AAID)</a>, <a href="https://developer.android.com/identity/app-set-id" target="_new">AppSetID</a> and <a href="https://developer.android.com/google/play/installreferrer/library" target="_new">Install Referrer</a> libraries to your build.gradle file.
+
+**Note:** The Tenjin SDK only collects the AppSetID if your app includes Google's `play-services-appset` library. If it is missing, events are sent without an AppSetID.
 
 ```java
 dependencies {
