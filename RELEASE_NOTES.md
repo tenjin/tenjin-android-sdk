@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.2 (2026-10-23)
+
+
+### Bug Fixes
+
+* reject compromised eMudhra intermediates (CVE-2026-111943)
+* route CloudX object impressions through the shared ILRD path
+
 ## 2.0.1 (2026-10-14)
 
 
