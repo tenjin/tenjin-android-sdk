@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.0 (2026-11-24)
+
+
+### Features
+
+* ingest Meta anonymous ID automatically as a parameter
+
+
+### Bug Fixes
+
+* cap 5xx retries to stop unbounded retry loop
+* enforce certificate pinning before the TLS handshake
+* fail closed when TCF consent is missing under GDPR
+* purge cached events on opt-out so they are not replayed
+* redact identifiers and payloads from debug logs
+* verify the Meta install-referrer provider's owning package
+
 ## 2.0.2 (2026-10-23)
 
 
